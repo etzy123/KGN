@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KGN Offerte</title>
+<meta name="theme-color" content="#1d1d1b">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="KGN Offerte">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+:root{--ink:#1d1d1b;--mute:#6d6d69;--rule:#d9d9d5;--bg:#e6e6e3;--soft:#f4f4f2;
+  font-family:'Schibsted Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-size:15px;display:flex;flex-direction:column;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--ink);color:#fff;flex:none}
+.bar .t{font-weight:600;letter-spacing:-.01em;font-size:16px}
+.bar .sp{flex:1}
+.btn{border:1px solid rgba(255,255,255,.55);background:transparent;color:#fff;padding:8px 13px;border-radius:6px;cursor:pointer;font-weight:500;font-size:14px}
+.btn.solid{background:#fff;color:var(--ink);border-color:#fff;font-weight:600}
+.btn.ghost{border-color:var(--rule);color:var(--ink)}
+.btn.small{padding:6px 10px;font-size:13px}
+.tabs{display:none;background:#fff;border-bottom:1px solid var(--rule);flex:none}
+.tabs button{flex:1;padding:12px;border:0;background:none;font-weight:600;color:var(--mute);border-bottom:3px solid transparent;cursor:pointer}
+body[data-tab=fill] .tabs [data-t=fill],body[data-tab=view] .tabs [data-t=view]{color:var(--ink);border-bottom-color:var(--ink)}
+
+.layout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(380px,470px) 1fr}
+#panel{overflow:auto;background:#fff;border-right:1px solid var(--rule);display:flex;flex-direction:column}
+#panelbody{flex:1}
+#stage{overflow:auto;padding:24px 12px 40px}
+
+details.sec{border-bottom:1px solid var(--rule)}
+details.sec>summary{list-style:none;cursor:pointer;padding:15px 16px;font-weight:600;font-size:16px;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.005em}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:"+";font-weight:400;font-size:20px;color:var(--mute)}
+details.sec[open]>summary::after{content:"\2212"}
+.body{padding:2px 16px 18px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g1{display:grid;gap:10px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f>label,.lbl{font-size:12.5px;color:var(--mute)}
+input[type=text],input[type=number],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;padding:9px 10px;border:1px solid var(--rule);border-radius:6px;background:#fff;min-width:0}
+textarea{resize:vertical;line-height:1.4}
+.hint{font-size:12.5px;color:var(--mute);margin:0 0 10px;line-height:1.4}
+
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin:0;padding:0;border:0}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--ink) var(--p,0%),var(--rule) var(--p,0%))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-10px;border-radius:50%;background:var(--ink);border:4px solid #fff;box-shadow:0 0 0 1px var(--ink)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--rule)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:4px solid #fff;box-shadow:0 0 0 1px var(--ink)}
+
+.room,.cust{border:1px solid var(--rule);border-radius:8px;padding:10px;margin-bottom:10px;display:grid;gap:8px}
+.room .dims{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rowtop{display:flex;gap:8px;align-items:flex-end}
+.rowtop .f{flex:1}
+.x{border:1px solid var(--rule);background:#fff;border-radius:6px;width:36px;height:38px;cursor:pointer;font-size:18px;line-height:1;flex:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.chip{background:var(--soft);border-radius:6px;padding:7px 10px;font-size:13px}
+.chip b{font-variant-numeric:tabular-nums}
+.cust .c4{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px}
+
+details.cat{border-top:1px solid var(--rule);margin:0 -16px}
+details.cat>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;justify-content:space-between;gap:10px;font-weight:600;background:var(--soft)}
+details.cat>summary::-webkit-details-marker{display:none}
+details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font-weight:500}
+.item{padding:12px 16px;border-top:1px solid var(--rule)}
+.item .head{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.item .head input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.item .nm{flex:1;font-weight:500;line-height:1.3}
+.item .nm small{display:block;font-weight:400;color:var(--mute);font-size:12.5px;margin-top:2px}
+.item .sub{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;color:var(--rule)}
+.item.on .sub{color:var(--ink)}
+.ctl{display:none;margin:6px 0 0 32px;grid-template-columns:1fr 104px;gap:4px 14px;align-items:center}
+.item.on .ctl{display:grid}
+.ctl .q{display:flex;align-items:center;gap:6px}
+.ctl .q input{text-align:right;padding:7px 8px}
+.ctl .q span{color:var(--mute);font-size:13px;min-width:20px}
+.ctl .meta{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mute)}
+.ctl .meta input{width:84px;padding:5px 7px;text-align:right}
+.ctl .solo{grid-column:1/-1}
+
+.tot{position:sticky;bottom:0;background:var(--ink);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.tot small{opacity:.7;font-size:12.5px;display:block}
+.tot b{font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+#sheet{margin:0 auto;position:relative}
+
+/* ---------- Het document ---------- */
+#paper{position:absolute;top:0;left:0;transform-origin:top left;width:210mm;min-height:297mm;background:#fff;color:var(--ink);padding:16mm;font-size:10pt;line-height:1.45;box-shadow:0 1px 3px rgba(0,0,0,.12),0 8px 28px rgba(0,0,0,.08);font-variant-numeric:tabular-nums}
+#paper *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.d-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm}
+.d-top svg{height:18mm;width:auto;display:block}
+.d-top .co{text-align:right;font-size:8.5pt;color:var(--mute);line-height:1.5}
+.d-kicker{margin:13mm 0 0;font-size:10pt;color:var(--mute)}
+.d-title{margin:1mm 0 0;font-size:27pt;line-height:1.08;font-weight:600;letter-spacing:-.025em;max-width:150mm}
+.d-meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:9mm;border-top:1.4pt solid var(--ink);border-bottom:.6pt solid var(--rule)}
+.d-meta div{padding:3mm 3mm 3mm 0}
+.d-meta div+div{padding-left:4mm;border-left:.6pt solid var(--rule)}
+.d-meta span{display:block;font-size:8pt;color:var(--mute)}
+.d-meta b{font-weight:600;font-size:10pt}
+.d-two{display:grid;grid-template-columns:1fr 1fr;gap:10mm;margin-top:8mm}
+.d-two h4,.d-h{margin:0 0 1.5mm;font-size:8.5pt;font-weight:600;color:var(--mute)}
+.d-two p{margin:0}
+.d-intro{margin:8mm 0 0;max-width:150mm}
+.d-intro p{margin:0 0 2mm}
+.d-sec{margin-top:9mm}
+.t-head,.t-row{display:grid;grid-template-columns:1fr 24mm 24mm 27mm;gap:3mm;align-items:baseline}
+.t-head{font-size:8pt;color:var(--mute);padding:0 0 1.5mm;border-bottom:.6pt solid var(--rule)}
+.t-head div:nth-child(n+2),.t-row div:nth-child(n+2){text-align:right}
+.t-cat{margin-top:6mm;break-inside:avoid;break-after:avoid;font-weight:700;font-size:10.5pt;padding-bottom:1.2mm;border-bottom:1.4pt solid var(--ink);display:flex;justify-content:space-between}
+.t-cat span{font-weight:500;color:var(--mute)}
+.t-row{padding:2.2mm 0;border-bottom:.6pt solid var(--rule);break-inside:avoid}
+.t-row .c1 b{font-weight:600;display:block}
+.t-row .c1 span{display:block;font-size:8.5pt;color:var(--mute);line-height:1.35}
+.t-empty{padding:6mm 0;color:var(--mute);border-bottom:.6pt solid var(--rule)}
+.sums{margin:8mm 0 0 auto;width:92mm;break-inside:avoid}
+.sums div{display:flex;justify-content:space-between;padding:1.6mm 0;border-bottom:.6pt solid var(--rule)}
+.sums div span:first-child{color:var(--mute)}
+.band{margin-top:3mm;background:var(--ink);color:#fff;padding:5mm 6mm;display:flex;justify-content:space-between;align-items:baseline;break-inside:avoid}
+.band span{font-size:10pt}
+.band b{font-size:23pt;font-weight:600;letter-spacing:-.02em}
+.d-cols{display:grid;grid-template-columns:1fr 1fr;gap:10mm;break-inside:avoid}
+.d-cols ul{margin:0;padding:0;list-style:none}
+.d-cols li{padding:1.5mm 0;border-bottom:.6pt solid var(--rule)}
+.d-list{margin:0;padding-left:4.5mm}
+.d-list li{margin-bottom:1.2mm}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:9mm;break-inside:avoid}
+.sign div{border-top:1.4pt solid var(--ink);padding-top:2mm;min-height:30mm;font-size:9pt}
+.sign span{color:var(--mute);display:block}
+.d-foot{margin-top:11mm;padding-top:4mm;border-top:.6pt solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;font-size:8.5pt;color:var(--mute);break-inside:avoid}
+.d-foot b{color:var(--ink);font-weight:600}
+
+
+.mic{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.micbtn{display:flex;align-items:center;gap:9px;background:var(--ink);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:600;cursor:pointer}
+.micbtn i{width:11px;height:11px;border-radius:50%;background:#fff;display:block}
+.micbtn.on i{background:#e5372b;animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.micbtn.on i{animation:none}}
+#micStat{font-size:13px;color:var(--mute)}
+.dictact{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.rev{margin-top:12px;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.rev h5{margin:0;padding:10px 12px;font-size:14px;background:var(--soft)}
+.rev ul{list-style:none;margin:0;padding:0}
+.rev li{padding:9px 12px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.rev li small{display:block;color:var(--mute);font-size:12.5px}
+.rev li .w{color:#9a5b00}
+.rev .none{padding:10px 12px;color:var(--mute);font-size:14px}
+.rev .rest{padding:10px 12px;border-top:1px solid var(--rule);font-size:13px;color:var(--mute)}
+.rev .go{padding:10px 12px;border-top:1px solid var(--rule);display:flex;gap:8px;flex-wrap:wrap}
+
+
+.bar{padding-top:calc(10px + env(safe-area-inset-top,0px))}
+.tot{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.btn:disabled{opacity:.6}
+#login{position:fixed;inset:0;background:var(--ink);color:#fff;display:none;align-items:center;justify-content:center;z-index:60;padding:24px}
+#login.show{display:flex}
+#login .box{width:100%;max-width:300px;display:grid;gap:14px;text-align:center}
+#login img{margin:0 auto;border-radius:22px}
+#login input{text-align:center;font-size:22px;letter-spacing:.25em;padding:12px;border-radius:8px;border:0;color:var(--ink)}
+#login .btn{padding:12px;font-size:16px}
+#login .err{color:#ffb4ad;min-height:1.3em;font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.toast.show{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--ink);color:#fff;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:none;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+.sheet.show{display:block}
+.sheet b{display:block;font-size:17px}
+.sheet span{display:block;font-size:13px;opacity:.7;margin:2px 0 14px;word-break:break-all}
+.sheet .row{display:flex;gap:8px}
+.sheet .row .btn{flex:1;padding:12px;font-size:15px}
+
+/* ---------- Mobiel ---------- */
+@media (max-width:980px){
+  .tabs{display:flex}
+  .layout{display:block;overflow:auto}
+  #panel{border-right:0;min-height:100%}
+  #stage{padding:12px 8px 30px}
+  body[data-tab=fill] #stage{display:none}
+  body[data-tab=view] #panel{display:none}
+  .bar .t{font-size:14px;line-height:1.15}
+  .bar{gap:6px;padding-left:10px;padding-right:10px}
+  .btn{font-size:13px;white-space:nowrap}
+  input,select,textarea{font-size:16px}
+  .btn{padding:7px 10px}
+  .cust .c4{grid-template-columns:1fr 1fr}
+  .cust .c4 .f:first-child{grid-column:1/-1}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  @page{size:A4;margin:14mm 16mm}
+  html,body{height:auto;background:#fff;display:block}
+  .bar,.tabs,#panel{display:none!important}
+  .layout{display:block;overflow:visible}
+  #stage{display:block!important;overflow:visible;padding:0}
+  #sheet{width:auto!important;height:auto!important}
+  #paper{position:static!important;transform:none!important;box-shadow:none;width:auto;min-height:0;padding:0}
+}
+</style>
+</head>
+<body data-tab="fill">
+<div id="login"><div class="box">
+  <img src="/icons/icon-192.png" alt="" width="96" height="96">
+  <div style="font-weight:600;font-size:18px">KGN Offerte</div>
+  <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Pincode" aria-label="Pincode">
+  <button type="button" id="pinBtn" class="btn solid">Inloggen</button>
+  <div class="err" id="pinErr"></div>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="sheet" id="pdfSheet"><b>PDF is klaar</b><span id="pdfNameOut"></span>
+  <div class="row"><button type="button" class="btn solid" id="pdfShare">Delen</button><button type="button" class="btn" id="pdfOpen">Openen</button><button type="button" class="btn" id="pdfClose">Sluiten</button></div></div>
+
+<div class="bar">
+  <span class="t">KGN Offerte</span>
+  <span class="sp"></span>
+  <button class="btn" id="btnNew" type="button">Nieuwe offerte</button>
+  <button class="btn solid" id="btnPrint" type="button">PDF maken</button>
+</div>
+<div class="tabs">
+  <button type="button" data-t="fill">Invullen</button>
+  <button type="button" data-t="view">Voorbeeld</button>
+</div>
+
+<div class="layout">
+  <aside id="panel">
+    <div id="panelbody">
+
+      <details class="sec" id="dictsec" open>
+        <summary>Inspreken</summary>
+        <div class="body">
+          <p class="hint">Vertel wat je hebt opgenomen, gewoon in je eigen woorden: de ruimtes met maten en wat er moet gebeuren. Bijvoorbeeld: "Woonkamer 6 bij 4,5, hoogte 2,6. Stucwerk wanden en plafond, 4 elektrapunten, groepenkast vervangen. Korting 5 procent."</p>
+          <div class="mic"><button class="micbtn" id="micBtn" type="button"><i></i><span>Start opnemen</span></button><span id="micStat"></span></div>
+          <textarea id="dictText" rows="5" placeholder="Je tekst verschijnt hier. Typen mag ook, of gebruik het microfoontje op het toetsenbord van je telefoon."></textarea>
+          <div class="dictact"><button class="btn ghost small" type="button" data-act="parse">Verwerk tekst</button><button class="btn ghost small" type="button" data-act="clearDict">Wissen</button></div>
+          <div id="dictOut"></div>
+        </div>
+      </details>
+
+      <details class="sec" open>
+        <summary>Klant</summary>
+        <div class="body g1">
+          <div class="f"><label for="k-naam">Naam</label><input id="k-naam" type="text" data-k="klant.naam" autocomplete="off"></div>
+          <div class="f"><label for="k-adres">Adres</label><input id="k-adres" type="text" data-k="klant.adres" autocomplete="off"></div>
+          <div class="f"><label for="k-plaats">Postcode en plaats</label><input id="k-plaats" type="text" data-k="klant.plaats" autocomplete="off"></div>
+          <div class="g2">
+            <div class="f"><label for="k-email">E-mail</label><input id="k-email" type="email" data-k="klant.email" autocomplete="off"></div>
+            <div class="f"><label for="k-tel">Telefoon</label><input id="k-tel" type="tel" data-k="klant.tel" autocomplete="off"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="sec" open>
+        <summary>Project</summary>
+        <div class="body g1">
+          <div class="f"><label for="p-titel">Omschrijving project</label><input id="p-titel" type="text" data-k="project.titel" placeholder="Bijvoorbeeld: Verbouwing begane grond" autocomplete="off"></div>
+          <div class="f"><label for="p-loc">Adres van het werk (indien anders)</label><input id="p-loc" type="text" data-k="project.locatie" autocomplete="off"></div>
+          <div class="g2">
+            <div class="f"><label for="n-nr">Offertenummer</label><input id="n-nr" type="text" data-k="nummer"></div>
+            <div class="f"><label for="n-dat">Datum</label><input id="n-dat" type="date" data-k="datum"></div>
+            <div class="f"><label for="n-gel">Geldig (dagen)</label><input id="n-gel" type="number" inputmode="numeric" min="0" data-k="geldig" data-t="n"></div>
+            <div class="f"><label for="n-wk">Doorlooptijd (weken)</label><input id="n-wk" type="text" inputmode="numeric" data-k="project.weken" placeholder="Bijvoorbeeld: 8"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="sec" id="roomsec">
+        <summary>Ruimtes en maten</summary>
+        <div class="body">
+          <p class="hint">Vul per ruimte de maten in. De vloer-, wand- en plafondoppervlakken kun je daarna in een keer overnemen in de gekozen werkzaamheden.</p>
+          <div id="rooms"></div>
+          <button class="btn ghost small" type="button" data-act="addRoom">Ruimte toevoegen</button>
+          <div class="chips" id="areaChips"></div>
+          <button class="btn solid small" style="background:var(--ink);color:#fff;border-color:var(--ink)" type="button" data-act="fill">Maten invullen bij gekozen werkzaamheden</button>
+        </div>
+      </details>
+
+      <details class="sec" open>
+        <summary>Werkzaamheden</summary>
+        <div class="body" id="items" style="padding-bottom:0"></div>
+      </details>
+
+      <details class="sec" id="custsec">
+        <summary>Eigen regels</summary>
+        <div class="body">
+          <p class="hint">Voor werk dat niet in de lijst staat.</p>
+          <div id="customs"></div>
+          <button class="btn ghost small" type="button" data-act="addCustom">Regel toevoegen</button>
+        </div>
+      </details>
+
+      <details class="sec" open>
+        <summary>Prijsopbouw</summary>
+        <div class="body g1">
+          <div class="f"><label for="b-btw">Btw-tarief</label>
+            <select id="b-btw" data-k="btw" data-t="n">
+              <option value="21">21% (hoog tarief)</option>
+              <option value="9">9% (laag tarief)</option>
+              <option value="0">0% (btw verlegd)</option>
+            </select></div>
+          <div class="f"><label for="b-kor">Korting: <output id="korOut">0%</output></label>
+            <input id="b-kor" type="range" min="0" max="20" step="0.5" data-k="korting" data-t="n"></div>
+        </div>
+      </details>
+
+      <details class="sec">
+        <summary>Teksten op de offerte</summary>
+        <div class="body g1">
+          <div class="f"><label for="t-intro">Inleiding</label><textarea id="t-intro" rows="4" data-k="intro"></textarea></div>
+          <div class="f"><label for="t-bet">Betaling (een regel per termijn)</label><textarea id="t-bet" rows="4" data-k="betaling"></textarea></div>
+          <div class="f"><label for="t-voor">Voorwaarden en uitgangspunten (een regel per punt)</label><textarea id="t-voor" rows="7" data-k="voorwaarden"></textarea></div>
+        </div>
+      </details>
+
+      <details class="sec">
+        <summary>Bedrijfsgegevens</summary>
+        <div class="body g1">
+          <p class="hint">Worden bewaard in deze browser. Lege velden verschijnen niet op de offerte.</p>
+          <div class="f"><label for="c-naam">Bedrijfsnaam</label><input id="c-naam" type="text" data-c="naam"></div>
+          <div class="f"><label for="c-adres">Adres en plaats</label><input id="c-adres" type="text" data-c="adres"></div>
+          <div class="g2">
+            <div class="f"><label for="c-tel">Telefoon</label><input id="c-tel" type="text" data-c="tel"></div>
+            <div class="f"><label for="c-mail">E-mail</label><input id="c-mail" type="text" data-c="email"></div>
+            <div class="f"><label for="c-kvk">KvK-nummer</label><input id="c-kvk" type="text" data-c="kvk"></div>
+            <div class="f"><label for="c-btw">Btw-nummer</label><input id="c-btw" type="text" data-c="btwnr"></div>
+          </div>
+          <div class="f"><label for="c-iban">IBAN</label><input id="c-iban" type="text" data-c="iban"></div>
+          <div class="f"><label for="c-ond">Naam ondertekenaar</label><input id="c-ond" type="text" data-c="ondertekenaar"></div>
+          <button class="btn ghost small" type="button" data-act="resetPrices">Prijslijst terugzetten naar standaard</button>
+        </div>
+      </details>
+
+    </div>
+    <div class="tot">
+      <div><small>Totaal exclusief btw <span id="totEx"></span></small>Totaal inclusief btw</div>
+      <b id="totIn">€ 0,00</b>
+    </div>
+  </aside>
+
+  <main id="stage"><div id="sheet"><div id="paper"></div></div></main>
+</div>
+
+<script>
+const LOGO = `<svg xmlns="http://www.w3.org/2000/svg" aria-label="KGN Totaalservice" role="img" viewBox="340 50 950 590">
+  <defs>
+    <style>.cls-1{fill:#1d1d1b;}.cls-2{fill:#fff;}</style>
+  </defs>
+  <path class="cls-2" d="M1069.01,350.07c.61-.19,1.21-.38,1.82-.57,1.95,2.45,3.93,4.88,5.85,7.35,47.01,60.42,93.99,120.87,141.07,181.23,1.81,2.32,4.47,5.41,6.89,5.55,10.2.62,20.45.26,31.08.26V252.89h-53.97v180.42c-3.35-4.05-5.33-6.38-7.23-8.77-43.88-55.5-87.74-111.01-131.65-166.48-1.58-1.99-3.61-5.08-5.51-5.14-14.12-.44-28.26-.24-42.32-.24v290.72h53.96M967.08,289.06c-35.95-35.96-86.86-51.08-138.76-42.11-44.18,7.63-78.69,29.75-101.06,68.86-21.3,37.24-26.08,77.66-18.77,119.5,6.18,35.37,22.49,65.11,51.89,86.73,22.98,16.91,49.31,24.69,77.33,27.39,51.09,4.93,96.3-7.2,132.5-45.71,3.76-4,5.19-7.91,5.16-13.29-.2-35.38-.1-70.77-.12-106.15,0-2.58-.21-5.16-.34-8.1h-123.77v48.36h73.89c0,16.96.16,33-.2,49.03-.05,2.03-2.4,4.46-4.29,5.93-22.06,17.15-47.34,22.25-74.61,19.49-28.27-2.86-52.72-13.22-69.51-37.24-16.09-23.02-19.44-48.99-16.71-76.34,6.09-60.91,58.55-100.35,118.66-89.04,20.71,3.89,38.94,12.82,53.25,25.4,11.92-11,23.51-21.69,35.46-32.72M578.69,393.69c43.47-46.87,86.38-93.13,130.85-141.08-23.96,0-45.27-.14-66.57.2-2.32.04-5.05,2.41-6.84,4.39-33.79,37.45-67.48,74.97-101.09,112.58-1.44,1.61-1.86,4.14-2.76,6.23-1.13-.86-2.25-1.71-3.38-2.56v-120.45h-53.8v290.42h54.4v-126.47c.67-.3,1.33-.6,2-.9,1.44,1.87,2.72,3.88,4.33,5.59,34.99,37.06,70.31,73.81,104.8,111.32,7.72,8.39,15.27,11.84,26.5,11.22,17-.94,34.08-.24,51.13-.24.5-.78,1-1.56,1.5-2.34-46.81-49.08-93.62-98.15-141.08-147.9"></path>
+  <path d="M1069,350.07v193.34h-53.96V252.69c14.06,0,28.2-.2,42.32.24,1.9.06,3.93,3.14,5.51,5.13,43.91,55.47,87.78,110.98,131.65,166.48,1.89,2.39,3.88,4.71,7.23,8.77v-180.42h53.97v291.02c-10.63,0-20.88.36-31.08-.26-2.42-.15-5.08-3.24-6.89-5.56-47.08-60.37-94.06-120.81-141.07-181.23-1.92-2.47-3.9-4.9-5.85-7.35-.61.19-1.22.38-1.83.57"></path>
+  <path d="M967.08,289.06c-11.95,11.03-23.54,21.72-35.46,32.72-14.31-12.59-32.54-21.51-53.24-25.4-60.11-11.3-112.56,28.14-118.66,89.04-2.73,27.35.62,53.33,16.71,76.34,16.79,24.02,41.24,34.38,69.51,37.24,27.27,2.76,52.56-2.34,74.61-19.49,1.89-1.47,4.25-3.9,4.29-5.93.35-16.03.2-32.08.2-49.04h-73.89v-48.36h123.77c.13,2.94.34,5.52.34,8.1.02,35.38-.08,70.77.12,106.15.03,5.38-1.4,9.29-5.16,13.29-36.2,38.51-81.41,50.64-132.5,45.71-28.02-2.7-54.35-10.48-77.34-27.39-29.39-21.63-45.71-51.36-51.89-86.74-7.31-41.84-2.53-82.26,18.77-119.5,22.37-39.1,56.88-61.22,101.06-68.85,51.9-8.97,102.81,6.15,138.76,42.11"></path>
+  <path d="M578.69,393.69c47.46,49.75,94.27,98.83,141.08,147.9-.5.78-1,1.56-1.5,2.34-17.05,0-34.14-.69-51.13.24-11.22.62-18.78-2.83-26.5-11.22-34.49-37.51-69.81-74.26-104.8-111.32-1.61-1.7-2.89-3.72-4.33-5.59-.67.3-1.33.6-2,.9v126.47h-54.4V252.99h53.8v120.45c1.12.85,2.25,1.71,3.38,2.56.89-2.1,1.32-4.62,2.76-6.23,33.61-37.61,67.3-75.13,101.09-112.58,1.78-1.97,4.51-4.35,6.84-4.39,21.3-.33,42.61-.2,66.57-.2-44.48,47.95-87.39,94.22-130.85,141.08"></path>
+  <path d="M376.44,275.35c33.78-29.96,75.78-66.7,109.57-96.66,41.4-36.71,82.79-73.42,124.28-110.02,7.63-6.74,10.48-6.59,18.1.11,15.48,13.6,30.84,27.34,46.34,40.92,2.14,1.88,4.77,3.17,8.8,5.8,0-14.19-.05-26.28.02-38.37.06-10.12,3.07-13.28,12.98-13.34,18.15-.1,36.29-.06,54.44-.03,12.48.02,15.46,3.08,15.48,15.99.04,27.73,1.59,55.59-.5,83.16-1.62,21.46,5.22,35.82,22.17,47.67,11.36,7.94,21.03,18.41,32.84,28.99-5.82,1.49-9.45,1.98-12.72,3.36-6.25,2.64-10.89,1.22-15.88-3.48-12.16-11.46-24.73-22.48-37.43-33.32-5.61-4.79-7.88-10.08-7.78-17.7.41-32.48.04-64.97.28-97.46.05-6.56-2.14-8.98-8.55-8.69-8.8.4-17.62.1-26.43.15-10.08.05-10.19.15-10.24,10.82-.06,14,.32,28.01-.28,41.99-.17,3.93-2.28,10.02-4.96,11.02-3.35,1.24-8.75-.63-12.38-3.05-2.12-1.42-3.19-2.63-4.76-4.02-18.18-16.08-36.49-32.02-54.47-48.33-4.68-4.25-7.77-4.14-12.38.16-12.78,11.93-26.02,23.37-39.1,34.96-41.02,36.35-156.37,138.18-197.4,174.52"></path>
+  <polyline class="cls-1" points="753.41 577.12 785.85 577.12 785.85 583.26 772.96 583.26 772.96 616.89 766.31 616.89 766.31 583.26 753.41 583.26"></polyline>
+  <path class="cls-1" d="M790.41,597c0-12.38,8.24-20.74,20.51-20.74s20.45,8.36,20.45,20.74-8.24,20.74-20.45,20.74-20.51-8.35-20.51-20.74M810.91,611.6c8.18,0,13.75-5.91,13.75-14.6s-5.57-14.6-13.75-14.6-13.8,5.91-13.8,14.6,5.57,14.6,13.8,14.6"></path>
+  <polyline class="cls-1" points="835.92 577.12 868.36 577.12 868.36 583.26 855.46 583.26 855.46 616.89 848.81 616.89 848.81 583.26 835.92 583.26"></polyline>
+  <path class="cls-1" d="M886.03,577.12h7.38l17.78,39.77h-7.22l-3.64-8.24h-21.36l-3.64,8.24h-7.16M897.79,602.63l-8.13-18.8-8.12,18.8h16.25Z"></path>
+  <path class="cls-1" d="M931.83,577.12h7.38l17.78,39.77h-7.21l-3.64-8.24h-21.36l-3.64,8.24h-7.16M943.59,602.63l-8.12-18.8-8.12,18.8h16.24Z"></path>
+  <polyline class="cls-1" points="964.28 577.12 970.92 577.12 970.92 610.69 991.88 610.69 991.88 616.89 964.28 616.89"></polyline>
+  <path class="cls-1" d="M997.35,612.11l3.47-5c3.35,2.78,8.41,4.49,13.29,4.49,5.79,0,9.54-2.33,9.54-5.91,0-3.29-3.07-5.06-9.94-5.96-10.79-1.48-15.4-5.06-15.4-12.04s6.31-11.36,15.4-11.36c5.28,0,10.68,1.82,14.71,4.94l-3.35,4.71c-3.3-2.5-7.39-3.81-11.31-3.81-5.23,0-8.92,2.33-8.92,5.57s2.84,5,9.54,5.97c11.25,1.65,15.96,5.06,15.96,11.81,0,7.33-6.48,12.16-16.25,12.16-6.02,0-12.1-1.99-16.76-5.57"></path>
+  <polyline class="cls-1" points="1039.28 577.12 1068.54 577.12 1068.54 583.14 1045.87 583.14 1045.87 593.76 1067.57 593.76 1067.57 599.67 1045.87 599.67 1045.87 610.81 1068.88 610.81 1068.88 616.89 1039.28 616.89"></polyline>
+  <path class="cls-1" d="M1078.94,577.12h18.63c8.52,0,14.09,5.23,14.09,13.13,0,6.59-3.92,11.31-10.28,12.67l12.1,13.97h-8.29l-11.53-13.58h-8.07v13.58h-6.65M1097.52,597.23c4.72,0,7.55-2.61,7.55-6.99s-2.84-6.99-7.55-6.99h-11.98v13.98h11.98Z"></path>
+  <polyline class="cls-1" points="1116.78 577.12 1123.94 577.12 1130.64 593.65 1136.78 609.16 1149.67 577.12 1156.83 577.12 1140.41 616.89 1133.26 616.89"></polyline>
+  <rect class="cls-1" x="1164.29" y="577.12" width="6.65" height="39.77"></rect>
+  <path class="cls-1" d="M1180.31,597c0-12.15,8.58-20.68,20.79-20.68,5.79,0,10.85,2.1,14.83,6.14l-4.43,4.09c-2.72-2.73-6.08-4.14-10.17-4.14-8.46,0-14.32,5.96-14.32,14.6s5.85,14.6,14.32,14.6c3.98,0,7.84-1.54,10.62-4.26l4.26,4.43c-3.97,3.92-9.03,5.91-15.05,5.91-12.33,0-20.85-8.52-20.85-20.68"></path>
+  <polyline class="cls-1" points="1224.69 577.12 1253.94 577.12 1253.94 583.14 1231.28 583.14 1231.28 593.76 1252.98 593.76 1252.98 599.67 1231.28 599.67 1231.28 610.81 1254.28 610.81 1254.28 616.89 1224.69 616.89"></polyline>
+  <path class="cls-1" d="M479.93,796.4v-16.53h4.67v16.45c0,4.88,2.9,7.98,7.42,7.98s7.42-3.1,7.42-7.98v-16.45h4.68v16.53c0,7.54-4.68,12.25-12.1,12.25s-12.09-4.72-12.09-12.25"></path>
+  <polyline class="cls-1" points="509.57 779.87 514.61 779.87 518.92 793.49 521.74 802.28 528.88 779.87 533.15 779.87 540.37 802.16 543.19 793.49 547.46 779.87 552.5 779.87 542.99 808.09 537.79 808.09 534.68 798.45 531.06 787.41 527.43 798.45 524.29 808.09 519.2 808.09"></polyline>
+  <path class="cls-1" d="M568.84,779.87h13.46c5.77,0,9.27,2.78,9.27,7.46,0,2.82-1.33,5.04-3.59,6.17,2.54.93,4.47,3.75,4.47,6.77,0,5-3.67,7.82-10.16,7.82h-13.46M582.46,791.52c2.82,0,4.48-1.37,4.48-3.71s-1.7-3.75-4.48-3.75h-8.95v7.46h8.95ZM582.82,803.81c3.06,0,4.96-1.57,4.96-4.15s-1.86-4.07-4.92-4.07h-9.35v8.22h9.31Z"></path>
+  <path class="cls-1" d="M597.75,793.98c0-8.79,5.85-14.72,14.55-14.72s14.51,5.93,14.51,14.72-5.84,14.71-14.51,14.71-14.55-5.92-14.55-14.71M612.3,804.34c5.8,0,9.76-4.19,9.76-10.36s-3.95-10.36-9.76-10.36-9.8,4.19-9.8,10.36,3.95,10.36,9.8,10.36"></path>
+  <path class="cls-1" d="M633.51,796.4v-16.53h4.67v16.45c0,4.88,2.9,7.98,7.42,7.98s7.42-3.1,7.42-7.98v-16.45h4.68v16.53c0,7.54-4.68,12.25-12.1,12.25s-12.09-4.72-12.09-12.25"></path>
+  <polyline class="cls-1" points="663.14 779.87 668.18 779.87 672.49 793.49 675.32 802.28 682.45 779.87 686.72 779.87 693.94 802.16 696.76 793.49 701.04 779.87 706.07 779.87 696.56 808.09 691.36 808.09 688.25 798.45 684.63 787.41 681 798.45 677.85 808.09 672.78 808.09"></polyline>
+  <rect class="cls-1" x="710.03" y="794.42" width="14.84" height="3.99"></rect>
+  <polyline class="cls-1" points="744.42 779.87 765.18 779.87 765.18 784.14 749.1 784.14 749.1 791.68 764.5 791.68 764.5 795.87 749.1 795.87 749.1 803.78 765.43 803.78 765.43 808.09 744.42 808.09"></polyline>
+  <polyline class="cls-1" points="772.93 779.87 777.2 779.87 792.44 800.02 792.4 791.6 792.4 779.87 797.12 779.87 797.12 808.09 792.84 808.09 777.61 787.93 777.64 796.92 777.64 808.09 772.93 808.09"></polyline>
+  <polyline class="cls-1" points="813.25 779.87 818.33 779.87 823.08 791.6 827.44 802.6 836.59 779.87 841.67 779.87 830.02 808.09 824.94 808.09"></polyline>
+  <path class="cls-1" d="M853.89,779.87h5.24l12.62,28.22h-5.12l-2.58-5.85h-15.16l-2.58,5.85h-5.08M862.23,797.97l-5.77-13.34-5.76,13.34h11.53Z"></path>
+  <path class="cls-1" d="M875.06,804.7l2.46-3.55c2.38,1.97,5.97,3.18,9.43,3.18,4.11,0,6.77-1.65,6.77-4.19,0-2.34-2.18-3.59-7.05-4.23-7.66-1.05-10.93-3.59-10.93-8.55s4.48-8.06,10.93-8.06c3.75,0,7.58,1.29,10.44,3.51l-2.38,3.35c-2.34-1.77-5.24-2.7-8.02-2.7-3.71,0-6.33,1.65-6.33,3.95s2.02,3.55,6.77,4.24c7.98,1.17,11.33,3.59,11.33,8.38,0,5.2-4.59,8.63-11.53,8.63-4.27,0-8.59-1.41-11.89-3.95"></path>
+  <polyline class="cls-1" points="902.35 779.87 925.37 779.87 925.37 784.22 916.22 784.22 916.22 808.09 911.5 808.09 911.5 784.22 902.35 784.22"></polyline>
+  <path class="cls-1" d="M928.96,793.98c0-8.63,6.09-14.68,14.92-14.68,4.03,0,7.7,1.49,10.48,4.35l-3.02,3.02c-1.89-1.89-4.76-3.02-7.5-3.02-6.01,0-10.16,4.15-10.16,10.32s3.87,10.32,9.88,10.32c2.82,0,5.12-.73,7.13-2.3v-5.81h-7.9v-4.15h12.26v11.97c-3.14,3.15-6.85,4.64-11.49,4.64-8.79,0-14.59-5.81-14.59-14.68"></path>
+  <path class="cls-1" d="M960.77,793.98c0-8.79,5.85-14.72,14.55-14.72s14.51,5.93,14.51,14.72-5.84,14.71-14.51,14.71-14.55-5.92-14.55-14.71M975.33,804.34c5.8,0,9.76-4.19,9.76-10.36s-3.95-10.36-9.76-10.36-9.8,4.19-9.8,10.36,3.95,10.36,9.8,10.36"></path>
+  <polyline class="cls-1" points="996.9 779.87 1017.66 779.87 1017.66 784.14 1001.58 784.14 1001.58 791.68 1016.97 791.68 1016.97 795.87 1001.58 795.87 1001.58 803.78 1017.9 803.78 1017.9 808.09 996.9 808.09"></polyline>
+  <path class="cls-1" d="M1025.4,779.87h10.8c8.51,0,14.23,5.64,14.23,14.11s-5.72,14.11-14.23,14.11h-10.8M1036.21,803.73c5.65,0,9.47-3.95,9.47-9.76s-3.87-9.76-9.47-9.76h-6.09v19.51h6.09Z"></path>
+  <path class="cls-1" d="M1057.46,779.87h13.14c6.17,0,10.2,3.91,10.2,9.84s-4.03,9.84-10.2,9.84h-8.43v8.55h-4.72M1070.36,795.27c3.47,0,5.77-2.18,5.77-5.56s-2.3-5.52-5.77-5.52h-8.22v11.09h8.22Z"></path>
+  <path class="cls-1" d="M1094.63,779.87h5.24l12.62,28.22h-5.12l-2.58-5.85h-15.16l-2.58,5.85h-5.08M1102.97,797.97l-5.77-13.34-5.76,13.34h11.53Z"></path>
+  <path class="cls-1" d="M1118.02,779.87h13.22c6.05,0,10,3.71,10,9.31,0,4.68-2.78,8.03-7.3,8.99l8.59,9.92h-5.89l-8.18-9.63h-5.73v9.63h-4.71M1131.2,794.14c3.35,0,5.36-1.85,5.36-4.96s-2.01-4.96-5.36-4.96h-8.5v9.92h8.5Z"></path>
+  <polyline class="cls-1" points="1145.63 779.87 1168.65 779.87 1168.65 784.22 1159.5 784.22 1159.5 808.09 1154.79 808.09 1154.79 784.22 1145.63 784.22"></polyline>
+  <polyline class="cls-1" points="1174.62 779.87 1178.89 779.87 1194.13 800.02 1194.09 791.6 1194.09 779.87 1198.81 779.87 1198.81 808.09 1194.54 808.09 1179.3 787.93 1179.34 796.92 1179.34 808.09 1174.62 808.09"></polyline>
+  <polyline class="cls-1" points="1207.52 779.87 1228.28 779.87 1228.28 784.14 1212.2 784.14 1212.2 791.68 1227.6 791.68 1227.6 795.87 1212.2 795.87 1212.2 803.78 1228.52 803.78 1228.52 808.09 1207.52 808.09"></polyline>
+  <path class="cls-1" d="M1236.03,779.87h13.22c6.05,0,10,3.71,10,9.31,0,4.68-2.78,8.03-7.3,8.99l8.59,9.92h-5.89l-8.18-9.63h-5.73v9.63h-4.71M1249.21,794.14c3.35,0,5.36-1.85,5.36-4.96s-2.01-4.96-5.36-4.96h-8.5v9.92h8.5Z"></path>
+  <path class="cls-1" d="M1714.89,859.69H14.1V9.29h1700.79v850.39ZM30.1,843.69h1668.79V25.29H30.1v818.39Z"></path>
+</svg>`;
+
+/* ---------- Catalogus (prijzen zijn voorbeeldprijzen en per regel aan te passen) ---------- */
+const CATS = [
+ {id:'sloop', name:'Sloop en voorbereiding', items:[
+  {id:'sloop', name:'Sloopwerk', desc:'Verwijderen van bestaande afwerking, vloer- en wandbekleding', unit:'m²', price:32, max:250, basis:'vloer'},
+  {id:'container', name:'Bouwcontainer', desc:'Plaatsen, vullen en afvoeren van bouwafval', unit:'stuk', price:495, max:10},
+  {id:'afdekken', name:'Afdekken en beschermen', desc:'Beschermen van vloeren, trappenhuis en overige bouwdelen', unit:'post', price:350, type:'toggle'}]},
+ {id:'wanden', name:'Wanden en plafonds', items:[
+  {id:'metalstud', name:'Metalstud wand', desc:'Opbouw, isolatie en dubbele beplating', unit:'m²', price:68, max:150},
+  {id:'plafond', name:'Verlaagd plafond', desc:'Frame en gipsplaat, inclusief naden', unit:'m²', price:58, max:200, basis:'plafond'},
+  {id:'deur', name:'Binnendeur met kozijn', desc:'Leveren en plaatsen, inclusief afhangen', unit:'stuk', price:640, max:20}]},
+ {id:'afwerking', name:'Stucwerk en schilderwerk', items:[
+  {id:'stuc-wand', name:'Stucwerk wanden', desc:'Gladde afwerking, klaar voor schilderwerk', unit:'m²', price:26, max:400, basis:'wand'},
+  {id:'stuc-plafond', name:'Stucwerk plafonds', desc:'Gladde afwerking, klaar voor schilderwerk', unit:'m²', price:30, max:200, basis:'plafond'},
+  {id:'schilder-wand', name:'Schilderwerk wanden', desc:'Voorstrijken en tweemaal afwerken', unit:'m²', price:15, max:400, basis:'wand'},
+  {id:'schilder-plafond', name:'Schilderwerk plafonds', desc:'Voorstrijken en tweemaal afwerken', unit:'m²', price:14, max:200, basis:'plafond'}]},
+ {id:'vloeren', name:'Vloeren', items:[
+  {id:'dekvloer', name:'Dekvloer', desc:'Egaliseren of storten van de vloer', unit:'m²', price:34, max:250, basis:'vloer'},
+  {id:'tegelvloer', name:'Tegelwerk vloer', desc:'Arbeid en lijmwerk, exclusief tegels', unit:'m²', price:88, max:250, basis:'vloer'},
+  {id:'pvc', name:'PVC vloer', desc:'Leveren en leggen', unit:'m²', price:52, max:250, basis:'vloer'},
+  {id:'plinten', name:'Plinten', desc:'Leveren en plaatsen', unit:'m', price:18, max:200}]},
+ {id:'installaties', name:'Installaties', items:[
+  {id:'elektra', name:'Elektrapunt', desc:'Aanleg en aansluiting per punt', unit:'stuk', price:85, max:60},
+  {id:'groepenkast', name:'Groepenkast', desc:'Nieuwe meterkast, inclusief aardlekschakelaars', unit:'post', price:1450, type:'toggle'},
+  {id:'water', name:'Loodgieterspunt', desc:'Aanleg water of afvoer per punt', unit:'stuk', price:220, max:20},
+  {id:'vloerverwarming', name:'Vloerverwarming', desc:'Leveren en aanleggen', unit:'m²', price:78, max:250, basis:'vloer'}]},
+ {id:'nat', name:'Badkamer en keuken', items:[
+  {id:'tegel-wand', name:'Tegelwerk wanden', desc:'Arbeid en lijmwerk, exclusief tegels', unit:'m²', price:95, max:150, basis:'wand'},
+  {id:'sanitair', name:'Sanitair plaatsen', desc:'Toilet, wastafel, douche of bad per stuk', unit:'stuk', price:380, max:10},
+  {id:'keuken', name:'Keuken plaatsen', desc:'Montage van de keukenopstelling', unit:'post', price:1800, type:'toggle'}]},
+ {id:'beheer', name:'Projectmanagement', items:[
+  {id:'pm', name:'Projectmanagement en toezicht', desc:'Planning, coördinatie van vakmensen en wekelijkse voortgang', unit:'%', type:'percent', def:8, max:20}]}
+];
+const ALL = CATS.flatMap(c => c.items.map(i => ({...i, cat:c.id})));
+const byId = Object.fromEntries(ALL.map(i => [i.id, i]));
+
+const TXT = {
+  intro: 'Hartelijk dank voor uw aanvraag. Op basis van onze bespreking en de opgegeven maten hebben wij onderstaande offerte voor u opgesteld. Als totaalpartner nemen wij het project van begin tot eind uit handen.',
+  betaling: '30% bij opdrachtbevestiging\n40% halverwege de werkzaamheden\n30% bij oplevering',
+  voorwaarden: 'Prijzen zijn gebaseerd op de opgegeven maten en kunnen na opname op locatie worden aangepast.\nMeerwerk wordt vooraf met u afgestemd en schriftelijk bevestigd.\nNiet inbegrepen: vergunningen, leges en materialen die niet expliciet zijn genoemd.\nAsbestinventarisatie en eventuele sanering vallen buiten deze offerte.\nFacturen worden betaald binnen 14 dagen na factuurdatum.'
+};
+
+/* ---------- Opslag ---------- */
+const DK='kgn-offerte-draft-v1', CK='kgn-offerte-cfg-v1';
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const DEF_CFG = {naam:'KGN Totaalservice', adres:'', tel:'06 38 28 63 01', email:'info@kgntotaalservice.nl', kvk:'', btwnr:'', iban:'', ondertekenaar:'', prices:{}, counter:1};
+let CFG = Object.assign({}, DEF_CFG, store.get(CK) || {});
+CFG.prices = CFG.prices || {};
+
+const iso = d => { const z = new Date(d.getTime() - d.getTimezoneOffset()*60000); return z.toISOString().slice(0,10); };
+const makeNr = () => 'KGN-' + new Date().getFullYear() + '-' + String(CFG.counter).padStart(3,'0');
+
+function newDraft(){
+  const lines = {};
+  ALL.forEach(i => lines[i.id] = {on:false, qty: i.type==='toggle' ? 1 : (i.type==='percent' ? i.def : 0)});
+  return {nummer:makeNr(), datum:iso(new Date()), geldig:30,
+    klant:{naam:'',adres:'',plaats:'',email:'',tel:''}, project:{titel:'',locatie:'',weken:''},
+    rooms:[{naam:'',l:0,b:0,h:2.6}], lines, custom:[], btw:21, korting:0,
+    intro:TXT.intro, betaling:TXT.betaling, voorwaarden:TXT.voorwaarden};
+}
+const hadDraft = !!store.get(DK);
+let S = newDraft();
+(function load(){
+  const d = store.get(DK); if(!d) return;
+  const base = newDraft();
+  S = Object.assign(base, d);
+  S.klant = Object.assign(base.klant, d.klant||{});
+  S.project = Object.assign(base.project, d.project||{});
+  S.lines = Object.assign(base.lines, d.lines||{});
+  if(!Array.isArray(S.rooms) || !S.rooms.length) S.rooms = base.rooms;
+  if(!Array.isArray(S.custom)) S.custom = [];
+})();
+let saveT; const saveDraft = () => { clearTimeout(saveT); saveT = setTimeout(()=>store.set(DK,S), 250); };
+
+/* ---------- Hulpjes ---------- */
+const $ = (s,r=document) => r.querySelector(s);
+const $$ = (s,r=document) => [...r.querySelectorAll(s)];
+const eur = n => new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n||0);
+const nf = n => new Intl.NumberFormat('nl-NL',{maximumFractionDigits:2}).format(n||0);
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const r2 = n => Math.round(n*100)/100;
+const r1 = n => Math.round(n*10)/10;
+const price = id => CFG.prices[id] != null ? CFG.prices[id] : byId[id].price;
+const getP = (o,p) => p.split('.').reduce((a,k)=>a&&a[k], o);
+const setP = (o,p,v) => { const ks=p.split('.'); const last=ks.pop(); ks.reduce((a,k)=>a[k],o)[last]=v; };
+const lines = t => String(t||'').split('\n').map(s=>s.trim()).filter(Boolean);
+
+function areas(){
+  let v=0,w=0;
+  S.rooms.forEach(r => { const l=+r.l||0,b=+r.b||0,h=+r.h||0; v+=l*b; w+=2*(l+b)*h; });
+  return {vloer:r1(v), plafond:r1(v), wand:r1(w)};
+}
+
+/* ---------- Berekening ---------- */
+function compute(){
+  const groups=[]; let base=0; const pct=[];
+  CATS.forEach(c => {
+    const rows=[];
+    c.items.forEach(it => {
+      const L=S.lines[it.id]; if(!L||!L.on) return;
+      if(it.type==='percent'){ if(+L.qty>0) pct.push({it,L,gi:groups.length}); return; }
+      const q = it.type==='toggle' ? 1 : (+L.qty||0); if(q<=0) return;
+      const pr=price(it.id), tot=r2(q*pr); base+=tot;
+      rows.push({name:it.name,desc:it.desc,q,unit:it.unit,pr,tot,toggle:it.type==='toggle'});
+    });
+    groups.push({id:c.id,name:c.name,rows});
+  });
+  const cr=[];
+  S.custom.forEach(x => {
+    const q=+x.qty||0, pr=+x.price||0; if(!x.name && !q && !pr) return;
+    const tot=r2(q*pr); base+=tot; cr.push({name:x.name||'Overige werkzaamheden',desc:'',q,unit:x.unit||'',pr,tot});
+  });
+  if(cr.length) groups.push({id:'custom',name:'Overige werkzaamheden',rows:cr});
+  let pctSum=0;
+  pct.forEach(({it,L,gi}) => {
+    const tot=r2(base*(+L.qty)/100); pctSum+=tot;
+    groups[gi].rows.push({name:it.name,desc:it.desc,q:+L.qty,unit:'%',pr:null,tot,percent:true});
+  });
+  const sub=r2(base+pctSum), korting=r2(sub*(+S.korting||0)/100), excl=r2(sub-korting);
+  const btw=r2(excl*(+S.btw||0)/100), incl=r2(excl+btw);
+  return {groups:groups.filter(g=>g.rows.length), sub, korting, excl, btw, incl, base};
+}
+function itemTotal(it){
+  const L=S.lines[it.id]; if(!L||!L.on) return 0;
+  if(it.type==='toggle') return price(it.id);
+  if(it.type==='percent') return compute().base*(+L.qty||0)/100;
+  return (+L.qty||0)*price(it.id);
+}
+
+/* ---------- Paneel opbouwen ---------- */
+function buildItems(){
+  const host=$('#items');
+  host.innerHTML = CATS.map(c => `
+    <details class="cat" open data-cat="${c.id}">
+      <summary><span>${esc(c.name)}</span><span class="cs" data-cs="${c.id}"></span></summary>
+      ${c.items.map(it => {
+        let ctl='';
+        if(it.type==='toggle'){
+          ctl = `<div class="meta solo">Prijs <input type="number" inputmode="decimal" class="pn" step="1" value="${price(it.id)}"> per post</div>`;
+        } else if(it.type==='percent'){
+          ctl = `<input type="range" class="rg" min="0" max="${it.max}" step="0.5">
+                 <div class="q"><input type="number" inputmode="decimal" class="qn" step="0.5"><span>%</span></div>
+                 <div class="meta">Percentage van het totaal van de gekozen werkzaamheden</div>`;
+        } else {
+          ctl = `<input type="range" class="rg" min="0" max="${it.max}" step="${it.unit==='m²'||it.unit==='m'?1:1}">
+                 <div class="q"><input type="number" inputmode="decimal" class="qn" step="any"><span>${esc(it.unit)}</span></div>
+                 <div class="meta">Prijs <input type="number" inputmode="decimal" class="pn" step="0.5" value="${price(it.id)}"> per ${esc(it.unit)}</div>`;
+        }
+        return `<div class="item" data-id="${it.id}">
+          <label class="head"><input type="checkbox" class="on"><span class="nm">${esc(it.name)}<small>${esc(it.desc)}</small></span><span class="sub"></span></label>
+          <div class="ctl">${ctl}</div></div>`;
+      }).join('')}
+    </details>`).join('');
+  ALL.forEach(syncItem);
+}
+function syncItem(it){
+  const row=$(`.item[data-id="${it.id}"]`); if(!row) return;
+  const L=S.lines[it.id];
+  row.classList.toggle('on', !!L.on);
+  $('.on',row).checked=!!L.on;
+  const rg=$('.rg',row), qn=$('.qn',row);
+  if(rg){ rg.max=Math.max(it.max, +L.qty||0); rg.value=L.qty||0; rg.style.setProperty('--p', (100*(+L.qty||0)/rg.max)+'%'); }
+  if(qn && document.activeElement!==qn) qn.value = L.qty ? L.qty : '';
+}
+function buildRooms(){
+  $('#rooms').innerHTML = S.rooms.map((r,i) => `
+    <div class="room" data-i="${i}">
+      <div class="rowtop"><div class="f"><label>Naam ruimte</label><input type="text" data-f="naam" value="${esc(r.naam)}" placeholder="Bijvoorbeeld: Woonkamer"></div>
+      ${S.rooms.length>1?`<button class="x" type="button" data-act="delRoom" aria-label="Ruimte verwijderen">×</button>`:''}</div>
+      <div class="dims">
+        <div class="f"><label>Lengte (m)</label><input type="number" inputmode="decimal" step="0.01" data-f="l" value="${r.l||''}"></div>
+        <div class="f"><label>Breedte (m)</label><input type="number" inputmode="decimal" step="0.01" data-f="b" value="${r.b||''}"></div>
+        <div class="f"><label>Hoogte (m)</label><input type="number" inputmode="decimal" step="0.01" data-f="h" value="${r.h||''}"></div>
+      </div></div>`).join('');
+  updateChips();
+}
+function updateChips(){
+  const a=areas();
+  $('#areaChips').innerHTML = `<span class="chip">Vloer en plafond <b>${nf(a.vloer)} m²</b></span><span class="chip">Wanden <b>${nf(a.wand)} m²</b></span>`;
+}
+function buildCustoms(){
+  $('#customs').innerHTML = S.custom.map((c,i) => `
+    <div class="cust" data-i="${i}">
+      <div class="c4">
+        <div class="f"><label>Omschrijving</label><input type="text" data-f="name" value="${esc(c.name)}"></div>
+        <div class="f"><label>Aantal</label><input type="number" inputmode="decimal" step="any" data-f="qty" value="${c.qty||''}"></div>
+        <div class="f"><label>Eenheid</label><input type="text" data-f="unit" value="${esc(c.unit)}" placeholder="stuk"></div>
+        <div class="f"><label>Prijs per eenheid</label><input type="number" inputmode="decimal" step="any" data-f="price" value="${c.price||''}"></div>
+      </div>
+      <div><button class="btn ghost small" type="button" data-act="delCustom">Verwijderen</button></div>
+    </div>`).join('');
+}
+function refreshInputs(){
+  $$('[data-k]').forEach(el => { const v=getP(S,el.dataset.k); el.value = v==null?'':v; });
+  $$('[data-c]').forEach(el => { el.value = CFG[el.dataset.c] || ''; });
+  syncKorting();
+}
+function syncKorting(){
+  const r=$('#b-kor'); $('#korOut').textContent = nf(+S.korting||0)+'%';
+  r.style.setProperty('--p', (100*(+S.korting||0)/+r.max)+'%');
+}
+
+/* ---------- Events ---------- */
+const panel=$('#panel');
+panel.addEventListener('input', e => {
+  const el=e.target;
+  if(el.dataset.k){
+    let v=el.value; if(el.dataset.t==='n') v = v==='' ? 0 : (parseFloat(String(v).replace(',','.'))||0);
+    setP(S, el.dataset.k, v);
+    if(el.dataset.k==='korting') syncKorting();
+    return update();
+  }
+  if(el.dataset.c){ CFG[el.dataset.c]=el.value; saveCfg(); return update(); }
+  const item=el.closest('.item');
+  if(item){
+    const it=byId[item.dataset.id], L=S.lines[it.id];
+    if(el.classList.contains('rg')){ L.qty=parseFloat(el.value)||0; syncItem(it); }
+    else if(el.classList.contains('qn')){ L.qty=parseFloat(String(el.value).replace(',','.'))||0; syncItem(it); }
+    else if(el.classList.contains('pn')){ CFG.prices[it.id]=parseFloat(String(el.value).replace(',','.'))||0; saveCfg(); }
+    return update();
+  }
+  const room=el.closest('.room');
+  if(room){ const r=S.rooms[+room.dataset.i]; const f=el.dataset.f; r[f] = f==='naam' ? el.value : (parseFloat(String(el.value).replace(',','.'))||0); updateChips(); return update(); }
+  const cu=el.closest('.cust');
+  if(cu){ const c=S.custom[+cu.dataset.i]; const f=el.dataset.f; c[f] = (f==='name'||f==='unit') ? el.value : (parseFloat(String(el.value).replace(',','.'))||0); return update(); }
+});
+panel.addEventListener('change', e => {
+  const el=e.target;
+  if(el.classList.contains('on')){
+    const it=byId[el.closest('.item').dataset.id], L=S.lines[it.id];
+    L.on=el.checked;
+    if(L.on && !(+L.qty>0) && !it.type){ const a=it.basis?areas()[it.basis]:0; L.qty = a>0 ? a : (it.unit==='stuk' ? 1 : 0); }
+    syncItem(it); update();
+  }
+  if(el.classList.contains('qn')) syncItem(byId[el.closest('.item').dataset.id]);
+});
+panel.addEventListener('click', e => {
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const a=b.dataset.act;
+  if(a==='addRoom'){ S.rooms.push({naam:'',l:0,b:0,h:+(S.rooms[S.rooms.length-1]||{}).h||2.6}); buildRooms(); }
+  else if(a==='delRoom'){ S.rooms.splice(+b.closest('.room').dataset.i,1); buildRooms(); update(); }
+  else if(a==='fill'){
+    const ar=areas();
+    ALL.forEach(it => { if(it.basis && S.lines[it.id].on && ar[it.basis]>0){ S.lines[it.id].qty=ar[it.basis]; syncItem(it); } });
+    update();
+  }
+  else if(a==='addCustom'){ S.custom.push({name:'',qty:1,unit:'stuk',price:0}); buildCustoms(); update(); }
+  else if(a==='delCustom'){ S.custom.splice(+b.closest('.cust').dataset.i,1); buildCustoms(); update(); }
+  else if(a==='resetPrices'){ if(confirm('Alle prijzen terugzetten naar de standaardprijslijst?')){ CFG.prices={}; saveCfg(); buildItems(); update(); } }
+});
+
+$('#btnPrint').addEventListener('click', makePdf);
+$('#btnNew').addEventListener('click', async () => {
+  if(!confirm('Nieuwe offerte starten? De huidige invoer wordt gewist.')) return;
+  let next=(+CFG.counter||1)+1;
+  if(API.online){ try{ const r=await api('/api/number',{method:'POST'}); if(r.ok) next=(await r.json()).counter; }catch(e){} }
+  CFG.counter=next; store.set(CK,CFG);
+  S=newDraft(); store.set(DK,S); buildAll(); setTab('fill'); $('#panel').scrollTop=0;
+});
+function setTab(t){ document.body.dataset.tab=t; if(t==='view') requestAnimationFrame(fit); }
+$$('.tabs button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.t)));
+window.addEventListener('resize', fit);
+
+/* ---------- Inspreken ---------- */
+const NW={nul:0,twee:2,drie:3,vier:4,vijf:5,zes:6,zeven:7,acht:8,negen:9,tien:10,elf:11,twaalf:12,dertien:13,veertien:14,vijftien:15,zestien:16,zeventien:17,achttien:18,negentien:19,twintig:20,dertig:30,veertig:40,vijftig:50,zestig:60,zeventig:70,tachtig:80,negentig:90,honderd:100,anderhalf:1.5};
+const UN={een:1,twee:2,drie:3,vier:4,vijf:5,zes:6,zeven:7,acht:8,negen:9};
+const STOP=new Set(['de','het','een','in','is','van','op','en','ook','dan','ruimte','we','hebben','zijn','maten','afmetingen','afmeting','eerst','daarna','nu','bij','met','voor','naar','nog','verder','heeft','heb','ik','dus','even','dit','dat']);
+const W_=/wand|muur|muren/, PL_=/plafond/, VL_=/vloer/;
+const RULES=[
+ {id:'sloop',kw:/slop|strippen|eruit halen|uitbreken/},
+ {id:'container',kw:/container/},
+ {id:'afdekken',kw:/afdek|beschermen/},
+ {id:'metalstud',kw:/metalstud|metal stud|stelwerk|scheidingswand|nieuwe wand/},
+ {id:'plafond',kw:/verlaagd\w*\s+plafond|plafond\s+verlagen|gipsplaat/},
+ {id:'deur',kw:/binnendeur|deuren|\bdeur\b/},
+ {id:'stuc-wand',kw:/stuc|stuken/,ok:c=>W_.test(c)||!PL_.test(c)},
+ {id:'stuc-plafond',kw:/stuc|stuken/,ok:c=>PL_.test(c)},
+ {id:'schilder-wand',kw:/schilder|verven|sauzen|\bsaus/,ok:c=>W_.test(c)||!PL_.test(c)},
+ {id:'schilder-plafond',kw:/schilder|verven|sauzen|\bsaus/,ok:c=>PL_.test(c)},
+ {id:'dekvloer',kw:/dekvloer|egaliseren|afwerkvloer|cementdek/},
+ {id:'tegelvloer',kw:/tegel/,ok:c=>VL_.test(c)||!W_.test(c)},
+ {id:'tegel-wand',kw:/tegel/,ok:c=>W_.test(c)},
+ {id:'pvc',kw:/pvc|vinyl|laminaat|click ?vloer/},
+ {id:'plinten',kw:/plint/},
+ {id:'elektra',kw:/elektra|stopcontact|schakelaar|lichtpunt|contactdoos/},
+ {id:'groepenkast',kw:/groepenkast|meterkast/},
+ {id:'water',kw:/loodgieter|waterpunt|afvoerpunt|waterleiding/},
+ {id:'vloerverwarming',kw:/vloerverwarming/},
+ {id:'sanitair',kw:/sanitair|toilet|\bwc\b|wastafel|douche|\bbad\b|closet/},
+ {id:'keuken',kw:/keuken/},
+ {id:'pm',kw:/projectmanagement|toezicht|projectbegeleiding/}
+];
+const capName=s=>s.split(/\s+/).filter(Boolean).map((w,i)=>(i>0&&/^(van|de|der|den|ten|ter)$/.test(w))?w:w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+
+function normalize(raw){
+  let t=' '+String(raw).toLowerCase().replace(/\u00a0/g,' ')+' ';
+  t=t.replace(/\b(een|twee|drie|vier|vijf|zes|zeven|acht|negen)(?:en|\u00ebn)(twintig|dertig|veertig|vijftig|zestig|zeventig|tachtig|negentig)\b/g,(m,a,b)=>UN[a]+NW[b]);
+  t=t.replace(new RegExp('\\b('+Object.keys(NW).join('|')+')\\b','g'),m=>NW[m]);
+  t=t.replace(/(\d)\s*komma\s*(\d)/g,'$1.$2').replace(/(\d),(\d)/g,'$1.$2');
+  t=t.replace(/(\d)\s*(?:x|keer|maal)\s*(?=\d)/g,'$1 bij ');
+  t=t.replace(/m\^2|m\u00b2|\bm2\b|vierkante meters?|vierkante|m kwadraat|meter kwadraat|vierkant/g,' m2 ');
+  t=t.replace(/(\d)(m|cm)\b/g,'$1 $2');
+  return t.replace(/\s+/g,' ');
+}
+function cut(t,m){ return t.slice(0,m.index)+' '+t.slice(m.index+m[0].length); }
+
+function parseRooms(t){
+  const rooms=[]; let out='', last=0, m;
+  const re=/(\d+(?:\.\d+)?)\s*(?:meter|m)?\s*bij\s*(\d+(?:\.\d+)?)\s*(?:meter|m)?(?![a-z0-9])/g;
+  while((m=re.exec(t))){
+    const before=t.slice(last,m.index);
+    const seg=before.split(/[,.;!?]|\s(?:daarnaast|dan|verder|daarna)\s/).pop();
+    const words=seg.trim().split(/\s+/).filter(w=>w&&!STOP.has(w));
+    let end=m.index+m[0].length;
+    const hm=t.slice(end,end+45).match(/^[^.;!?]{0,25}?hoog(?:te)?\s*(?:van|is)?\s*(\d+(?:\.\d+)?)\s*(?:meter|m|cm)?/);
+    let h=null; if(hm){ h=+hm[1]; if(h>10) h=h/100; end+=hm[0].length; }
+    out+=before.slice(0,before.length-seg.length)+' ';
+    rooms.push({naam:capName(words.slice(-2).join(' ')),l:+m[1],b:+m[2],h});
+    last=end; re.lastIndex=end;
+  }
+  return {rooms,text:out+t.slice(last)};
+}
+function qtyFor(it,clause,pos){
+  const re=/(\d+(?:\.\d+)?)\s*(m2|meter|m|stuks?|punten|punt|keer)?(?![a-z0-9])/g; let best=null,m;
+  while((m=re.exec(clause))){
+    const u=m[2]||''; let ok;
+    if(it.unit==='m\u00b2') ok=u==='m2'||u==='meter'||u==='m';
+    else if(it.unit==='m') ok=u==='meter'||u==='m';
+    else ok=!u||/stuk|punt|keer/.test(u);
+    if(!ok) continue;
+    const d=Math.abs(m.index-pos); if(!best||d<best.d) best={v:+m[1],d};
+  }
+  return best?best.v:null;
+}
+function parseDictation(raw){
+  let t=normalize(raw), m; const P={rooms:[],items:[],rest:[]};
+  if((m=t.match(/(?:klant|opdrachtgever|offerte voor)\s+(?:is\s+|heet\s+)?([a-z\u00e0-\u00ff'\-]+(?:\s+(?:van|de|der|den|ten|ter)\s+[a-z\u00e0-\u00ff'\-]+|\s+[a-z\u00e0-\u00ff'\-]+){0,2}?)(?=\s*[,.;!?]|\s+(?:en|met|adres|korting|btw|doorlooptijd)\b|\s*$)/))){ P.klant=capName(m[1]); t=cut(t,m); }
+  if((m=t.match(/(?:doorlooptijd\s*(?:van|is)?\s*)?(\d+(?:\.\d+)?)\s*weken?/))){ P.weken=m[1]; t=cut(t,m); }
+  if((m=t.match(/btw\s*verlegd|verlegde\s*btw|btw\s*0\b|\b0\s*(?:procent|%)\s*btw/))){ P.btw=0; t=cut(t,m); }
+  else if((m=t.match(/(\d+)\s*(?:procent|%)\s*btw|btw\s*(?:van\s*)?(\d+)/))){ const v=+(m[1]||m[2]); if([0,9,21].includes(v)) P.btw=v; t=cut(t,m); }
+  if((m=t.match(/korting(?:\s+van)?\s*(\d+(?:\.\d+)?)\s*(?:procent|%)?|(\d+(?:\.\d+)?)\s*(?:procent|%)\s*korting/))){ P.korting=+(m[1]||m[2]); t=cut(t,m); }
+  let defH=null;
+  if((m=t.match(/plafondhoogte\s*(?:van|is)?\s*(\d+(?:\.\d+)?)/))){ defH=+m[1]; if(defH>10) defH/=100; t=cut(t,m); }
+  const pr=parseRooms(t); t=pr.text; P.rooms=pr.rooms.map(r=>({...r,h:r.h||defH||2.6}));
+  const prot=t.replace(/(\d)\.(\d)/g,'$1\u00a7$2');
+  let clauses=prot.split(/[,;.!?]+|\s(?:daarnaast|verder|ook|plus|tevens|daarna)\s/).map(s=>s.replace(/\u00a7/g,'.').trim()).filter(Boolean);
+  const hasNum=s=>/\d/.test(s);
+  clauses=clauses.flatMap(c=>{const p=c.split(/\s+en\s+/); return p.length>1&&p.filter(hasNum).length>1?p:[c];});
+  const found={};
+  clauses.forEach(c=>{
+    let any=false;
+    RULES.forEach(r=>{
+      const pos=c.search(r.kw); if(pos<0) return; if(r.ok&&!r.ok(c)) return;
+      any=true; const it=byId[r.id];
+      const q=(it.type==='toggle'||it.type==='percent')?null:qtyFor(it,c,pos);
+      if(!found[r.id]||q!=null) found[r.id]={id:r.id,qty:q};
+    });
+    if(!any && /[a-z\u00e0-\u00ff]{3,}/.test(c.replace(/\bm2\b/g,''))) P.rest.push(c);
+  });
+  P.items=ALL.filter(i=>found[i.id]).map(i=>found[i.id]);
+  return P;
+}
+function reviewHtml(P){
+  const rooms=P.rooms.map(r=>({...r,h:r.h||2.6}));
+  const ar=(()=>{ if(!rooms.length) return areas(); let v=0,w=0; rooms.forEach(r=>{v+=r.l*r.b; w+=2*(r.l+r.b)*r.h;}); return {vloer:r1(v),plafond:r1(v),wand:r1(w)}; })();
+  const rows=[];
+  rooms.forEach(r=>rows.push(`<li><span>${esc(r.naam||'Ruimte')}<small>${nf(r.l)} bij ${nf(r.b)} m, hoogte ${nf(r.h)} m</small></span><span>${nf(r1(r.l*r.b))} m²</span></li>`));
+  P.items.forEach(x=>{
+    const it=byId[x.id]; if(!it) return; let val='', warn='';
+    if(it.type==='toggle') val='1 post';
+    else if(it.type==='percent') val=nf(x.qty!=null?x.qty:it.def)+'%';
+    else if(x.qty!=null) val=nf(x.qty)+' '+it.unit;
+    else if(it.basis&&ar[it.basis]>0) val=nf(ar[it.basis])+' '+it.unit+' (uit de ruimtes)';
+    else if(it.unit==='stuk') { val='1 stuk'; warn='Aantal niet genoemd, controleer'; }
+    else { val='0 '+it.unit; warn='Geen maat genoemd, vul zelf in'; }
+    rows.push(`<li><span>${esc(it.name)}${warn?`<small class="w">${warn}</small>`:''}</span><span>${esc(val)}</span></li>`);
+  });
+  (P.custom||[]).forEach(c=>rows.push(`<li><span>${esc(c.name)}<small class="w">Eigen regel, prijs zelf invullen</small></span><span>${c.qty!=null?nf(c.qty)+' '+esc(c.unit||''):'aantal?'}</span></li>`));
+  if(P.klant) rows.push(`<li><span>Klant</span><span>${esc(P.klant)}</span></li>`);
+  if(P.adres||P.plaats) rows.push(`<li><span>Adres</span><span>${esc([P.adres,P.plaats].filter(Boolean).join(', '))}</span></li>`);
+  if(P.weken) rows.push(`<li><span>Doorlooptijd</span><span>${esc(P.weken)} weken</span></li>`);
+  if(P.korting!=null) rows.push(`<li><span>Korting${P.korting>20?'<small class="w">Maximaal 20% in te stellen</small>':''}</span><span>${nf(Math.min(20,P.korting))}%</span></li>`);
+  if(P.btw!=null) rows.push(`<li><span>Btw-tarief</span><span>${P.btw}%</span></li>`);
+  if(!rows.length) return `<div class="rev"><div class="none">Ik kon hier geen maten of werkzaamheden in vinden. Noem bijvoorbeeld "woonkamer 6 bij 4,5" of "stucwerk wanden".</div></div>`;
+  const rest=P.rest||[];
+  return `<div class="rev"><h5>Dit heb ik begrepen</h5><ul>${rows.join('')}</ul>${rest.length?`<div class="rest">Niet herkend: ${esc(rest.join(' / '))}</div>`:''}<div class="go"><button class="btn solid small" style="background:var(--ink);color:#fff;border-color:var(--ink)" type="button" data-act="applyDict">Overnemen in de offerte</button></div></div>`;
+}
+let lastParse=null;
+async function runParse(){
+  const txt=$('#dictText').value.trim(); const out=$('#dictOut');
+  if(!txt){ out.innerHTML=''; lastParse=null; return; }
+  if(API.online&&API.ai){
+    out.innerHTML='<div class="rev"><div class="none">Bezig met begrijpen...</div></div>';
+    try{
+      const catalog=ALL.map(i=>({id:i.id,name:i.name,desc:i.desc,unit:i.unit,type:i.type||'',basis:i.basis||''}));
+      const r=await api('/api/parse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:txt,catalog})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(j.error||'AI niet bereikbaar');
+      lastParse=j; out.innerHTML=reviewHtml(j); return;
+    }catch(e){ if(e.status===401){ out.innerHTML=''; return; } toast((e.message||'AI niet bereikbaar')+'. Eenvoudige herkenning gebruikt.'); }
+  }
+  lastParse=parseDictation(txt); out.innerHTML=reviewHtml(lastParse);
+}
+function applyParsed(P){
+  if(!P) return;
+  if(P.rooms.length){
+    const empty=S.rooms.length===1&&!(+S.rooms[0].l)&&!(+S.rooms[0].b)&&!S.rooms[0].naam;
+    if(empty) S.rooms=[];
+    P.rooms.forEach(r=>S.rooms.push({naam:r.naam||'',l:r.l,b:r.b,h:r.h||2.6}));
+    buildRooms();
+  }
+  const ar=areas();
+  P.items.forEach(x=>{
+    const it=byId[x.id]; if(!it) return; const L=S.lines[x.id]; L.on=true;
+    if(it.type==='percent'){ L.qty = x.qty!=null ? Math.min(it.max,x.qty) : (+L.qty>0 ? L.qty : it.def); }
+    else if(it.type!=='toggle'){
+      if(x.qty!=null) L.qty=x.qty;
+      else if(it.basis&&ar[it.basis]>0) L.qty=ar[it.basis];
+      else if(!(+L.qty>0)) L.qty=it.unit==='stuk'?1:0;
+    }
+  });
+  if((P.custom||[]).length){
+    P.custom.forEach(c=>S.custom.push({name:c.name,qty:c.qty!=null?c.qty:1,unit:c.unit||'stuk',price:0}));
+    buildCustoms(); $('#custsec').open=true;
+  }
+  if(P.klant) S.klant.naam=P.klant;
+  if(P.adres) S.klant.adres=P.adres;
+  if(P.plaats) S.klant.plaats=P.plaats;
+  if(P.weken) S.project.weken=P.weken;
+  if(P.korting!=null) S.korting=Math.min(20,P.korting);
+  if(P.btw!=null) S.btw=P.btw;
+  ALL.forEach(syncItem); refreshInputs(); update();
+  $('#dictOut').innerHTML='<div class="rev"><div class="none">Overgenomen. Controleer de werkzaamheden hieronder en bekijk het voorbeeld.</div></div>';
+  const first=$('#items'); if(first&&first.scrollIntoView) first.scrollIntoView({behavior:'smooth',block:'start'});
+}
+panel.addEventListener('click', e => {
+  const b=e.target.closest('[data-act]'); if(!b) return; const a=b.dataset.act;
+  if(a==='parse') runParse();
+  else if(a==='clearDict'){ $('#dictText').value=''; $('#dictOut').innerHTML=''; lastParse=null; }
+  else if(a==='applyDict') applyParsed(lastParse);
+});
+
+/* ---------- Opnemen ---------- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let micMode='none', rec=null, mr=null, stream=null, chunks=[], listening=false, baseText='', recT=null, recStart=0;
+function micUI(on,msg){ listening=on; $('#micBtn').classList.toggle('on',on); $('#micBtn span').textContent=on?'Stop opnemen':'Start opnemen'; if(msg!==undefined) $('#micStat').textContent=msg; }
+function setupMic(){
+  const canRec=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+  micMode=(API.online&&API.ai&&canRec)?'server':(SR?'browser':'none');
+  $('#micBtn').style.display=micMode==='none'?'none':'';
+  $('#micStat').textContent=micMode==='none'?'Opnemen werkt hier niet. Gebruik het microfoontje op je toetsenbord.':'';
+}
+$('#micBtn').addEventListener('click',()=>{
+  if(micMode==='server') return listening?stopRec():startRec();
+  if(micMode==='browser') return listening?(rec&&rec.stop()):startBrowser();
+});
+async function startRec(){
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}}); }
+  catch(e){ micUI(false,'Geen toegang tot de microfoon. Sta de microfoon toe voor deze app.'); return; }
+  const type=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'].find(t=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t));
+  try{ mr=new MediaRecorder(stream,type?{mimeType:type}:undefined); }catch(e){ mr=new MediaRecorder(stream); }
+  chunks=[]; mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+  mr.onstop=onRecStop; mr.start(1000); recStart=Date.now();
+  micUI(true,'Opnemen 0:00');
+  recT=setInterval(()=>{ const s=Math.floor((Date.now()-recStart)/1000); $('#micStat').textContent='Opnemen '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); if(s>=600) stopRec(); },500);
+}
+function stopRec(){ clearInterval(recT); if(mr&&mr.state!=='inactive') mr.stop(); }
+async function onRecStop(){
+  if(stream) stream.getTracks().forEach(t=>t.stop());
+  micUI(false,'Uitschrijven...');
+  const blob=new Blob(chunks,{type:(mr&&mr.mimeType)||'audio/webm'});
+  if(blob.size<1500){ micUI(false,'Opname te kort.'); return; }
+  try{
+    const r=await api('/api/transcribe',{method:'POST',headers:{'Content-Type':blob.type.split(';')[0]},body:blob});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error||'Uitschrijven mislukt.');
+    const ta=$('#dictText'); ta.value=(ta.value.trim()?ta.value.trim()+' ':'')+(j.text||'');
+    micUI(false,''); runParse();
+  }catch(e){ if(e.status!==401) micUI(false,(e.message||'Uitschrijven mislukt.')+' Probeer opnieuw of typ de tekst.'); else micUI(false,''); }
+}
+function startBrowser(){
+  rec=new SR(); rec.lang='nl-NL'; rec.continuous=true; rec.interimResults=true;
+  baseText=$('#dictText').value; if(baseText&&!/\s$/.test(baseText)) baseText+=' ';
+  rec.onresult=ev=>{ let fin='',tmp=''; for(let i=0;i<ev.results.length;i++){ if(ev.results[i].isFinal) fin+=ev.results[i][0].transcript+' '; else tmp+=ev.results[i][0].transcript; } $('#dictText').value=(baseText+fin+tmp).trim(); };
+  rec.onerror=ev=>{ const m={'not-allowed':'Geen toegang tot de microfoon.','service-not-allowed':'Geen toegang tot de microfoon.','no-speech':'Niets gehoord.','network':'Geen internetverbinding voor spraakherkenning.','audio-capture':'Geen microfoon gevonden.'}; micUI(false,m[ev.error]||'Opnemen is gestopt.'); };
+  rec.onend=()=>{ micUI(false); if($('#dictText').value.trim()) runParse(); };
+  try{ rec.start(); micUI(true,'Aan het luisteren...'); }catch(err){ micUI(false,'Opnemen starten lukt niet.'); }
+}
+
+/* ---------- Totalen in het paneel ---------- */
+function updatePanel(T){
+  ALL.forEach(it => {
+    const row=$(`.item[data-id="${it.id}"]`); if(!row) return;
+    const t=itemTotal(it); $('.sub',row).textContent = eur(t);
+  });
+  CATS.forEach(c => {
+    const t=c.items.reduce((s,it)=>s+itemTotal(it),0);
+    const el=$(`[data-cs="${c.id}"]`); if(el) el.textContent = t>0 ? eur(t) : '';
+  });
+  $('#totIn').textContent=eur(T.incl); $('#totEx').textContent=eur(T.excl);
+}
+
+/* ---------- Document ---------- */
+function renderDoc(){
+  const T=compute(), k=S.klant, p=S.project, c=CFG;
+  const d = S.datum ? new Date(S.datum+'T12:00:00') : new Date();
+  const g = new Date(d); g.setDate(g.getDate()+(+S.geldig||0));
+  const dl = x => x.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+  const klantRegels = [k.naam,k.adres,k.plaats,k.email,k.tel].filter(Boolean).map(esc).join('<br>');
+  const werk = p.locatie || [k.adres,k.plaats].filter(Boolean).join(', ');
+  const greet = k.naam ? 'Beste '+esc(k.naam)+',' : 'Beste opdrachtgever,';
+
+  const rowsHtml = T.groups.map(gr => {
+    const gt = gr.rows.reduce((s,r)=>s+r.tot,0);
+    return `<div class="t-cat"><div>${esc(gr.name)}</div><span>${eur(gt)}</span></div>` + gr.rows.map(r => `
+      <div class="t-row">
+        <div class="c1"><b>${esc(r.name)}</b>${r.desc?`<span>${esc(r.desc)}</span>`:''}</div>
+        <div>${r.percent ? nf(r.q)+'%' : (r.toggle ? '1 post' : nf(r.q)+' '+esc(r.unit))}</div>
+        <div>${r.pr==null ? '' : eur(r.pr)}</div>
+        <div><b style="font-weight:600">${eur(r.tot)}</b></div>
+      </div>`).join('');
+  }).join('') || `<div class="t-empty">Er zijn nog geen werkzaamheden gekozen.</div>`;
+
+  const sums = `
+    <div class="sums">
+      <div><span>Subtotaal</span><span>${eur(T.sub)}</span></div>
+      ${T.korting>0?`<div><span>Korting ${nf(+S.korting)}%</span><span>- ${eur(T.korting)}</span></div>`:''}
+      <div><span>Totaal exclusief btw</span><span>${eur(T.excl)}</span></div>
+      ${(+S.btw)>0?`<div><span>Btw ${nf(+S.btw)}%</span><span>${eur(T.btw)}</span></div>`:`<div><span>Btw</span><span>verlegd</span></div>`}
+    </div>
+    <div class="band"><span>Totaal inclusief btw</span><b>${eur(T.incl)}</b></div>`;
+
+  const bet = lines(S.betaling), voor = lines(S.voorwaarden), intro = lines(S.intro);
+  const footA = [c.naam&&`<b>${esc(c.naam)}</b>`, esc(c.adres)].filter(Boolean).join('<br>');
+  const footB = [c.tel&&esc(c.tel), c.email&&esc(c.email), 'kgntotaalservice.nl'].filter(Boolean).join('<br>');
+  const footC = [c.kvk&&'KvK '+esc(c.kvk), c.btwnr&&'Btw '+esc(c.btwnr), c.iban&&'IBAN '+esc(c.iban)].filter(Boolean).join('<br>');
+
+  $('#paper').innerHTML = `
+    <div class="d-top">${LOGO}
+      <div class="co">${[c.adres&&esc(c.adres), c.tel&&esc(c.tel), c.email&&esc(c.email)].filter(Boolean).join('<br>')}</div></div>
+    <p class="d-kicker">Offerte voor ${esc(k.naam||'opdrachtgever')}</p>
+    <h1 class="d-title">${esc(p.titel||'Offerte werkzaamheden')}</h1>
+    <div class="d-meta">
+      <div><span>Offertenummer</span><b>${esc(S.nummer)}</b></div>
+      <div><span>Datum</span><b>${dl(d)}</b></div>
+      <div><span>Geldig tot</span><b>${dl(g)}</b></div>
+      <div><span>Doorlooptijd</span><b>${p.weken?esc(p.weken)+' weken':'in overleg'}</b></div>
+    </div>
+    <div class="d-two">
+      <div><h4>Opdrachtgever</h4><p>${klantRegels||'&nbsp;'}</p></div>
+      <div><h4>Locatie van het werk</h4><p>${esc(werk)||'&nbsp;'}</p></div>
+    </div>
+    <div class="d-intro"><p>${greet}</p>${intro.map(l=>`<p>${esc(l)}</p>`).join('')}</div>
+    <div class="d-sec">
+      <div class="t-head"><div>Omschrijving</div><div>Aantal</div><div>Prijs per eenheid</div><div>Totaal</div></div>
+      ${rowsHtml}
+    </div>
+    ${sums}
+    <div class="d-sec d-cols">
+      <div><h4 class="d-h">Betaling</h4>${bet.length?`<ul>${bet.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`:''}</div>
+      <div><h4 class="d-h">Voorwaarden en uitgangspunten</h4>${voor.length?`<ul class="d-list">${voor.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`:''}</div>
+    </div>
+    <div class="sign">
+      <div><b>Voor akkoord opdrachtgever</b><span>Naam, datum en handtekening</span></div>
+      <div><b>${esc(c.naam||'KGN Totaalservice')}</b><span>${esc(c.ondertekenaar)}</span></div>
+    </div>
+    <div class="d-foot"><div>${footA}</div><div>${footB}</div><div>${footC}</div></div>`;
+  fit();
+}
+function fit(){
+  const st=$('#stage'), paper=$('#paper'), sheet=$('#sheet');
+  if(!st.offsetParent && getComputedStyle(st).display==='none') return;
+  const W=793.7, avail=st.clientWidth-(window.innerWidth<=980?16:24);
+  const s=Math.min(1,avail/W);
+  paper.style.transform = s<1 ? `scale(${s})` : 'none';
+  sheet.style.width = (W*s)+'px';
+  sheet.style.height = (paper.offsetHeight*s)+'px';
+}
+
+/* ---------- Server, login en PDF ---------- */
+const API={token:store.get('kgn-token')||'',online:false,ai:false,auth:false};
+async function api(p,opt={}){
+  const h=Object.assign({},opt.headers||{}); if(API.token) h['x-kgn-token']=API.token;
+  const r=await fetch(p,Object.assign({},opt,{headers:h}));
+  if(r.status===401){ showLogin(); const e=new Error('Niet ingelogd'); e.status=401; throw e; }
+  return r;
+}
+let cfgT;
+function saveCfg(){
+  store.set(CK,CFG); if(!API.online) return;
+  clearTimeout(cfgT);
+  cfgT=setTimeout(()=>api('/api/settings',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({cfg:CFG})}).catch(()=>{}),600);
+}
+function toast(msg,ms=3000){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),ms); }
+function showLogin(){ $('#login').classList.add('show'); setTimeout(()=>$('#pin').focus(),60); }
+async function doLogin(){
+  const pin=$('#pin').value.trim(); if(!pin) return; $('#pinErr').textContent='';
+  try{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok){ $('#pinErr').textContent=j.error||'Inloggen mislukt'; return; }
+    API.token=j.token; store.set('kgn-token',j.token);
+    $('#login').classList.remove('show'); $('#pin').value=''; syncSettings();
+  }catch(e){ $('#pinErr').textContent='Geen verbinding met de server.'; }
+}
+$('#pinBtn').addEventListener('click',doLogin);
+$('#pin').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+async function syncSettings(){
+  try{
+    const r=await api('/api/settings'); if(!r.ok) return; const j=await r.json();
+    if(j.cfg){ CFG=Object.assign({},DEF_CFG,j.cfg); CFG.prices=CFG.prices||{}; }
+    CFG.counter=Math.max(1,+j.counter||1); store.set(CK,CFG);
+    if(!j.cfg) saveCfg();
+    if(!hadDraft && !S.klant.naam && !Object.values(S.lines).some(l=>l.on)) S.nummer=makeNr();
+    buildItems(); refreshInputs(); update();
+  }catch(e){}
+}
+async function initServer(){
+  try{
+    const r=await fetch('/api/health',{cache:'no-store'}); if(!r.ok) throw new Error();
+    const h=await r.json(); API.online=true; API.ai=!!h.ai; API.auth=!!h.auth;
+  }catch(e){ API.online=false; }
+  setupMic();
+  if(API.online) await syncSettings();
+}
+function pdfName(){ return ('Offerte '+S.nummer+(S.klant.naam?' '+S.klant.naam:'')).replace(/[^\w.\- ]+/g,'').replace(/\s+/g,' ').trim()+'.pdf'; }
+function docHtml(){
+  const c=document.documentElement.cloneNode(true);
+  const bd=c.querySelector('body'); if(bd) bd.setAttribute('data-tab','view');
+  c.querySelectorAll('script,#panel,.bar,.tabs,#login,#toast,#pdfSheet,link[rel=manifest],link[rel=icon],link[rel=apple-touch-icon]').forEach(e=>e.remove());
+  return '<!doctype html>'+c.outerHTML;
+}
+let pdfFile=null, pdfUrl=null;
+function downloadPdf(){ const a=document.createElement('a'); a.href=pdfUrl; a.download=pdfFile.name; document.body.appendChild(a); a.click(); a.remove(); }
+async function makePdf(){
+  renderDoc();
+  if(!API.online){ window.print(); return; }
+  const btn=$('#btnPrint'), old=btn.textContent; btn.disabled=true; btn.textContent='Bezig...';
+  try{
+    const r=await api('/api/pdf',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({html:docHtml(),filename:pdfName()})});
+    if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||'PDF maken mislukt');
+    const blob=await r.blob();
+    if(pdfUrl) URL.revokeObjectURL(pdfUrl);
+    pdfFile=new File([blob],pdfName(),{type:'application/pdf'}); pdfUrl=URL.createObjectURL(blob);
+    if(matchMedia('(pointer:coarse)').matches){
+      $('#pdfNameOut').textContent=pdfFile.name;
+      $('#pdfShare').style.display=(navigator.canShare&&navigator.canShare({files:[pdfFile]}))?'':'none';
+      $('#pdfSheet').classList.add('show');
+    } else downloadPdf();
+  }catch(e){ if(e.status!==401){ toast((e.message||'PDF maken mislukt')+'. Het afdrukvenster wordt geopend.'); setTimeout(()=>window.print(),500); } }
+  finally{ btn.disabled=false; btn.textContent=old; }
+}
+$('#pdfShare').addEventListener('click',async()=>{ try{ await navigator.share({files:[pdfFile],title:pdfFile.name}); $('#pdfSheet').classList.remove('show'); }catch(e){ if(e.name!=='AbortError') toast('Delen lukt niet. Gebruik Openen.'); } });
+$('#pdfOpen').addEventListener('click',()=>{ const w=window.open(pdfUrl,'_blank'); if(!w) downloadPdf(); });
+$('#pdfClose').addEventListener('click',()=>$('#pdfSheet').classList.remove('show'));
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
+
+function update(){ const T=compute(); updatePanel(T); renderDoc(); saveDraft(); }
+function buildAll(){ buildItems(); buildRooms(); buildCustoms(); refreshInputs(); update(); }
+buildAll();
+initServer();
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+</script>
+</body>
+</html>
