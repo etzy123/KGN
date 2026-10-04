@@ -25,7 +25,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--ink);color:#fff;flex:none}
 .bar .t{font-weight:600;letter-spacing:-.01em;font-size:16px}
 .bar .sp{flex:1}
-.btn{border:1px solid rgba(255,255,255,.55);background:transparent;color:#fff;padding:8px 13px;border-radius:6px;cursor:pointer;font-weight:500;font-size:14px}
+.btn{text-decoration:none;border:1px solid rgba(255,255,255,.55);background:transparent;color:#fff;padding:8px 13px;border-radius:6px;cursor:pointer;font-weight:500;font-size:14px}
 .btn.solid{background:#fff;color:var(--ink);border-color:#fff;font-weight:600}
 .btn.ghost{border-color:var(--rule);color:var(--ink)}
 .btn.small{padding:6px 10px;font-size:13px}
@@ -99,11 +99,11 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 #paper{position:absolute;top:0;left:0;transform-origin:top left;width:210mm;min-height:297mm;background:#fff;color:var(--ink);padding:16mm;font-size:10pt;line-height:1.45;box-shadow:0 1px 3px rgba(0,0,0,.12),0 8px 28px rgba(0,0,0,.08);font-variant-numeric:tabular-nums}
 #paper *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .d-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10mm}
-.d-top svg{height:18mm;width:auto;display:block}
+.d-top>svg{height:18mm;width:auto;display:block}
 .d-top .co{text-align:right;font-size:8.5pt;color:var(--mute);line-height:1.5}
 .d-kicker{margin:13mm 0 0;font-size:10pt;color:var(--mute)}
 .d-title{margin:1mm 0 0;font-size:27pt;line-height:1.08;font-weight:600;letter-spacing:-.025em;max-width:150mm}
-.d-meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:9mm;border-top:1.4pt solid var(--ink);border-bottom:.6pt solid var(--rule)}
+.d-meta{display:grid;grid-template-columns:repeat(4,1fr);margin-top:9mm;border-top:1.4pt solid var(--acc,var(--ink));border-bottom:.6pt solid var(--rule)}
 .d-meta div{padding:3mm 3mm 3mm 0}
 .d-meta div+div{padding-left:4mm;border-left:.6pt solid var(--rule)}
 .d-meta span{display:block;font-size:8pt;color:var(--mute)}
@@ -117,7 +117,7 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 .t-head,.t-row{display:grid;grid-template-columns:1fr 24mm 24mm 27mm;gap:3mm;align-items:baseline}
 .t-head{font-size:8pt;color:var(--mute);padding:0 0 1.5mm;border-bottom:.6pt solid var(--rule)}
 .t-head div:nth-child(n+2),.t-row div:nth-child(n+2){text-align:right}
-.t-cat{margin-top:6mm;break-inside:avoid;break-after:avoid;font-weight:700;font-size:10.5pt;padding-bottom:1.2mm;border-bottom:1.4pt solid var(--ink);display:flex;justify-content:space-between}
+.t-cat{margin-top:6mm;break-inside:avoid;break-after:avoid;font-weight:700;font-size:10.5pt;padding-bottom:1.2mm;border-bottom:1.4pt solid var(--acc,var(--ink));display:flex;justify-content:space-between}
 .t-cat span{font-weight:500;color:var(--mute)}
 .t-row{padding:2.2mm 0;border-bottom:.6pt solid var(--rule);break-inside:avoid}
 .t-row .c1 b{font-weight:600;display:block}
@@ -126,7 +126,7 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 .sums{margin:8mm 0 0 auto;width:92mm;break-inside:avoid}
 .sums div{display:flex;justify-content:space-between;padding:1.6mm 0;border-bottom:.6pt solid var(--rule)}
 .sums div span:first-child{color:var(--mute)}
-.band{margin-top:3mm;background:var(--ink);color:#fff;padding:5mm 6mm;display:flex;justify-content:space-between;align-items:baseline;break-inside:avoid}
+.band{margin-top:3mm;background:var(--acc,var(--ink));color:#fff;padding:5mm 6mm;display:flex;justify-content:space-between;align-items:baseline;break-inside:avoid}
 .band span{font-size:10pt}
 .band b{font-size:23pt;font-weight:600;letter-spacing:-.02em}
 .d-cols{display:grid;grid-template-columns:1fr 1fr;gap:10mm;break-inside:avoid}
@@ -135,7 +135,7 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 .d-list{margin:0;padding-left:4.5mm}
 .d-list li{margin-bottom:1.2mm}
 .sign{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:9mm;break-inside:avoid}
-.sign div{border-top:1.4pt solid var(--ink);padding-top:2mm;min-height:30mm;font-size:9pt}
+.sign div{border-top:1.4pt solid var(--acc,var(--ink));padding-top:2mm;min-height:30mm;font-size:9pt}
 .sign span{color:var(--mute);display:block}
 .d-foot{margin-top:11mm;padding-top:4mm;border-top:.6pt solid var(--rule);display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;font-size:8.5pt;color:var(--mute);break-inside:avoid}
 .d-foot b{color:var(--ink);font-weight:600}
@@ -179,8 +179,109 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 .sheet .row{display:flex;gap:8px}
 .sheet .row .btn{flex:1;padding:12px;font-size:15px}
 
+/* ---------- Overzicht ---------- */
+#list{display:none;flex:1;min-height:0;overflow:auto;background:var(--bg)}
+body[data-view=list] #list{display:block}
+body[data-view=list] .layout,body[data-view=list] .tabs,body[data-view=list] .ed-only{display:none!important}
+body:not([data-view=list]) .ls-only{display:none!important}
+.wrap{max-width:980px;margin:0 auto;padding:16px 16px 60px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.tile{background:#fff;border-radius:10px;padding:12px 14px;border:1px solid var(--rule)}
+.tile span{display:block;font-size:12.5px;color:var(--mute)}
+.tile b{display:block;font-size:21px;font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin-top:2px}
+.tile small{display:block;font-size:12px;color:var(--mute);margin-top:2px}
+.card{background:#fff;border:1px solid var(--rule);border-radius:10px;margin-bottom:14px;overflow:hidden}
+.card>h3{margin:0;padding:12px 14px;font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--rule)}
+.card>h3 small{font-weight:500;color:var(--mute);font-size:13px}
+.qrow{display:flex;gap:12px;align-items:center;padding:12px 14px;border-top:1px solid var(--rule);cursor:pointer}
+.card>h3+.qrow,.card>.qrow:first-child{border-top:0}
+.qrow:hover{background:var(--soft)}
+.qrow .m{flex:1;min-width:0}
+.qrow .m b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qrow .m small{display:block;color:var(--mute);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qrow .a{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.qrow .a small{display:block;font-weight:500}
+.st{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 7px;border-radius:999px;background:var(--soft);color:var(--mute);white-space:nowrap}
+.st.verstuurd{background:#e7eefb;color:#1f4fa3}.st.bekeken{background:#efe7fb;color:#5b2ea6}
+.st.getekend{background:#e2f4e6;color:#1d6b33}.st.afgewezen{background:#fbe6e4;color:#a3271d}
+.st.gefactureerd{background:#fff1d6;color:#8a5a00}.st.betaald{background:#1d6b33;color:#fff}.st.open{background:#fff1d6;color:#8a5a00}
+.st.te-laat{background:#a3271d;color:#fff}
+.fbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.fbar input{flex:1;min-width:180px}
+.pill{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;font-weight:500}
+.pill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.wa{background:#1f8f4e;border-color:#1f8f4e;color:#fff}
+.empty{padding:22px 14px;color:var(--mute);text-align:center}
+.ev{padding:9px 14px;border-top:1px solid var(--rule);font-size:13.5px;display:flex;gap:10px;cursor:pointer}
+.ev time{color:var(--mute);white-space:nowrap;font-size:12.5px;min-width:74px}
+.newbtn{width:100%;padding:14px;font-size:16px;margin-bottom:14px;border-radius:10px}
+
+/* ---------- Modaal ---------- */
+#modal{position:fixed;inset:0;z-index:55;display:none;background:rgba(20,20,18,.45);align-items:flex-end;justify-content:center}
+#modal.show{display:flex}
+#modal .mbox{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:14px 14px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+@media (min-width:700px){#modal{align-items:center}#modal .mbox{border-radius:14px}}
+.mbox h3{margin:0 0 4px;font-size:18px;letter-spacing:-.01em}
+.mbox .sub2{margin:0 0 14px;color:var(--mute);font-size:13.5px}
+.mlist{display:grid;gap:8px}
+.mlist .btn{padding:12px 14px;font-size:15px;text-align:left;display:flex;justify-content:space-between;align-items:center;border-color:var(--rule);color:var(--ink)}
+.mlist .btn small{color:var(--mute);font-weight:400;font-size:12.5px}
+.mlist .btn.dark{color:#fff;border-color:var(--ink)}
+.mlist .btn.dark small{color:rgba(255,255,255,.75)}
+.mlist .btn.wa{color:#fff}.mlist .btn.wa small{color:rgba(255,255,255,.8)}
+.mlist .btn.danger{color:#a3271d}
+.linkbox{display:flex;gap:6px;margin:0 0 12px}
+.linkbox input{flex:1;font-size:13px;color:var(--mute)}
+.mclose{margin-top:12px;width:100%;padding:11px;border-color:var(--rule);color:var(--ink)}
+.opt{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rule);border-radius:8px;cursor:pointer}
+.opt input{width:18px;height:18px;accent-color:var(--ink)}
+.opt span{flex:1}.opt b{font-variant-numeric:tabular-nums}
+.mat h4{margin:14px 0 4px;font-size:13px;color:var(--mute);font-weight:600}
+.mat label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.mat label input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--ink);flex:none}
+.mat label span{flex:1;line-height:1.3}.mat label small{display:block;color:var(--mute);font-size:12px}
+.mat label b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.mat label.done span,.mat label.done b{text-decoration:line-through;color:var(--mute)}
+
+/* ---------- Banner, foto's, klant zoeken ---------- */
+.qban{padding:12px 16px;border-bottom:1px solid var(--rule);background:var(--soft);font-size:13.5px;display:grid;gap:8px}
+.qban:empty{display:none}
+.qban .row1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inv{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--rule);border-radius:8px;padding:8px 10px}
+.inv .m{flex:1;min-width:0}.inv .m small{display:block;color:var(--mute);font-size:12px}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.ph{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--soft)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .x{position:absolute;top:4px;right:4px;width:28px;height:28px;font-size:16px;border-radius:50%;opacity:.92}
+.ph.busy::after{content:"Uploaden...";position:absolute;inset:0;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.chk input{width:18px;height:18px;accent-color:var(--ink)}
+.srch{position:relative}
+.srch .res{position:absolute;left:0;right:0;top:100%;z-index:5;background:#fff;border:1px solid var(--rule);border-radius:0 0 8px 8px;box-shadow:0 8px 20px rgba(0,0,0,.08);max-height:260px;overflow:auto}
+.srch .res div{padding:9px 10px;border-top:1px solid var(--rule);cursor:pointer;font-size:14px}
+.srch .res div:first-child{border-top:0}
+.srch .res div:hover{background:var(--soft)}
+.srch .res small{display:block;color:var(--mute);font-size:12px}
+.pcrow{display:grid;grid-template-columns:1.3fr 1fr;gap:10px}
+.langsel{width:auto!important;padding:8px!important;font-size:13px!important}
+.d-photos{break-before:page;margin-top:12mm}
+.d-photos .grid{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:3mm}
+.d-photos figure{margin:0;break-inside:avoid}
+.d-photos img{width:100%;height:62mm;object-fit:cover;display:block;border-radius:1mm}
+.d-photos figcaption{font-size:8.5pt;color:var(--mute);margin-top:1mm}
+.d-pay{display:grid;grid-template-columns:1fr 34mm;gap:8mm;align-items:center;margin-top:9mm;padding:5mm 6mm;border:.6pt solid var(--rule);break-inside:avoid}
+.d-pay svg{width:34mm;height:34mm;display:block}
+.d-pay p{margin:0 0 2mm}
+.d-pay small{color:var(--mute);font-size:8.5pt;display:block;text-align:center;margin-top:1mm}
+.d-logo{max-height:18mm;max-width:70mm;display:block}
+
 /* ---------- Mobiel ---------- */
 @media (max-width:980px){
+  .tiles{grid-template-columns:1fr 1fr}
+  #btnNew2{display:none}
+  #barTitle small{display:none}
   .tabs{display:flex}
   .layout{display:block;overflow:auto}
   #panel{border-right:0;min-height:100%}
@@ -200,7 +301,7 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 @media print{
   @page{size:A4;margin:14mm 16mm}
   html,body{height:auto;background:#fff;display:block}
-  .bar,.tabs,#panel{display:none!important}
+  .bar,.tabs,#panel,#list,#modal{display:none!important}
   .layout{display:block;overflow:visible}
   #stage{display:block!important;overflow:visible;padding:0}
   #sheet{width:auto!important;height:auto!important}
@@ -219,37 +320,69 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
 <div class="toast" id="toast" role="status"></div>
 <div class="sheet" id="pdfSheet"><b>PDF is klaar</b><span id="pdfNameOut"></span>
   <div class="row"><button type="button" class="btn solid" id="pdfShare">Delen</button><button type="button" class="btn" id="pdfOpen">Openen</button><button type="button" class="btn" id="pdfClose">Sluiten</button></div></div>
+<div id="modal" role="dialog" aria-modal="true"><div class="mbox" id="mbox"></div></div>
 
 <div class="bar">
-  <span class="t">KGN Offerte</span>
+  <button class="btn ed-only" id="btnList" type="button" aria-label="Alle offertes">&#8592; Offertes</button>
+  <span class="t" id="barTitle">KGN Offerte</span>
   <span class="sp"></span>
-  <button class="btn" id="btnNew" type="button">Nieuwe offerte</button>
-  <button class="btn solid" id="btnPrint" type="button">PDF maken</button>
+  <button class="btn ls-only" id="btnNew2" type="button">Nieuwe offerte</button>
+  <button class="btn ed-only" id="btnMore" type="button">Meer</button>
+  <button class="btn solid ed-only" id="btnSend" type="button">Versturen</button>
 </div>
 <div class="tabs">
   <button type="button" data-t="fill">Invullen</button>
   <button type="button" data-t="view">Voorbeeld</button>
 </div>
 
+<section id="list"><div class="wrap" id="listWrap"></div></section>
+
 <div class="layout">
   <aside id="panel">
+    <div id="qban" class="qban"></div>
     <div id="panelbody">
 
       <details class="sec" id="dictsec" open>
         <summary>Inspreken</summary>
         <div class="body">
           <p class="hint">Vertel wat je hebt opgenomen, gewoon in je eigen woorden: de ruimtes met maten en wat er moet gebeuren. Bijvoorbeeld: "Woonkamer 6 bij 4,5, hoogte 2,6. Stucwerk wanden en plafond, 4 elektrapunten, groepenkast vervangen. Korting 5 procent."</p>
-          <div class="mic"><button class="micbtn" id="micBtn" type="button"><i></i><span>Start opnemen</span></button><span id="micStat"></span></div>
+          <div class="mic"><button class="micbtn" id="micBtn" type="button"><i></i><span>Start opnemen</span></button>
+            <select id="lang" class="langsel" aria-label="Taal van de opname">
+              <option value="nl">NL</option><option value="en">EN</option><option value="pl">PL</option><option value="de">DE</option>
+              <option value="tr">TR</option><option value="ro">RO</option><option value="bg">BG</option><option value="uk">UK</option>
+              <option value="pt">PT</option><option value="es">ES</option><option value="ar">AR</option><option value="fr">FR</option>
+            </select>
+            <span id="micStat"></span></div>
           <textarea id="dictText" rows="5" placeholder="Je tekst verschijnt hier. Typen mag ook, of gebruik het microfoontje op het toetsenbord van je telefoon."></textarea>
           <div class="dictact"><button class="btn ghost small" type="button" data-act="parse">Verwerk tekst</button><button class="btn ghost small" type="button" data-act="clearDict">Wissen</button></div>
           <div id="dictOut"></div>
         </div>
       </details>
 
+      <details class="sec" id="photosec">
+        <summary>Foto's</summary>
+        <div class="body">
+          <p class="hint">Maak foto's van de situatie. De AI kijkt mee en stelt werkzaamheden voor, en de foto's kunnen als bijlage in de offerte.</p>
+          <div class="acts">
+            <label class="btn ghost small" style="cursor:pointer">Foto maken<input id="camIn" type="file" accept="image/*" capture="environment" hidden></label>
+            <label class="btn ghost small" style="cursor:pointer">Uit galerij<input id="galIn" type="file" accept="image/*" multiple hidden></label>
+          </div>
+          <div class="photos" id="photos"></div>
+          <label class="chk"><input type="checkbox" id="fotosInDoc"> Foto's als bijlage in de offerte</label>
+          <div class="dictact"><button class="btn solid small dark" type="button" data-act="vision">Laat AI meekijken</button></div>
+          <div id="visionOut"></div>
+        </div>
+      </details>
+
       <details class="sec" open>
         <summary>Klant</summary>
         <div class="body g1">
+          <div class="f srch"><label for="k-zoek">Eerdere klant zoeken</label><input id="k-zoek" type="search" placeholder="Naam, adres of telefoon" autocomplete="off"><div class="res" id="k-res" hidden></div></div>
           <div class="f"><label for="k-naam">Naam</label><input id="k-naam" type="text" data-k="klant.naam" autocomplete="off"></div>
+          <div class="pcrow">
+            <div class="f"><label for="k-pc">Postcode</label><input id="k-pc" type="text" data-k="klant.postcode" placeholder="1234 AB" autocomplete="off" autocapitalize="characters"></div>
+            <div class="f"><label for="k-nr">Huisnummer</label><input id="k-nr" type="text" data-k="klant.huisnr" placeholder="12A" autocomplete="off"></div>
+          </div>
           <div class="f"><label for="k-adres">Adres</label><input id="k-adres" type="text" data-k="klant.adres" autocomplete="off"></div>
           <div class="f"><label for="k-plaats">Postcode en plaats</label><input id="k-plaats" type="text" data-k="klant.plaats" autocomplete="off"></div>
           <div class="g2">
@@ -324,7 +457,7 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
       <details class="sec">
         <summary>Bedrijfsgegevens</summary>
         <div class="body g1">
-          <p class="hint">Worden bewaard in deze browser. Lege velden verschijnen niet op de offerte.</p>
+          <p class="hint">Worden bewaard op de server en gelden voor alle toestellen. Lege velden verschijnen niet op de offerte.</p>
           <div class="f"><label for="c-naam">Bedrijfsnaam</label><input id="c-naam" type="text" data-c="naam"></div>
           <div class="f"><label for="c-adres">Adres en plaats</label><input id="c-adres" type="text" data-c="adres"></div>
           <div class="g2">
@@ -335,6 +468,12 @@ details.cat>summary .cs{font-variant-numeric:tabular-nums;color:var(--mute);font
           </div>
           <div class="f"><label for="c-iban">IBAN</label><input id="c-iban" type="text" data-c="iban"></div>
           <div class="f"><label for="c-ond">Naam ondertekenaar</label><input id="c-ond" type="text" data-c="ondertekenaar"></div>
+          <div class="g2">
+            <div class="f"><label for="c-kleur">Huisstijlkleur</label><input id="c-kleur" type="color" data-c="kleur" style="height:40px;padding:3px"></div>
+            <div class="f"><label>Logo op de offerte</label>
+              <div class="acts"><label class="btn ghost small" style="cursor:pointer">Eigen logo<input id="logoIn" type="file" accept="image/*" hidden></label><button class="btn ghost small" type="button" data-act="logoReset">Standaard</button></div></div>
+          </div>
+          <div class="f"><label for="c-dagen">Betaaltermijn facturen (dagen)</label><input id="c-dagen" type="number" inputmode="numeric" min="0" data-c="dagen"></div>
           <button class="btn ghost small" type="button" data-act="resetPrices">Prijslijst terugzetten naar standaard</button>
         </div>
       </details>
@@ -446,19 +585,20 @@ const store = {
   get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
-const DEF_CFG = {naam:'KGN Totaalservice', adres:'', tel:'06 38 28 63 01', email:'info@kgntotaalservice.nl', kvk:'', btwnr:'', iban:'', ondertekenaar:'', prices:{}, counter:1};
+const DEF_CFG = {naam:'KGN Totaalservice', adres:'', tel:'06 38 28 63 01', email:'info@kgntotaalservice.nl', kvk:'', btwnr:'', iban:'', ondertekenaar:'', kleur:'#1d1d1b', logo:'', dagen:14, prices:{}, counter:1};
 let CFG = Object.assign({}, DEF_CFG, store.get(CK) || {});
 CFG.prices = CFG.prices || {};
 
 const iso = d => { const z = new Date(d.getTime() - d.getTimezoneOffset()*60000); return z.toISOString().slice(0,10); };
+const newId = () => (crypto.randomUUID ? crypto.randomUUID().replace(/-/g,'') : Date.now().toString(36)+Math.random().toString(36).slice(2)).slice(0,20);
 const makeNr = () => 'KGN-' + new Date().getFullYear() + '-' + String(CFG.counter).padStart(3,'0');
 
 function newDraft(){
   const lines = {};
   ALL.forEach(i => lines[i.id] = {on:false, qty: i.type==='toggle' ? 1 : (i.type==='percent' ? i.def : 0)});
-  return {nummer:makeNr(), datum:iso(new Date()), geldig:30,
-    klant:{naam:'',adres:'',plaats:'',email:'',tel:''}, project:{titel:'',locatie:'',weken:''},
-    rooms:[{naam:'',l:0,b:0,h:2.6}], lines, custom:[], btw:21, korting:0,
+  return {id:newId(), nummer:makeNr(), datum:iso(new Date()), geldig:30,
+    klant:{naam:'',adres:'',plaats:'',email:'',tel:'',postcode:'',huisnr:''}, project:{titel:'',locatie:'',weken:''},
+    rooms:[{naam:'',l:0,b:0,h:2.6}], lines, custom:[], photos:[], fotosInDoc:true, btw:21, korting:0,
     intro:TXT.intro, betaling:TXT.betaling, voorwaarden:TXT.voorwaarden};
 }
 const hadDraft = !!store.get(DK);
@@ -472,6 +612,8 @@ let S = newDraft();
   S.lines = Object.assign(base.lines, d.lines||{});
   if(!Array.isArray(S.rooms) || !S.rooms.length) S.rooms = base.rooms;
   if(!Array.isArray(S.custom)) S.custom = [];
+  if(!Array.isArray(S.photos)) S.photos = [];
+  if(!S.id){ S.id = newId(); }
 })();
 let saveT; const saveDraft = () => { clearTimeout(saveT); saveT = setTimeout(()=>store.set(DK,S), 250); };
 
@@ -595,7 +737,8 @@ function buildCustoms(){
 }
 function refreshInputs(){
   $$('[data-k]').forEach(el => { const v=getP(S,el.dataset.k); el.value = v==null?'':v; });
-  $$('[data-c]').forEach(el => { el.value = CFG[el.dataset.c] || ''; });
+  $$('[data-c]').forEach(el => { el.value = CFG[el.dataset.c] || (el.type==='color' ? '#1d1d1b' : ''); });
+  $('#fotosInDoc').checked = S.fotosInDoc !== false;
   syncKorting();
 }
 function syncKorting(){
@@ -649,17 +792,24 @@ panel.addEventListener('click', e => {
   }
   else if(a==='addCustom'){ S.custom.push({name:'',qty:1,unit:'stuk',price:0}); buildCustoms(); update(); }
   else if(a==='delCustom'){ S.custom.splice(+b.closest('.cust').dataset.i,1); buildCustoms(); update(); }
+  else if(a==='logoReset'){ CFG.logo=''; saveCfg(); update(); toast('Standaard KGN-logo hersteld.'); }
+  else if(a==='vision') runVision();
+  else if(a==='delPhoto'){ S.photos.splice(+b.closest('.ph').dataset.i,1); buildPhotos(); update(); }
   else if(a==='resetPrices'){ if(confirm('Alle prijzen terugzetten naar de standaardprijslijst?')){ CFG.prices={}; saveCfg(); buildItems(); update(); } }
 });
 
-$('#btnPrint').addEventListener('click', makePdf);
-$('#btnNew').addEventListener('click', async () => {
-  if(!confirm('Nieuwe offerte starten? De huidige invoer wordt gewist.')) return;
+async function nextNumber(){
   let next=(+CFG.counter||1)+1;
   if(API.online){ try{ const r=await api('/api/number',{method:'POST'}); if(r.ok) next=(await r.json()).counter; }catch(e){} }
   CFG.counter=next; store.set(CK,CFG);
-  S=newDraft(); store.set(DK,S); buildAll(); setTab('fill'); $('#panel').scrollTop=0;
-});
+  return makeNr();
+}
+async function newQuote(){
+  if(!API.online && !confirm('Je bent offline. Nieuwe offerte starten? De huidige invoer wordt dan gewist.')) return;
+  await flushSave();
+  await nextNumber();
+  S=newDraft(); setCur(null); store.set(DK,S); buildAll(); setView('edit'); setTab('fill'); $('#panel').scrollTop=0;
+}
 function setTab(t){ document.body.dataset.tab=t; if(t==='view') requestAnimationFrame(fit); }
 $$('.tabs button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.t)));
 window.addEventListener('resize', fit);
@@ -784,9 +934,11 @@ function reviewHtml(P){
   if(P.weken) rows.push(`<li><span>Doorlooptijd</span><span>${esc(P.weken)} weken</span></li>`);
   if(P.korting!=null) rows.push(`<li><span>Korting${P.korting>20?'<small class="w">Maximaal 20% in te stellen</small>':''}</span><span>${nf(Math.min(20,P.korting))}%</span></li>`);
   if(P.btw!=null) rows.push(`<li><span>Btw-tarief</span><span>${P.btw}%</span></li>`);
-  if(!rows.length) return `<div class="rev"><div class="none">Ik kon hier geen maten of werkzaamheden in vinden. Noem bijvoorbeeld "woonkamer 6 bij 4,5" of "stucwerk wanden".</div></div>`;
+  if(!rows.length && !P.waarneming) return `<div class="rev"><div class="none">Ik kon hier geen maten of werkzaamheden in vinden. Noem bijvoorbeeld "woonkamer 6 bij 4,5" of "stucwerk wanden".</div></div>`;
   const rest=P.rest||[];
-  return `<div class="rev"><h5>Dit heb ik begrepen</h5><ul>${rows.join('')}</ul>${rest.length?`<div class="rest">Niet herkend: ${esc(rest.join(' / '))}</div>`:''}<div class="go"><button class="btn solid small" style="background:var(--ink);color:#fff;border-color:var(--ink)" type="button" data-act="applyDict">Overnemen in de offerte</button></div></div>`;
+  if(P.titel) rows.unshift(`<li><span>Projectomschrijving</span><span>${esc(P.titel)}</span></li>`);
+  const seen = P.waarneming ? `<div class="rest" style="color:var(--ink);border-top:0">${esc(P.waarneming)}</div>` : '';
+  return `<div class="rev"><h5>${P.vision?'Dit zie ik op de foto\'s':'Dit heb ik begrepen'}</h5>${seen}<ul>${rows.join('')}</ul>${rest.length?`<div class="rest">Niet herkend: ${esc(rest.join(' / '))}</div>`:''}<div class="go"><button class="btn solid small" style="background:var(--ink);color:#fff;border-color:var(--ink)" type="button" data-act="applyDict">Overnemen in de offerte</button></div></div>`;
 }
 let lastParse=null;
 async function runParse(){
@@ -832,8 +984,9 @@ function applyParsed(P){
   if(P.weken) S.project.weken=P.weken;
   if(P.korting!=null) S.korting=Math.min(20,P.korting);
   if(P.btw!=null) S.btw=P.btw;
+  if(P.titel && !S.project.titel) S.project.titel=P.titel;
   ALL.forEach(syncItem); refreshInputs(); update();
-  $('#dictOut').innerHTML='<div class="rev"><div class="none">Overgenomen. Controleer de werkzaamheden hieronder en bekijk het voorbeeld.</div></div>';
+  (P.vision?$('#visionOut'):$('#dictOut')).innerHTML='<div class="rev"><div class="none">Overgenomen. Controleer de werkzaamheden hieronder en bekijk het voorbeeld.</div></div>';
   const first=$('#items'); if(first&&first.scrollIntoView) first.scrollIntoView({behavior:'smooth',block:'start'});
 }
 panel.addEventListener('click', e => {
@@ -874,7 +1027,7 @@ async function onRecStop(){
   const blob=new Blob(chunks,{type:(mr&&mr.mimeType)||'audio/webm'});
   if(blob.size<1500){ micUI(false,'Opname te kort.'); return; }
   try{
-    const r=await api('/api/transcribe',{method:'POST',headers:{'Content-Type':blob.type.split(';')[0]},body:blob});
+    const r=await api('/api/transcribe?lang='+encodeURIComponent($('#lang').value),{method:'POST',headers:{'Content-Type':blob.type.split(';')[0]},body:blob});
     const j=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(j.error||'Uitschrijven mislukt.');
     const ta=$('#dictText'); ta.value=(ta.value.trim()?ta.value.trim()+' ':'')+(j.text||'');
@@ -882,7 +1035,7 @@ async function onRecStop(){
   }catch(e){ if(e.status!==401) micUI(false,(e.message||'Uitschrijven mislukt.')+' Probeer opnieuw of typ de tekst.'); else micUI(false,''); }
 }
 function startBrowser(){
-  rec=new SR(); rec.lang='nl-NL'; rec.continuous=true; rec.interimResults=true;
+  rec=new SR(); rec.lang=({nl:'nl-NL',en:'en-GB',pl:'pl-PL',de:'de-DE',tr:'tr-TR',ro:'ro-RO',bg:'bg-BG',uk:'uk-UA',pt:'pt-PT',es:'es-ES',ar:'ar-SA',fr:'fr-FR'})[$('#lang').value]||'nl-NL'; rec.continuous=true; rec.interimResults=true;
   baseText=$('#dictText').value; if(baseText&&!/\s$/.test(baseText)) baseText+=' ';
   rec.onresult=ev=>{ let fin='',tmp=''; for(let i=0;i<ev.results.length;i++){ if(ev.results[i].isFinal) fin+=ev.results[i][0].transcript+' '; else tmp+=ev.results[i][0].transcript; } $('#dictText').value=(baseText+fin+tmp).trim(); };
   rec.onerror=ev=>{ const m={'not-allowed':'Geen toegang tot de microfoon.','service-not-allowed':'Geen toegang tot de microfoon.','no-speech':'Niets gehoord.','network':'Geen internetverbinding voor spraakherkenning.','audio-capture':'Geen microfoon gevonden.'}; micUI(false,m[ev.error]||'Opnemen is gestopt.'); };
@@ -904,16 +1057,15 @@ function updatePanel(T){
 }
 
 /* ---------- Document ---------- */
-function renderDoc(){
-  const T=compute(), k=S.klant, p=S.project, c=CFG;
-  const d = S.datum ? new Date(S.datum+'T12:00:00') : new Date();
-  const g = new Date(d); g.setDate(g.getDate()+(+S.geldig||0));
-  const dl = x => x.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
-  const klantRegels = [k.naam,k.adres,k.plaats,k.email,k.tel].filter(Boolean).map(esc).join('<br>');
-  const werk = p.locatie || [k.adres,k.plaats].filter(Boolean).join(', ');
-  const greet = k.naam ? 'Beste '+esc(k.naam)+',' : 'Beste opdrachtgever,';
-
-  const rowsHtml = T.groups.map(gr => {
+function renderDoc(){ $('#paper').innerHTML = docInner(); paperStyle(); fit(); }
+function paperStyle(){ $('#paper').style.setProperty('--acc', CFG.kleur||'#1d1d1b'); }
+const logoHtml = () => CFG.logo ? `<img class="d-logo" src="${esc(CFG.logo)}" alt="${esc(CFG.naam||'Logo')}">` : LOGO;
+function photosHtml(){
+  if(S.fotosInDoc===false || !(S.photos||[]).length) return '';
+  return `<div class="d-photos"><h4 class="d-h">Foto's van de situatie</h4><div class="grid">${S.photos.map(ph=>`<figure><img src="${esc(ph.url)}" alt="">${ph.cap?`<figcaption>${esc(ph.cap)}</figcaption>`:''}</figure>`).join('')}</div></div>`;
+}
+function rowsFor(T){
+  return T.groups.map(gr => {
     const gt = gr.rows.reduce((s,r)=>s+r.tot,0);
     return `<div class="t-cat"><div>${esc(gr.name)}</div><span>${eur(gt)}</span></div>` + gr.rows.map(r => `
       <div class="t-row">
@@ -923,23 +1075,35 @@ function renderDoc(){
         <div><b style="font-weight:600">${eur(r.tot)}</b></div>
       </div>`).join('');
   }).join('') || `<div class="t-empty">Er zijn nog geen werkzaamheden gekozen.</div>`;
-
-  const sums = `
+}
+function sumsFor(T, label){
+  return `
     <div class="sums">
       <div><span>Subtotaal</span><span>${eur(T.sub)}</span></div>
       ${T.korting>0?`<div><span>Korting ${nf(+S.korting)}%</span><span>- ${eur(T.korting)}</span></div>`:''}
       <div><span>Totaal exclusief btw</span><span>${eur(T.excl)}</span></div>
       ${(+S.btw)>0?`<div><span>Btw ${nf(+S.btw)}%</span><span>${eur(T.btw)}</span></div>`:`<div><span>Btw</span><span>verlegd</span></div>`}
     </div>
-    <div class="band"><span>Totaal inclusief btw</span><b>${eur(T.incl)}</b></div>`;
+    <div class="band"><span>${label||'Totaal inclusief btw'}</span><b>${eur(T.incl)}</b></div>`;
+}
+function docInner(){
+  const T=compute(), k=S.klant, p=S.project, c=CFG;
+  const d = S.datum ? new Date(S.datum+'T12:00:00') : new Date();
+  const g = new Date(d); g.setDate(g.getDate()+(+S.geldig||0));
+  const dl = x => x.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+  const klantRegels = [k.naam,k.adres,k.plaats,k.email,k.tel].filter(Boolean).map(esc).join('<br>');
+  const werk = p.locatie || [k.adres,k.plaats].filter(Boolean).join(', ');
+  const greet = k.naam ? 'Beste '+esc(k.naam)+',' : 'Beste opdrachtgever,';
+
+  const rowsHtml = rowsFor(T), sums = sumsFor(T);
 
   const bet = lines(S.betaling), voor = lines(S.voorwaarden), intro = lines(S.intro);
   const footA = [c.naam&&`<b>${esc(c.naam)}</b>`, esc(c.adres)].filter(Boolean).join('<br>');
   const footB = [c.tel&&esc(c.tel), c.email&&esc(c.email), 'kgntotaalservice.nl'].filter(Boolean).join('<br>');
   const footC = [c.kvk&&'KvK '+esc(c.kvk), c.btwnr&&'Btw '+esc(c.btwnr), c.iban&&'IBAN '+esc(c.iban)].filter(Boolean).join('<br>');
 
-  $('#paper').innerHTML = `
-    <div class="d-top">${LOGO}
+  return `
+    <div class="d-top">${logoHtml()}
       <div class="co">${[c.adres&&esc(c.adres), c.tel&&esc(c.tel), c.email&&esc(c.email)].filter(Boolean).join('<br>')}</div></div>
     <p class="d-kicker">Offerte voor ${esc(k.naam||'opdrachtgever')}</p>
     <h1 class="d-title">${esc(p.titel||'Offerte werkzaamheden')}</h1>
@@ -964,11 +1128,11 @@ function renderDoc(){
       <div><h4 class="d-h">Voorwaarden en uitgangspunten</h4>${voor.length?`<ul class="d-list">${voor.map(l=>`<li>${esc(l)}</li>`).join('')}</ul>`:''}</div>
     </div>
     <div class="sign">
-      <div><b>Voor akkoord opdrachtgever</b><span>Naam, datum en handtekening</span></div>
+      <div><b>Voor akkoord opdrachtgever</b><!--KGN-SIGN--><span>Naam, datum en handtekening</span><!--/KGN-SIGN--></div>
       <div><b>${esc(c.naam||'KGN Totaalservice')}</b><span>${esc(c.ondertekenaar)}</span></div>
     </div>
-    <div class="d-foot"><div>${footA}</div><div>${footB}</div><div>${footC}</div></div>`;
-  fit();
+    <div class="d-foot"><div>${footA}</div><div>${footB}</div><div>${footC}</div></div>
+    ${photosHtml()}`;
 }
 function fit(){
   const st=$('#stage'), paper=$('#paper'), sheet=$('#sheet');
@@ -1003,7 +1167,7 @@ async function doLogin(){
     const j=await r.json().catch(()=>({}));
     if(!r.ok){ $('#pinErr').textContent=j.error||'Inloggen mislukt'; return; }
     API.token=j.token; store.set('kgn-token',j.token);
-    $('#login').classList.remove('show'); $('#pin').value=''; syncSettings();
+    $('#login').classList.remove('show'); $('#pin').value=''; await syncSettings(); queueSave(); if(VIEW==='list') loadList(); else refreshCur();
   }catch(e){ $('#pinErr').textContent='Geen verbinding met de server.'; }
 }
 $('#pinBtn').addEventListener('click',doLogin);
@@ -1021,16 +1185,20 @@ async function syncSettings(){
 async function initServer(){
   try{
     const r=await fetch('/api/health',{cache:'no-store'}); if(!r.ok) throw new Error();
-    const h=await r.json(); API.online=true; API.ai=!!h.ai; API.auth=!!h.auth;
+    const h=await r.json(); API.online=true; API.ai=!!h.ai; API.auth=!!h.auth; API.mollie=!!h.mollie;
   }catch(e){ API.online=false; }
   setupMic();
-  if(API.online) await syncSettings();
+  if(API.online){ await syncSettings(); if(!pristine()) queueSave(); pollEvents(); }
+  const qp=new URLSearchParams(location.search).get('q');
+  if(qp){ history.replaceState(null,'','/'); if(API.online) return openQuote(qp); }
+  setView(API.online && store.get('kgn-view')!=='edit' ? 'list' : 'edit');
 }
 function pdfName(){ return ('Offerte '+S.nummer+(S.klant.naam?' '+S.klant.naam:'')).replace(/[^\w.\- ]+/g,'').replace(/\s+/g,' ').trim()+'.pdf'; }
-function docHtml(){
+function docHtml(paperInner){
   const c=document.documentElement.cloneNode(true);
-  const bd=c.querySelector('body'); if(bd) bd.setAttribute('data-tab','view');
-  c.querySelectorAll('script,#panel,.bar,.tabs,#login,#toast,#pdfSheet,link[rel=manifest],link[rel=icon],link[rel=apple-touch-icon]').forEach(e=>e.remove());
+  const bd=c.querySelector('body'); if(bd){ bd.setAttribute('data-tab','view'); bd.removeAttribute('data-view'); }
+  c.querySelectorAll('script,#panel,.bar,.tabs,#login,#toast,#pdfSheet,#modal,#list,link[rel=manifest],link[rel=icon],link[rel=apple-touch-icon]').forEach(e=>e.remove());
+  const pp=c.querySelector('#paper'); if(pp){ if(paperInner!=null) pp.innerHTML=paperInner; pp.style.transform='none'; pp.style.setProperty('--acc', CFG.kleur||'#1d1d1b'); }
   return '<!doctype html>'+c.outerHTML;
 }
 let pdfFile=null, pdfUrl=null;
@@ -1058,8 +1226,662 @@ $('#pdfOpen').addEventListener('click',()=>{ const w=window.open(pdfUrl,'_blank'
 $('#pdfClose').addEventListener('click',()=>$('#pdfSheet').classList.remove('show'));
 if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});
 
-function update(){ const T=compute(); updatePanel(T); renderDoc(); saveDraft(); }
-function buildAll(){ buildItems(); buildRooms(); buildCustoms(); refreshInputs(); update(); }
+/* =====================================================================
+   Offertes bewaren, overzicht, versturen, facturen, foto's en meer
+   ===================================================================== */
+const DAY=86400000;
+const dshort = t => t ? new Date(t).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}) : '';
+const dlong = t => t ? new Date(typeof t==='string'&&t.length===10?t+'T12:00:00':t).toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'}) : '';
+const ago = t => { const d=Math.floor((Date.now()-t)/DAY); return d<=0?'vandaag':d===1?'gisteren':d+' dagen geleden'; };
+const linkFor = token => location.origin+'/o/'+token;
+
+/* ---------- Huidige offerte en opslaan op de server ---------- */
+let CUR = store.get('kgn-cur');
+if(CUR && CUR.id!==S.id) CUR=null;
+function setCur(c){ CUR=c; store.set('kgn-cur',c); renderBanner(); updateBarTitle(); }
+function pristine(){
+  return !CUR && !S.klant.naam && !S.project.titel && !S.custom.length && !(S.photos||[]).length
+    && !Object.values(S.lines).some(l=>l.on) && !S.rooms.some(r=>+r.l||+r.b||r.naam);
+}
+let srvT=null, saving=null, dirty=false;
+function queueSave(){ dirty=true; if(!API.online) return; clearTimeout(srvT); srvT=setTimeout(saveNow,1200); }
+function saveNow(force){
+  clearTimeout(srvT);
+  if(!API.online || (!dirty && !force) || (!force && pristine())) return saving||Promise.resolve();
+  dirty=false;
+  const T=compute(), id=S.id;
+  const body=JSON.stringify({data:S,totals:{excl:T.excl,incl:T.incl}});
+  const p=(saving||Promise.resolve()).then(()=>api('/api/quotes/'+encodeURIComponent(id),{method:'PUT',headers:{'Content-Type':'application/json'},body}))
+    .then(r=>r.ok?r.json():null).then(j=>{ if(j && S.id===id) setCur(j); return j; })
+    .catch(e=>{ dirty=true; if(e.status!==401) console.warn('opslaan',e); });
+  saving=p; p.finally(()=>{ if(saving===p) saving=null; });
+  return p;
+}
+async function flushSave(force){ if(dirty||force) await saveNow(force); else if(saving) await saving; }
+window.addEventListener('pagehide',()=>{ if(dirty && API.online && !pristine()){ try{ const T=compute(); fetch('/api/quotes/'+S.id,{method:'PUT',keepalive:true,headers:{'Content-Type':'application/json','x-kgn-token':API.token},body:JSON.stringify({data:S,totals:{excl:T.excl,incl:T.incl}})}); }catch(e){} } });
+
+function hydrate(d){
+  const base=newDraft();
+  const x=Object.assign(base, d);
+  x.klant=Object.assign(base.klant, d.klant||{});
+  x.project=Object.assign(base.project, d.project||{});
+  x.lines=Object.assign(base.lines, d.lines||{});
+  if(!Array.isArray(x.rooms)||!x.rooms.length) x.rooms=base.rooms;
+  if(!Array.isArray(x.custom)) x.custom=[];
+  if(!Array.isArray(x.photos)) x.photos=[];
+  return x;
+}
+async function openQuote(id){
+  if(S.id===id && CUR){ setView('edit'); return; }
+  try{
+    await flushSave();
+    const r=await api('/api/quotes/'+encodeURIComponent(id)); if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||'Openen mislukt');
+    const j=await r.json(); const data=j.data||{}; delete j.data;
+    S=hydrate(Object.assign({},data,{id:j.id})); dirty=false; store.set(DK,S); setCur(j);
+    $('#dictOut').innerHTML=''; $('#visionOut').innerHTML='';
+    buildAll(); dirty=false; setView('edit'); setTab(matchMedia('(max-width:980px)').matches?'view':'fill'); $('#panel').scrollTop=0;
+  }catch(e){ if(e.status!==401) toast(e.message||'Openen mislukt'); }
+}
+async function refreshCur(){
+  if(!API.online||!CUR) return;
+  try{ const r=await api('/api/quotes/'+encodeURIComponent(CUR.id)); if(r.ok){ const j=await r.json(); delete j.data; if(S.id===j.id) setCur(j); } }catch(e){}
+}
+
+/* ---------- Weergave ---------- */
+let VIEW='edit';
+function setView(v){
+  VIEW=v; document.body.dataset.view=v; store.set('kgn-view',v); updateBarTitle();
+  if(v==='list'){ loadList(); window.scrollTo(0,0); } else requestAnimationFrame(fit);
+}
+function updateBarTitle(){
+  const el=$('#barTitle'); if(!el) return;
+  if(VIEW==='list'){ el.innerHTML=esc(CFG.naam||'KGN Offerte'); return; }
+  const st=CUR?dispStatus(CUR):{key:'concept',label:'Concept'};
+  el.innerHTML=`${esc(S.nummer)} <small class="st ${st.key}" style="margin-left:4px">${esc(st.label)}</small>`;
+}
+$('#btnList').addEventListener('click',async()=>{ await flushSave(); setView('list'); });
+$('#btnNew2').addEventListener('click',newQuote);
+$('#btnSend').addEventListener('click',openSend);
+$('#btnMore').addEventListener('click',openMore);
+
+/* ---------- Status ---------- */
+const sumPct = fs => fs.reduce((a,f)=>a+(+f.pct||0),0);
+const overdue = f => f.status==='open' && f.verval && Date.now()>new Date(f.verval+'T23:59:59').getTime();
+function dispStatus(q){
+  const inv=q.facturen||[];
+  if(inv.length){
+    if(inv.some(overdue)) return {key:'te-laat',label:'Betaling te laat'};
+    if(inv.every(f=>f.status==='betaald')) return sumPct(inv)>=99.9?{key:'betaald',label:'Betaald'}:{key:'gefactureerd',label:'Deels betaald'};
+    return {key:'gefactureerd',label:'Gefactureerd'};
+  }
+  if(q.status==='verstuurd') return q.viewedAt?{key:'bekeken',label:'Bekeken'}:{key:'verstuurd',label:'Verstuurd'};
+  return {key:q.status,label:({concept:'Concept',getekend:'Getekend',afgewezen:'Afgewezen'})[q.status]||q.status};
+}
+function needsFollowup(q){ return q.status==='verstuurd' && q.lastContact && Date.now()-q.lastContact>=7*DAY; }
+
+/* ---------- Berichten ---------- */
+function waLink(tel,text){
+  let d=String(tel||'').replace(/[^\d+]/g,'');
+  if(d.startsWith('+')) d=d.slice(1); else if(d.startsWith('00')) d=d.slice(2); else if(d.startsWith('0')) d='31'+d.slice(1);
+  return 'https://wa.me/'+(d.length>=10?d:'')+'?text='+encodeURIComponent(text);
+}
+const mailLink = (to,subject,body) => 'mailto:'+encodeURIComponent(to||'')+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+function groet(){ return '\n\nMet vriendelijke groet,\n'+[CFG.ondertekenaar,CFG.naam||'KGN Totaalservice',CFG.tel].filter(Boolean).join('\n'); }
+function msgQuote(q,link,herinnering){
+  const naam=q.klant&&q.klant.naam?q.klant.naam:'heer/mevrouw', wat=q.titel?' voor '+q.titel.toLowerCase():'';
+  if(herinnering) return `Beste ${naam},\n\nOp ${dlong(q.sentAt||Date.now())} stuurden wij u onze offerte${wat} (${q.nummer}). Heeft u deze al kunnen bekijken? U kunt de offerte hier inzien en direct digitaal ondertekenen:\n${link}\n\nHeeft u nog vragen of wilt u iets aanpassen, laat het gerust weten.`+groet();
+  return `Beste ${naam},\n\nHierbij ontvangt u onze offerte${wat} (${q.nummer}), totaal ${eur(q.incl)} inclusief btw. U kunt de offerte online bekijken en direct digitaal ondertekenen:\n${link}\n\nHeeft u vragen, dan hoor ik het graag.`+groet();
+}
+function msgInvoice(q,f,link,herinnering){
+  const naam=q.klant&&q.klant.naam?q.klant.naam:'heer/mevrouw';
+  const pay=API.mollie?' en direct betalen met iDEAL':'';
+  if(herinnering) return `Beste ${naam},\n\nVolgens onze administratie staat factuur ${f.nummer} van ${eur(f.incl)} nog open. De vervaldatum was ${dlong(f.verval)}. Wilt u het bedrag zo snel mogelijk overmaken? U kunt de factuur hier bekijken${pay}:\n${link}\n\nHeeft u al betaald, dan kunt u dit bericht als niet verzonden beschouwen.`+groet();
+  return `Beste ${naam},\n\nHierbij ontvangt u factuur ${f.nummer} van ${eur(f.incl)}${f.label?' ('+f.label.toLowerCase()+')':''}. U kunt de factuur hier bekijken${pay}:\n${link}\n\nWij verzoeken u het bedrag vóór ${dlong(f.verval)} te voldoen.`+groet();
+}
+async function markSent(qid,fid,herinnering){
+  if(!API.online) return;
+  try{
+    const r=await api('/api/quotes/'+encodeURIComponent(qid)+'/sent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({factuur:fid||undefined,herinnering:!!herinnering})});
+    if(r.ok){ const j=await r.json(); if(CUR&&CUR.id===j.id) setCur(j); const i=LIST.findIndex(x=>x.id===j.id); if(i>=0){ LIST[i]=j; if(VIEW==='list') renderList(); } }
+  }catch(e){}
+}
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); toast('Gekopieerd.'); return true; }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Gekopieerd.'); }catch(x){} ta.remove(); return true; }
+}
+function shareButtons(o){
+  // o: {tel,email,subject,text,link,qid,fid,herinnering}
+  const d=`data-q="${esc(o.qid)}"${o.fid?` data-f="${esc(o.fid)}"`:''}${o.herinnering?' data-h="1"':''}`;
+  return `<a class="btn wa" href="${esc(waLink(o.tel,o.text))}" target="_blank" rel="noopener" data-m="sent" ${d}>WhatsApp <small>${o.tel?esc(o.tel):'kies contact'}</small></a>
+    <a class="btn" href="${esc(mailLink(o.email,o.subject,o.text))}" data-m="sent" ${d}>E-mail <small>${o.email?esc(o.email):'kies adres'}</small></a>
+    ${navigator.share?`<button class="btn" type="button" data-m="share" ${d}>Delen via... <small>sms, Signal, enz.</small></button>`:''}
+    <button class="btn" type="button" data-m="copyMsg" ${d}>Bericht kopiëren <small>met link</small></button>`;
+}
+let SHARE=null;
+
+/* ---------- Modaal ---------- */
+function openModal(html){ $('#mbox').innerHTML=html+'<button class="btn mclose" type="button" data-m="close">Sluiten</button>'; $('#modal').classList.add('show'); $('#mbox').scrollTop=0; }
+function closeModal(){ $('#modal').classList.remove('show'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ---------- Versturen ---------- */
+async function openSend(){
+  renderDoc();
+  if(!API.online){
+    openModal(`<h3>Offerte versturen</h3><p class="sub2">Je bent offline. Online versturen en laten tekenen kan zodra je weer internet hebt. Een PDF maken kan wel.</p><div class="mlist"><button class="btn dark" type="button" data-m="pdf">PDF maken</button></div>`);
+    return;
+  }
+  openModal(`<h3>Offerte versturen</h3><p class="sub2">Link klaarmaken...</p>`);
+  try{
+    await flushSave(true);
+    const r=await api('/api/quotes/'+encodeURIComponent(S.id)+'/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({snapshot:docHtml()})});
+    if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||'Versturen mislukt');
+    const q=await r.json(); setCur(q);
+    const link=linkFor(q.token);
+    const signed=q.status==='getekend';
+    SHARE={text:msgQuote(q,link,false),link,title:'Offerte '+q.nummer};
+    openModal(`<h3>Offerte ${esc(q.nummer)} versturen</h3>
+      <p class="sub2">${esc(q.klant.naam||'Klant')} · ${eur(q.incl)}. ${signed?'Deze offerte is al getekend; de klant ziet de getekende versie.':'De klant opent de offerte op de telefoon en kan direct digitaal tekenen. Jij krijgt een melding zodra de klant kijkt of tekent.'}</p>
+      <div class="linkbox"><input type="text" readonly value="${esc(link)}" aria-label="Link"><button class="btn ghost small" type="button" data-m="copyLink" data-q="${esc(q.id)}">Kopieer</button></div>
+      <div class="mlist">
+        ${shareButtons({tel:S.klant.tel,email:S.klant.email,subject:'Offerte '+q.nummer+(q.titel?' - '+q.titel:''),text:SHARE.text,link,qid:q.id})}
+        <a class="btn" href="${esc(link)}?preview=1" target="_blank" rel="noopener">Bekijk als klant <small>zonder dat het als bekeken telt</small></a>
+        <button class="btn" type="button" data-m="pdf">PDF maken <small>om zelf te versturen of te printen</small></button>
+      </div>`);
+  }catch(e){ if(e.status!==401) openModal(`<h3>Versturen lukt niet</h3><p class="sub2">${esc(e.message||'Probeer het opnieuw.')}</p><div class="mlist"><button class="btn dark" type="button" data-m="pdf">PDF maken</button></div>`); }
+}
+
+/* ---------- Meer ---------- */
+function openMore(){
+  const q=CUR, st=q?q.status:'concept';
+  const canInv = st==='getekend' && API.online;
+  openModal(`<h3>${esc(S.nummer)}</h3><p class="sub2">${esc(S.klant.naam||'Nog geen klant')}${S.project.titel?' · '+esc(S.project.titel):''}</p>
+    <div class="mlist">
+      <button class="btn dark" type="button" data-m="new">Nieuwe offerte</button>
+      <button class="btn" type="button" data-m="dup">Dupliceren <small>zelfde klus, nieuwe klant of maten</small></button>
+      <button class="btn" type="button" data-m="pdf">PDF maken</button>
+      <button class="btn" type="button" data-m="mat">Materiaallijst <small>voor de bouwmarkt</small></button>
+      <button class="btn" type="button" data-m="inv" ${canInv?'':'disabled'}>Factuur maken <small>${canInv?'termijn of volledig':(API.online?'kan na ondertekening':'alleen online')}</small></button>
+      ${API.online?`<button class="btn" type="button" data-m="status">Status wijzigen <small>${esc(dispStatus(q||{status:'concept'}).label)}</small></button>`:''}
+      ${API.online&&q?`<button class="btn danger" type="button" data-m="del">Verwijderen</button>`:''}
+    </div>`);
+}
+async function duplicate(){
+  closeModal();
+  await flushSave();
+  const nummer=await nextNumber();
+  const id=newId();
+  if(API.online && CUR){
+    try{
+      const r=await api('/api/quotes/'+encodeURIComponent(CUR.id)+'/duplicate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,patch:{id,nummer,datum:iso(new Date())}})});
+      if(!r.ok) throw new Error();
+      const j=await r.json(); const data=j.data; delete j.data;
+      S=hydrate(data); store.set(DK,S); setCur(j); buildAll(); dirty=false; setView('edit'); setTab('fill');
+      toast('Gedupliceerd als '+nummer+'. Pas klant en maten aan.'); return;
+    }catch(e){ if(e.status===401) return; }
+  }
+  S=hydrate(Object.assign(JSON.parse(JSON.stringify(S)),{id,nummer,datum:iso(new Date())})); store.set(DK,S); setCur(null); buildAll(); setView('edit'); setTab('fill');
+  toast('Gedupliceerd als '+nummer+'.');
+}
+function openStatus(){
+  const cur=CUR?CUR.status:'concept';
+  const opts=[['concept','Concept'],['verstuurd','Verstuurd'],['getekend','Getekend (opdracht)'],['afgewezen','Afgewezen']];
+  openModal(`<h3>Status wijzigen</h3><p class="sub2">Bijvoorbeeld als de klant op papier of mondeling akkoord gaf.</p>
+    <div class="mlist">${opts.map(([v,l])=>`<button class="btn ${v===cur?'dark':''}" type="button" data-m="setStatus" data-v="${v}">${l}</button>`).join('')}</div>`);
+}
+async function setStatus(v){
+  await flushSave(true);
+  try{
+    const r=await api('/api/quotes/'+encodeURIComponent(S.id)+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:v})});
+    if(r.ok){ setCur(await r.json()); closeModal(); toast('Status bijgewerkt.'); }
+  }catch(e){}
+}
+async function deleteQuote(){
+  if(!confirm('Offerte '+S.nummer+' verwijderen?')) return;
+  try{ const r=await api('/api/quotes/'+encodeURIComponent(S.id),{method:'DELETE'}); if(!r.ok) throw new Error(); }catch(e){ if(e.status!==401) toast('Verwijderen mislukt.'); return; }
+  closeModal(); dirty=false; S=newDraft(); setCur(null); store.set(DK,S); buildAll(); dirty=false; setView('list'); toast('Verwijderd.');
+}
+
+/* ---------- Banner boven het formulier ---------- */
+function renderBanner(){
+  const el=$('#qban'); if(!el) return;
+  const q=CUR; if(!q || q.id!==S.id){ el.innerHTML=''; return; }
+  const st=dispStatus(q), parts=[];
+  if(q.status==='verstuurd') parts.push(q.sentAt?'Verstuurd '+ago(q.sentAt):'Link gemaakt, nog niet verstuurd', q.viewedAt?`${q.views}x bekeken, eerst ${dshort(q.viewedAt)}`:'nog niet geopend');
+  if(q.signed) parts.push(`Getekend door ${q.signed.name} op ${dlong(q.signed.at)}`);
+  if(q.rejected) parts.push('Afgewezen '+dshort(q.rejected.at)+(q.rejected.reason?': "'+q.rejected.reason+'"':''));
+  let html=`<div class="row1"><span class="st ${st.key}">${esc(st.label)}</span><span>${esc(parts.join(' · '))}</span></div>`;
+  if(q.status==='getekend') html+=`<div style="color:var(--mute);font-size:12.5px">Wijzigingen die je nu maakt komen niet in de getekende versie.</div>`;
+  if(needsFollowup(q)) html+=`<div class="acts"><button class="btn dark small" type="button" data-b="remind">Herinnering sturen</button></div>`;
+  (q.facturen||[]).forEach(f=>{
+    const fs=f.status==='betaald'?{key:'betaald',label:'Betaald'}:overdue(f)?{key:'te-laat',label:'Te laat'}:{key:'open',label:'Open'};
+    html+=`<div class="inv"><div class="m"><b>${esc(f.nummer)}</b> <span class="st ${fs.key}">${fs.label}</span><small>${esc(f.label||(f.pct+'%'))} · ${eur(f.incl)} · vervalt ${dshort(f.verval)}${f.viewedAt?' · bekeken':''}</small></div>
+      <button class="btn ghost small" type="button" data-b="invSend" data-f="${esc(f.id)}">Versturen</button>
+      ${f.status==='betaald'?'':`<button class="btn ghost small" type="button" data-b="invPaid" data-f="${esc(f.id)}">Betaald</button>`}</div>`;
+  });
+  if(q.status==='getekend') html+=`<div class="acts"><button class="btn dark small" type="button" data-b="inv">${(q.facturen||[]).length?'Nog een factuur maken':'Factuur maken'}</button></div>`;
+  el.innerHTML=html;
+}
+$('#qban').addEventListener('click',e=>{
+  const b=e.target.closest('[data-b]'); if(!b) return; const a=b.dataset.b;
+  if(a==='inv') openInvoice();
+  else if(a==='invSend') openInvSend(b.dataset.f);
+  else if(a==='invPaid') invPaid(b.dataset.f,true);
+  else if(a==='remind') openRemind(CUR.id);
+});
+
+/* ---------- Overzicht ---------- */
+let LIST=[], EVENTS=[], FILTER='alle', QUERY='';
+async function loadList(){
+  const w=$('#listWrap');
+  if(!API.online){ w.innerHTML=`<div class="card"><div class="empty">Geen verbinding met de server. Het overzicht is alleen online te zien.<br><br><button class="btn dark" type="button" data-l="edit">Verder met ${esc(S.nummer)}</button></div></div>`; return; }
+  if(!LIST.length) w.innerHTML=`<div class="card"><div class="empty">Offertes laden...</div></div>`;
+  try{
+    const [a,b]=await Promise.all([api('/api/quotes'),api('/api/events?since=0')]);
+    LIST=a.ok?await a.json():[]; EVENTS=b.ok?await b.json():[];
+    renderList();
+  }catch(e){ if(e.status!==401) w.innerHTML=`<div class="card"><div class="empty">Laden mislukt.</div></div>`; }
+}
+function pushState(){
+  if(!('Notification' in window) || !('serviceWorker' in navigator) || !('PushManager' in window)) return /iphone|ipad|ipod/i.test(navigator.userAgent)&&!navigator.standalone?'ios':'none';
+  return (Notification.permission==='granted' && store.get('kgn-push'))?'on':'off';
+}
+function renderList(){
+  const now=Date.now(), year=new Date().getFullYear();
+  const open=LIST.filter(q=>q.status==='verstuurd');
+  const won=LIST.filter(q=>q.signed && new Date(q.signed.at).getFullYear()===year);
+  const invOpen=LIST.flatMap(q=>q.facturen.filter(f=>f.status==='open'));
+  const late=invOpen.filter(overdue);
+  const decided=LIST.filter(q=>q.status==='getekend'||q.status==='afgewezen');
+  const rate=decided.length?Math.round(100*decided.filter(q=>q.status==='getekend').length/decided.length):null;
+  const sum=a=>a.reduce((s,x)=>s+(+x.incl||0),0);
+  const fol=LIST.filter(needsFollowup);
+  const invLate=LIST.flatMap(q=>q.facturen.filter(overdue).map(f=>({q,f})));
+  const ps=pushState();
+
+  let h=`<button class="btn dark newbtn" type="button" data-l="new">+ Nieuwe offerte</button>
+  <div class="tiles">
+    <div class="tile"><span>Openstaande offertes</span><b>${eur(sum(open))}</b><small>${open.length} wachten op reactie</small></div>
+    <div class="tile"><span>Binnengehaald ${year}</span><b>${eur(sum(won))}</b><small>${won.length} getekend</small></div>
+    <div class="tile"><span>Nog te ontvangen</span><b>${eur(sum(invOpen))}</b><small>${invOpen.length} ${invOpen.length===1?'factuur':'facturen'}${late.length?`, <b style="display:inline;font-size:inherit;color:#a3271d">${late.length} te laat</b>`:''}</small></div>
+    <div class="tile"><span>Scoringskans</span><b>${rate==null?'-':rate+'%'}</b><small>${decided.length} ${decided.length===1?'offerte':'offertes'} beslist</small></div>
+  </div>`;
+  if(ps==='off'||ps==='ios') h+=`<div class="card"><h3>Meldingen <small>direct een seintje als een klant kijkt, tekent of betaalt</small></h3><div class="qrow" style="cursor:default"><div class="m"><small style="white-space:normal">${ps==='ios'?'Op iPhone werken meldingen alleen als de app op je beginscherm staat: tik in Safari op Deel en kies "Zet op beginscherm". Open de app daarna vanaf je beginscherm.':'Zet meldingen aan op dit toestel.'}</small></div>${ps==='off'?'<button class="btn dark small" type="button" data-l="push">Aanzetten</button>':''}</div></div>`;
+  if(fol.length||invLate.length){
+    h+=`<div class="card"><h3>Opvolgen <small>${fol.length+invLate.length} actie${fol.length+invLate.length>1?'s':''}</small></h3>`;
+    fol.forEach(q=>{ h+=`<div class="qrow" data-id="${esc(q.id)}"><div class="m"><b>${esc(q.klant.naam||q.nummer)}</b><small>${esc(q.nummer)} · ${eur(q.incl)} · verstuurd ${ago(q.lastContact)} · ${q.viewedAt?'wel bekeken':'nog niet geopend'}</small></div><button class="btn dark small" type="button" data-l="remind" data-id="${esc(q.id)}">Herinnering</button></div>`; });
+    invLate.forEach(({q,f})=>{ h+=`<div class="qrow" data-id="${esc(q.id)}"><div class="m"><b>${esc(q.klant.naam||q.nummer)}</b><small>Factuur ${esc(f.nummer)} · ${eur(f.incl)} · vervallen ${dshort(f.verval)}</small></div><button class="btn dark small" type="button" data-l="remindInv" data-id="${esc(q.id)}" data-f="${esc(f.id)}">Herinnering</button></div>`; });
+    h+=`</div>`;
+  }
+  const filters=[['alle','Alle'],['concept','Concept'],['open','Verstuurd'],['getekend','Getekend'],['factuur','Gefactureerd'],['afgewezen','Afgewezen']];
+  const ql=QUERY.trim().toLowerCase();
+  const rows=LIST.filter(q=>{
+    if(FILTER==='concept'&&q.status!=='concept') return false;
+    if(FILTER==='open'&&q.status!=='verstuurd') return false;
+    if(FILTER==='getekend'&&!(q.status==='getekend'&&!q.facturen.length)) return false;
+    if(FILTER==='factuur'&&!q.facturen.length) return false;
+    if(FILTER==='afgewezen'&&q.status!=='afgewezen') return false;
+    if(ql && ![q.nummer,q.klant.naam,q.klant.adres,q.klant.plaats,q.titel].join(' ').toLowerCase().includes(ql)) return false;
+    return true;
+  });
+  h+=`<div class="fbar"><input type="search" id="lq" placeholder="Zoek op klant, adres of nummer" value="${esc(QUERY)}">${filters.map(([v,l])=>`<button class="pill ${FILTER===v?'on':''}" type="button" data-l="filter" data-v="${v}">${l}</button>`).join('')}</div>`;
+  h+=`<div class="card" id="lrows">${rowsHtmlList(rows)}</div>`;
+  if(EVENTS.length) h+=`<div class="card"><h3>Activiteit</h3>${EVENTS.slice(0,10).map(e=>`<div class="ev" data-id="${esc(e.quote||'')}"><time>${dshort(e.at)} ${new Date(e.at).toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'})}</time><span>${esc(e.text)}</span></div>`).join('')}</div>`;
+  $('#listWrap').innerHTML=h;
+}
+function rowsHtmlList(rows){
+  if(!rows.length) return `<div class="empty">${LIST.length?'Geen offertes gevonden.':'Nog geen offertes. Maak je eerste offerte met de knop hierboven.'}</div>`;
+  return rows.map(q=>{ const st=dispStatus(q); return `<div class="qrow" data-id="${esc(q.id)}"><div class="m"><b>${esc(q.klant.naam||'Zonder naam')}</b><small>${esc(q.nummer)}${q.titel?' · '+esc(q.titel):''}${q.klant.plaats?' · '+esc(q.klant.plaats):''}</small></div><div class="a">${eur(q.incl)}<small><span class="st ${st.key}">${esc(st.label)}</span></small></div></div>`; }).join('');
+}
+$('#list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-l]');
+  if(b){
+    const a=b.dataset.l; e.stopPropagation();
+    if(a==='new') return newQuote();
+    if(a==='edit') return setView('edit');
+    if(a==='filter'){ FILTER=b.dataset.v; return renderList(); }
+    if(a==='push') return enablePush();
+    if(a==='remind') return openRemind(b.dataset.id);
+    if(a==='remindInv') return openRemind(b.dataset.id,b.dataset.f);
+    return;
+  }
+  const r=e.target.closest('[data-id]'); if(r&&r.dataset.id) openQuote(r.dataset.id);
+});
+$('#list').addEventListener('input',e=>{ if(e.target.id==='lq'){ QUERY=e.target.value; const ql=QUERY; renderList(); const i=$('#lq'); i.focus(); i.setSelectionRange(ql.length,ql.length); } });
+function openRemind(qid,fid){
+  const q=LIST.find(x=>x.id===qid)||(CUR&&CUR.id===qid?CUR:null); if(!q) return;
+  const f=fid?q.facturen.find(x=>x.id===fid):null;
+  const link=linkFor(f?f.token:q.token);
+  const text=f?msgInvoice(q,f,link,true):msgQuote(q,link,true);
+  SHARE={text,link,title:f?'Factuur '+f.nummer:'Offerte '+q.nummer};
+  openModal(`<h3>${f?'Betalingsherinnering':'Herinnering sturen'}</h3><p class="sub2">${esc(q.klant.naam||'Klant')} · ${f?'factuur '+esc(f.nummer)+' · '+eur(f.incl):'offerte '+esc(q.nummer)+' · '+eur(q.incl)}</p>
+    <textarea id="remTxt" rows="8" style="margin-bottom:10px">${esc(text)}</textarea>
+    <div class="mlist">${shareButtons({tel:q.klant.tel,email:q.klant.email,subject:(f?'Herinnering factuur ':'Offerte ')+(f?f.nummer:q.nummer),text,link,qid:q.id,fid,herinnering:true})}</div>`);
+}
+
+/* ---------- Facturen ---------- */
+function termOptions(){
+  const T=compute(), done=sumPct((CUR&&CUR.facturen)||[]);
+  const opts=[];
+  lines(S.betaling).forEach(l=>{ const m=l.match(/(\d+(?:[.,]\d+)?)\s*%/); if(m) opts.push({pct:+m[1].replace(',','.'),label:l}); });
+  if(done>0 && done<99.9) opts.push({pct:r2(100-done),label:'Restant van de opdracht'});
+  if(!done) opts.push({pct:100,label:'Volledig bedrag'});
+  return {T,opts,done};
+}
+function openInvoice(){
+  if(!API.online) return toast('Facturen maken kan alleen online.');
+  const {T,opts,done}=termOptions();
+  const n=((CUR&&CUR.facturen)||[]).length;
+  const pre=Math.min(n,opts.length-1);
+  openModal(`<h3>Factuur maken</h3><p class="sub2">Offerte ${esc(S.nummer)} · ${eur(T.incl)} incl. btw${done?` · al ${nf(done)}% gefactureerd`:''}</p>
+    <div class="mlist" id="invOpts">${opts.map((o,i)=>`<label class="opt"><input type="radio" name="term" value="${i}" ${i===pre?'checked':''}><span>${esc(o.label)}</span><b>${eur(r2(T.excl*o.pct/100)*(1+(+S.btw||0)/100))}</b></label>`).join('')}
+      <label class="opt"><input type="radio" name="term" value="x"><span>Ander percentage <input type="number" id="invPct" min="1" max="100" step="any" style="width:80px;display:inline-block;margin-left:6px"> %</span></label></div>
+    <div class="g2" style="margin-top:12px"><div class="f"><label for="invDays">Betaaltermijn (dagen)</label><input id="invDays" type="number" min="0" value="${+CFG.dagen||14}"></div></div>
+    <div class="mlist" style="margin-top:12px"><button class="btn dark" type="button" data-m="invCreate">Factuur maken</button></div>`);
+  $('#invPct').addEventListener('focus',()=>{ $('input[name=term][value=x]').checked=true; });
+}
+async function createInvoice(){
+  const {T,opts}=termOptions();
+  const sel=($('input[name=term]:checked')||{}).value;
+  let o = sel==='x' ? {pct:+String($('#invPct').value).replace(',','.'),label:''} : opts[+sel];
+  if(!o||!(o.pct>0)||o.pct>100) return toast('Kies een termijn of vul een percentage in.');
+  if(sel==='x') o.label=nf(o.pct)+'% van de opdracht';
+  const excl=r2(T.excl*o.pct/100), btw=r2(excl*(+S.btw||0)/100);
+  const btn=$('[data-m=invCreate]'); btn.disabled=true; btn.textContent='Bezig...';
+  try{
+    await flushSave(true);
+    const r=await api('/api/quotes/'+encodeURIComponent(S.id)+'/invoices',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pct:o.pct,label:o.label,excl,btw,dagen:+$('#invDays').value})});
+    if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||'Factuur maken mislukt');
+    const f=await r.json();
+    await saveInvoiceSnapshot(f);
+    await refreshCur();
+    openInvSend(f.id);
+  }catch(e){ if(e.status!==401) toast(e.message||'Factuur maken mislukt'); btn.disabled=false; btn.textContent='Factuur maken'; }
+}
+async function saveInvoiceSnapshot(f){
+  const html=docHtml(invoiceInner(f));
+  await api('/api/quotes/'+encodeURIComponent(S.id)+'/invoices/'+encodeURIComponent(f.id),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({snapshot:html})});
+}
+function invoiceInner(f){
+  const k=S.klant, p=S.project, c=CFG, full=f.pct>=99.99;
+  const T0=compute();
+  const T=full?T0:{sub:f.excl,korting:0,excl:f.excl,btw:f.btw,incl:f.incl};
+  const rows=full?rowsFor(T0):`<div class="t-row"><div class="c1"><b>${esc(f.label||'Termijn')}</b><span>${nf(f.pct)}% van offerte ${esc(S.nummer)}${p.titel?', '+esc(p.titel):''}. Opdrachtsom exclusief btw ${eur(T0.excl)}.</span></div><div>${nf(f.pct)}%</div><div>${eur(T0.excl)}</div><div><b style="font-weight:600">${eur(f.excl)}</b></div></div>`;
+  const sums=full?sumsFor(T0,'Te betalen'):`<div class="sums"><div><span>Totaal exclusief btw</span><span>${eur(f.excl)}</span></div>${(+S.btw)>0?`<div><span>Btw ${nf(+S.btw)}%</span><span>${eur(f.btw)}</span></div>`:`<div><span>Btw</span><span>verlegd</span></div>`}</div><div class="band"><span>Te betalen</span><b>${eur(f.incl)}</b></div>`;
+  const klantRegels=[k.naam,k.adres,k.plaats,k.email].filter(Boolean).map(esc).join('<br>');
+  const werk=p.locatie||[k.adres,k.plaats].filter(Boolean).join(', ');
+  const qr=f.qr?`<div>${f.qr}<small>${f.qrKind==='link'?'Scan om te betalen':'Scan met uw bank-app'}</small></div>`:'';
+  const footA=[c.naam&&`<b>${esc(c.naam)}</b>`,esc(c.adres)].filter(Boolean).join('<br>');
+  const footB=[c.tel&&esc(c.tel),c.email&&esc(c.email),'kgntotaalservice.nl'].filter(Boolean).join('<br>');
+  const footC=[c.kvk&&'KvK '+esc(c.kvk),c.btwnr&&'Btw '+esc(c.btwnr),c.iban&&'IBAN '+esc(c.iban)].filter(Boolean).join('<br>');
+  return `
+    <div class="d-top">${logoHtml()}<div class="co">${[c.adres&&esc(c.adres),c.tel&&esc(c.tel),c.email&&esc(c.email)].filter(Boolean).join('<br>')}</div></div>
+    <p class="d-kicker">Factuur voor ${esc(k.naam||'opdrachtgever')}</p>
+    <h1 class="d-title">Factuur ${esc(f.nummer)}</h1>
+    <div class="d-meta">
+      <div><span>Factuurnummer</span><b>${esc(f.nummer)}</b></div>
+      <div><span>Factuurdatum</span><b>${dlong(f.datum)}</b></div>
+      <div><span>Vervaldatum</span><b>${dlong(f.verval)}</b></div>
+      <div><span>Offerte</span><b>${esc(S.nummer)}</b></div>
+    </div>
+    <div class="d-two"><div><h4>Factuuradres</h4><p>${klantRegels||'&nbsp;'}</p></div><div><h4>Project</h4><p>${esc(p.titel||'Werkzaamheden')}<br>${esc(werk)}</p></div></div>
+    <div class="d-sec"><div class="t-head"><div>Omschrijving</div><div>Aantal</div><div>Prijs per eenheid</div><div>Totaal</div></div>${rows}</div>
+    ${sums}
+    ${(+S.btw)===0?`<p style="font-size:9pt;color:var(--mute);margin-top:4mm">Btw verlegd. De btw wordt door u als opdrachtgever afgedragen.</p>`:''}
+    <div class="d-pay" ${qr?'':'style="grid-template-columns:1fr"'}><div><h4 class="d-h">Betaling</h4>
+      <p>Wij verzoeken u het bedrag van <b>${eur(f.incl)}</b> vóór <b>${dlong(f.verval)}</b> over te maken${c.iban?` op rekening <b>${esc(c.iban)}</b> ten name van ${esc(c.naam||'KGN Totaalservice')}`:''}, onder vermelding van <b>${esc(f.nummer)}</b>.</p>
+      ${f.link?`<p style="color:var(--mute);font-size:9pt">Online bekijken${f.qrKind==='link'?' en betalen met iDEAL':''}: ${esc(f.link)}</p>`:''}</div>${qr}</div>
+    <div class="d-foot"><div>${footA}</div><div>${footB}</div><div>${footC}</div></div>`;
+}
+async function openInvSend(fid){
+  const f=((CUR&&CUR.facturen)||[]).find(x=>x.id===fid); if(!f) return;
+  const q=CUR, link=linkFor(f.token);
+  if(!f.hasSnapshot){ try{ const r=await api('/api/quotes/'+encodeURIComponent(q.id)+'/invoices/'+encodeURIComponent(f.id)+'/qr'); if(r.ok){ await saveInvoiceSnapshot(await r.json()); await refreshCur(); } }catch(e){} }
+  SHARE={text:msgInvoice(q,f,link,false),link,title:'Factuur '+f.nummer};
+  openModal(`<h3>Factuur ${esc(f.nummer)}</h3><p class="sub2">${esc(q.klant.naam||'Klant')} · ${eur(f.incl)} · vervalt ${dlong(f.verval)}${f.status==='betaald'?' · <b>betaald</b>':''}</p>
+    <div class="linkbox"><input type="text" readonly value="${esc(link)}" aria-label="Link"><button class="btn ghost small" type="button" data-m="copyLink" data-q="${esc(q.id)}" data-f="${esc(f.id)}">Kopieer</button></div>
+    <div class="mlist">
+      ${shareButtons({tel:S.klant.tel,email:S.klant.email,subject:'Factuur '+f.nummer+(q.titel?' - '+q.titel:''),text:SHARE.text,link,qid:q.id,fid:f.id})}
+      <a class="btn" href="${esc(link)}?preview=1" target="_blank" rel="noopener">Bekijk als klant</a>
+      <button class="btn" type="button" data-m="invPdf" data-t="${esc(f.token)}" data-n="${esc(f.nummer)}">PDF maken</button>
+      ${f.status==='betaald'?`<button class="btn" type="button" data-m="invOpen" data-f="${esc(f.id)}">Toch nog niet betaald</button>`:`<button class="btn" type="button" data-m="invPaidM" data-f="${esc(f.id)}">Markeer als betaald</button>`}
+      <button class="btn danger" type="button" data-m="invDel" data-f="${esc(f.id)}">Factuur verwijderen</button>
+    </div>`);
+}
+async function invPaid(fid,paid,remove){
+  try{
+    const r=await api('/api/quotes/'+encodeURIComponent(CUR.id)+'/invoices/'+encodeURIComponent(fid),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(remove?{remove:true}:{status:paid?'betaald':'open'})});
+    if(r.ok){ setCur(await r.json()); toast(remove?'Factuur verwijderd.':paid?'Gemarkeerd als betaald.':'Weer op open gezet.'); }
+  }catch(e){}
+}
+async function pdfFromUrl(url,name){
+  try{
+    const r=await fetch(url); if(!r.ok) throw new Error();
+    const blob=await r.blob();
+    if(pdfUrl) URL.revokeObjectURL(pdfUrl);
+    pdfFile=new File([blob],name,{type:'application/pdf'}); pdfUrl=URL.createObjectURL(blob);
+    closeModal();
+    if(matchMedia('(pointer:coarse)').matches){ $('#pdfNameOut').textContent=name; $('#pdfShare').style.display=(navigator.canShare&&navigator.canShare({files:[pdfFile]}))?'':'none'; $('#pdfSheet').classList.add('show'); }
+    else downloadPdf();
+  }catch(e){ toast('PDF maken mislukt.'); }
+}
+
+/* ---------- Materiaallijst ---------- */
+const MATS={
+ sloop:[['Puinzakken',q=>Math.ceil(q/2),'stuk']],
+ afdekken:[['Stucloper of afdekvlies (rol 25 m²)',(q,a)=>Math.max(1,Math.ceil(a.vloer/25)),'rol'],['Afplaktape',()=>3,'rol']],
+ metalstud:[['Metalstud C-profiel 50 mm, 2,6 m',q=>Math.ceil(q/1.5)+2,'stuk'],['Metalstud U-profiel 50 mm, 3 m',q=>Math.ceil(q/1.3),'stuk'],['Gipsplaat 260 x 60 cm, 12,5 mm',q=>Math.ceil(q*4/1.56*1.1),'plaat'],['Isolatie glaswol 50 mm',q=>Math.ceil(q*1.05),'m²'],['Snelbouwschroeven (doos 1000)',q=>Math.ceil(q/25),'doos'],['Voegenvuller (zak 5 kg)',q=>Math.ceil(q/20),'zak'],['Voegband',q=>Math.ceil(q/30),'rol']],
+ plafond:[['Plafondprofiel CD 60/27, 3 m',q=>Math.ceil(q*1.1),'stuk'],['Noniushangers',q=>Math.ceil(q*1.3),'stuk'],['UD-randprofiel, 3 m',q=>Math.ceil(Math.sqrt(q)*4/3),'stuk'],['Gipsplaat 260 x 60 cm, 12,5 mm',q=>Math.ceil(q/1.56*1.1),'plaat'],['Snelbouwschroeven (doos 1000)',q=>Math.ceil(q/40),'doos'],['Voegenvuller (zak 5 kg)',q=>Math.ceil(q/25),'zak']],
+ deur:[['Binnendeur',q=>q,'stuk'],['Kozijn',q=>q,'stuk'],['Scharnieren',q=>q*3,'stuk'],['Loopslot en deurbeslag',q=>q,'set']],
+ 'stuc-wand':[['Voorstrijkmiddel (emmer 10 L)',q=>Math.ceil(q/80),'emmer'],['Stucmortel (zak 25 kg)',q=>Math.ceil(q/8),'zak'],['Hoekbeschermers, 3 m',q=>Math.ceil(q/15),'stuk']],
+ 'stuc-plafond':[['Voorstrijkmiddel (emmer 10 L)',q=>Math.ceil(q/80),'emmer'],['Stucmortel (zak 25 kg)',q=>Math.ceil(q/7),'zak']],
+ 'schilder-wand':[['Muurverf (emmer 10 L)',q=>Math.ceil(q*2/8*1.1/10),'emmer'],['Primer (emmer 10 L)',q=>Math.ceil(q/100),'emmer'],['Afplaktape',q=>Math.ceil(q/40)+1,'rol'],['Rollers, bakken en kwasten',()=>1,'set']],
+ 'schilder-plafond':[['Plafondverf (emmer 10 L)',q=>Math.ceil(q*2/8*1.1/10),'emmer'],['Primer (emmer 10 L)',q=>Math.ceil(q/100),'emmer'],['Afplaktape',q=>Math.ceil(q/40)+1,'rol']],
+ dekvloer:[['Egaline (zak 25 kg)',q=>Math.ceil(q/5),'zak'],['Primer (can 5 L)',q=>Math.ceil(q/50),'can'],['Randisolatiestrook (rol 25 m)',q=>Math.max(1,Math.ceil(Math.sqrt(q)*4/25)),'rol']],
+ tegelvloer:[['Vloertegels, incl. 10% snijverlies',q=>r1(q*1.1),'m²'],['Tegellijm (zak 25 kg)',q=>Math.ceil(q/5),'zak'],['Voegmiddel (zak 5 kg)',q=>Math.ceil(q/8),'zak'],['Tegelkruisjes of levelsysteem',q=>Math.ceil(q/10),'zak']],
+ pvc:[['PVC-vloer, incl. 7% snijverlies',q=>r1(q*1.07),'m²'],['Ondervloer',q=>Math.ceil(q*1.05),'m²'],['PVC-lijm (emmer)',q=>Math.ceil(q/40),'emmer']],
+ plinten:[['Plinten, 2,4 m',q=>Math.ceil(q*1.1/2.4),'stuk'],['Montagekit',q=>Math.ceil(q/10),'koker'],['Acrylaatkit wit',q=>Math.ceil(q/12),'koker']],
+ elektra:[['Inbouwdozen',q=>q,'stuk'],['Stopcontacten of schakelaars',q=>q,'stuk'],['Installatiedraad 2,5 mm² (rol 100 m)',q=>Math.ceil(q*10/100),'rol'],['Flexbuis 16 mm (rol 100 m)',q=>Math.ceil(q*8/100),'rol']],
+ groepenkast:[['Groepenkast compleet met aardlekautomaten',()=>1,'stuk'],['Installatiedraad 2,5 mm² (rol 100 m)',()=>1,'rol']],
+ water:[['Meerlagenbuis 16 mm',q=>q*5,'m'],['Knelfittingen en koppelingen',q=>q*4,'stuk'],['Afvoerbuis PVC 40 mm, 4 m',q=>Math.ceil(q/2),'stuk']],
+ vloerverwarming:[['Vloerverwarmingsbuis 16 mm',q=>Math.ceil(q*7),'m'],['Tackerplaat met isolatie',q=>Math.ceil(q*1.05),'m²'],['Tackernagels',q=>Math.ceil(q/20),'zak'],['Verdeler',q=>Math.ceil(q/40),'stuk'],['Randisolatiestrook (rol 25 m)',q=>Math.max(1,Math.ceil(Math.sqrt(q)*4/25)),'rol']],
+ 'tegel-wand':[['Wandtegels, incl. 10% snijverlies',q=>r1(q*1.1),'m²'],['Tegellijm (zak 25 kg)',q=>Math.ceil(q/6),'zak'],['Voegmiddel (zak 5 kg)',q=>Math.ceil(q/10),'zak'],['Sanitairkit',q=>Math.ceil(q/10)+1,'koker'],['Hoekprofielen',q=>Math.ceil(q/8),'stuk']],
+ sanitair:[['Aansluitset (kranen, sifon, flexslangen)',q=>q,'set'],['Sanitairkit',q=>Math.ceil(q/2),'koker'],['Bevestigingsset',q=>q,'set']],
+ keuken:[['Montagemateriaal en pluggen',()=>1,'set'],['Sanitairkit',()=>2,'koker'],['Aansluitset kraan en afvoer',()=>1,'set']]
+};
+function materials(){
+  const a=areas(), groups=[];
+  CATS.forEach(c=>{
+    const m=new Map();
+    c.items.forEach(it=>{
+      const L=S.lines[it.id]; if(!L||!L.on||!MATS[it.id]) return;
+      const q=it.type==='toggle'?1:(+L.qty||0); if(q<=0) return;
+      MATS[it.id].forEach(([name,f,unit])=>{ const v=f(q,a); if(!(v>0)) return; const k=name+'|'+unit; const e=m.get(k)||{name,unit,v:0,for:[]}; e.v=r1(e.v+v); if(!e.for.includes(it.name)) e.for.push(it.name); m.set(k,e); });
+    });
+    if(m.size) groups.push({name:c.name,items:[...m.values()]});
+  });
+  return groups;
+}
+function matText(){
+  const g=materials();
+  return `Materiaallijst ${S.nummer}${S.klant.naam?' - '+S.klant.naam:''}\n`+g.map(x=>`\n${x.name}\n`+x.items.map(i=>`- ${nf(i.v)} ${i.unit} ${i.name}`).join('\n')).join('\n')+`\n\nIndicatie op basis van gangbaar verbruik.`;
+}
+function openMaterials(){
+  const g=materials(), done=S.matDone||{};
+  if(!g.length){ openModal(`<h3>Materiaallijst</h3><p class="sub2">Kies eerst werkzaamheden met hoeveelheden. Dan rekent de app uit wat je nodig hebt.</p>`); return; }
+  SHARE={text:matText(),title:'Materiaallijst '+S.nummer};
+  openModal(`<h3>Materiaallijst</h3><p class="sub2">${esc(S.nummer)}${S.klant.naam?' · '+esc(S.klant.naam):''}. Indicatie op basis van gangbaar verbruik, inclusief snijverlies. Vink af wat je hebt.</p>
+    <div class="mat">${g.map(x=>`<h4>${esc(x.name)}</h4>`+x.items.map(i=>{ const k=i.name+'|'+i.unit; return `<label class="${done[k]?'done':''}"><input type="checkbox" data-mk="${esc(k)}" ${done[k]?'checked':''}><span>${esc(i.name)}<small>voor ${esc(i.for.join(', ').toLowerCase())}</small></span><b>${nf(i.v)} ${esc(i.unit)}</b></label>`; }).join('')).join('')}</div>
+    <div class="mlist" style="margin-top:14px">
+      <a class="btn wa" href="${esc(waLink('',SHARE.text))}" target="_blank" rel="noopener">Via WhatsApp sturen <small>naar jezelf of de leverancier</small></a>
+      ${navigator.share?`<button class="btn" type="button" data-m="share">Delen via...</button>`:''}
+      <button class="btn" type="button" data-m="copyMat">Kopiëren</button>
+    </div>`);
+}
+$('#modal').addEventListener('change',e=>{
+  const k=e.target.dataset.mk; if(k==null) return;
+  S.matDone=S.matDone||{}; if(e.target.checked) S.matDone[k]=1; else delete S.matDone[k];
+  e.target.closest('label').classList.toggle('done',e.target.checked); saveDraft(); queueSave();
+});
+
+/* ---------- Acties in de modaal ---------- */
+$('#modal').addEventListener('click',async e=>{
+  if(e.target.id==='modal') return closeModal();
+  const b=e.target.closest('[data-m]'); if(!b) return; const a=b.dataset.m;
+  if(a==='close') closeModal();
+  else if(a==='new'){ closeModal(); newQuote(); }
+  else if(a==='dup') duplicate();
+  else if(a==='pdf'){ closeModal(); makePdf(); }
+  else if(a==='mat') openMaterials();
+  else if(a==='inv') openInvoice();
+  else if(a==='status') openStatus();
+  else if(a==='setStatus') setStatus(b.dataset.v);
+  else if(a==='del') deleteQuote();
+  else if(a==='invCreate') createInvoice();
+  else if(a==='invPaidM'){ await invPaid(b.dataset.f,true); closeModal(); }
+  else if(a==='invOpen'){ await invPaid(b.dataset.f,false); closeModal(); }
+  else if(a==='invDel'){ if(confirm('Deze factuur verwijderen? Het factuurnummer wordt niet opnieuw gebruikt.')){ await invPaid(b.dataset.f,false,true); closeModal(); } }
+  else if(a==='invPdf') pdfFromUrl('/api/public/'+encodeURIComponent(b.dataset.t)+'/pdf','Factuur '+b.dataset.n+'.pdf');
+  else if(a==='copyMat') copyText(matText());
+  else if(a==='copyLink'){ copyText(SHARE.link); markSent(b.dataset.q,b.dataset.f,b.dataset.h); }
+  else if(a==='copyMsg'){ const t=$('#remTxt')?$('#remTxt').value:SHARE.text; copyText(t); markSent(b.dataset.q,b.dataset.f,b.dataset.h); }
+  else if(a==='share'){
+    const t=$('#remTxt')?$('#remTxt').value:SHARE.text;
+    try{ await navigator.share(SHARE.link?{title:SHARE.title,text:t}:{title:SHARE.title,text:t}); if(b.dataset.q) markSent(b.dataset.q,b.dataset.f,b.dataset.h); }catch(x){}
+  }
+  else if(a==='sent'){
+    const t=$('#remTxt'); if(t && t.value!==SHARE.text){ b.href = b.href.startsWith('mailto:') ? b.href.replace(/body=[^&]*/,'body='+encodeURIComponent(t.value)) : b.href.replace(/text=[^&]*/,'text='+encodeURIComponent(t.value)); }
+    markSent(b.dataset.q,b.dataset.f,b.dataset.h);
+    setTimeout(closeModal,400);
+  }
+});
+
+/* ---------- Foto's ---------- */
+function buildPhotos(){
+  $('#photos').innerHTML=(S.photos||[]).map((p,i)=>`<div class="ph" data-i="${i}"><img src="${esc(p.url)}" alt="Foto ${i+1}" loading="lazy"><button class="x" type="button" data-act="delPhoto" aria-label="Foto verwijderen">×</button></div>`).join('');
+  $('#fotosInDoc').checked=S.fotosInDoc!==false;
+}
+function loadImage(file){ return new Promise((res,rej)=>{ const u=URL.createObjectURL(file), img=new Image(); img.onload=()=>{ URL.revokeObjectURL(u); res(img); }; img.onerror=()=>{ URL.revokeObjectURL(u); rej(new Error('Kan de foto niet lezen')); }; img.src=u; }); }
+async function shrink(file,max,type,q){
+  const img=await loadImage(file);
+  const sc=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+  const c=document.createElement('canvas'); c.width=Math.round(img.naturalWidth*sc); c.height=Math.round(img.naturalHeight*sc);
+  const ctx=c.getContext('2d'); if(type==='image/jpeg'){ ctx.fillStyle='#fff'; ctx.fillRect(0,0,c.width,c.height); }
+  ctx.drawImage(img,0,0,c.width,c.height);
+  return {canvas:c,blob:await new Promise(r=>c.toBlob(r,type,q))};
+}
+async function addPhotos(files){
+  if(!files||!files.length) return;
+  if(!API.online) return toast("Foto's toevoegen kan alleen met internet.");
+  $('#photosec').open=true;
+  for(const file of [...files].slice(0,12)){
+    const ph=document.createElement('div'); ph.className='ph busy'; $('#photos').appendChild(ph);
+    try{
+      const {blob}=await shrink(file,1600,'image/jpeg',0.82);
+      const r=await api('/api/photos',{method:'POST',headers:{'Content-Type':'image/jpeg'},body:blob});
+      const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||'Uploaden mislukt');
+      S.photos.push({id:j.id,url:j.url,cap:''});
+    }catch(e){ if(e.status!==401) toast(e.message||'Uploaden mislukt'); }
+    ph.remove();
+  }
+  buildPhotos(); update();
+}
+$('#camIn').addEventListener('change',e=>{ addPhotos(e.target.files); e.target.value=''; });
+$('#galIn').addEventListener('change',e=>{ addPhotos(e.target.files); e.target.value=''; });
+$('#fotosInDoc').addEventListener('change',e=>{ S.fotosInDoc=e.target.checked; update(); });
+async function runVision(){
+  const out=$('#visionOut');
+  if(!(S.photos||[]).length) return toast("Maak eerst een of meer foto's.");
+  if(!API.online||!API.ai) return toast('De AI is alleen online beschikbaar.');
+  out.innerHTML='<div class="rev"><div class="none">De AI bekijkt de foto\'s...</div></div>';
+  try{
+    const catalog=ALL.map(i=>({id:i.id,name:i.name,desc:i.desc,unit:i.unit,type:i.type||'',basis:i.basis||''}));
+    const r=await api('/api/vision',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({photos:S.photos.slice(-5).map(p=>p.id),catalog,note:$('#dictText').value.trim()})});
+    const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||'AI niet bereikbaar');
+    lastParse=j; out.innerHTML=reviewHtml(j);
+  }catch(e){ out.innerHTML=e.status===401?'':`<div class="rev"><div class="none">${esc(e.message||'Mislukt')}</div></div>`; }
+}
+
+/* ---------- Eigen logo ---------- */
+$('#logoIn').addEventListener('change',async e=>{
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  try{
+    const {canvas}=await shrink(f,700,'image/png');
+    let url=canvas.toDataURL('image/png'); if(url.length>450000) url=canvas.toDataURL('image/jpeg',0.85);
+    CFG.logo=url; saveCfg(); update(); toast('Logo ingesteld.');
+  }catch(x){ toast('Dit logo kan ik niet lezen.'); }
+});
+
+/* ---------- Postcode en eerdere klanten ---------- */
+let pcT=null;
+function lookupAddress(){
+  clearTimeout(pcT);
+  const pc=$('#k-pc').value.replace(/\s+/g,'').toUpperCase(), nr=$('#k-nr').value.trim();
+  if(!/^\d{4}[A-Z]{2}$/.test(pc)||!/^\d+/.test(nr)||!API.online) return;
+  pcT=setTimeout(async()=>{
+    try{
+      const r=await api('/api/adres?pc='+encodeURIComponent(pc)+'&nr='+encodeURIComponent(nr)); const j=await r.json();
+      if(!r.ok){ toast(j.error||'Adres niet gevonden.'); return; }
+      S.klant.adres=j.straat+' '+j.huisnummer; S.klant.plaats=j.postcode+' '+j.plaats; S.klant.postcode=j.postcode;
+      ['#k-adres','#k-plaats','#k-pc'].forEach(s=>{ const el=$(s); if(el!==document.activeElement) el.value=getP(S,el.dataset.k)||''; });
+      update(); toast('Adres gevonden: '+S.klant.adres+', '+j.plaats);
+    }catch(e){}
+  },500);
+}
+['#k-pc','#k-nr'].forEach(s=>$(s).addEventListener('input',lookupAddress));
+let CUSTOMERS=null;
+async function customers(){ if(CUSTOMERS||!API.online) return CUSTOMERS||[]; try{ const r=await api('/api/customers'); CUSTOMERS=r.ok?await r.json():[]; }catch(e){ CUSTOMERS=[]; } return CUSTOMERS; }
+$('#k-zoek').addEventListener('focus',()=>customers());
+$('#k-zoek').addEventListener('input',async e=>{
+  const ql=e.target.value.trim().toLowerCase(), box=$('#k-res');
+  if(ql.length<2){ box.hidden=true; return; }
+  const list=(await customers()).filter(c=>[c.naam,c.adres,c.plaats,c.tel,c.email].join(' ').toLowerCase().includes(ql)).slice(0,8);
+  box.innerHTML=list.length?list.map((c,i)=>`<div data-ci="${(CUSTOMERS||[]).indexOf(c)}">${esc(c.naam)}<small>${esc([c.adres,c.plaats].filter(Boolean).join(', '))}${c.offertes>1?' · '+c.offertes+' offertes':''}</small></div>`).join(''):'<div style="cursor:default;color:var(--mute)">Geen eerdere klant gevonden</div>';
+  box.hidden=false;
+});
+$('#k-res').addEventListener('mousedown',e=>e.preventDefault());
+$('#k-res').addEventListener('click',e=>{
+  const d=e.target.closest('[data-ci]'); if(!d) return; const c=CUSTOMERS[+d.dataset.ci]; if(!c) return;
+  Object.assign(S.klant,{naam:c.naam,adres:c.adres,plaats:c.plaats,email:c.email,tel:c.tel,postcode:c.postcode,huisnr:c.huisnr});
+  $('#k-zoek').value=''; $('#k-res').hidden=true; refreshInputs(); update(); toast('Klantgegevens ingevuld.');
+});
+$('#k-zoek').addEventListener('blur',()=>setTimeout(()=>{ $('#k-res').hidden=true; },150));
+
+/* ---------- Meldingen ---------- */
+function b64u(s){ const p='='.repeat((4-s.length%4)%4); const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/')); return Uint8Array.from(b,c=>c.charCodeAt(0)); }
+async function enablePush(){
+  try{
+    if(!('serviceWorker' in navigator)||!('PushManager' in window)) return toast('Meldingen worden op dit toestel niet ondersteund.');
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted') return toast('Meldingen zijn niet toegestaan. Zet ze aan in de instellingen van je telefoon.');
+    const reg=await navigator.serviceWorker.ready;
+    const {key}=await (await api('/api/push/key')).json();
+    let sub=await reg.pushManager.getSubscription();
+    if(!sub) sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(key)});
+    const r=await api('/api/push/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sub:sub.toJSON()})});
+    if(!r.ok) throw new Error();
+    store.set('kgn-push',1); api('/api/push/test',{method:'POST'}).catch(()=>{});
+    toast('Meldingen staan aan.'); if(VIEW==='list') renderList();
+  }catch(e){ if(e.status!==401) toast('Meldingen aanzetten lukt niet.'); }
+}
+let EVSEEN=+store.get('kgn-evseen')||0;
+async function pollEvents(){
+  if(!API.online||document.hidden) return;
+  try{
+    if(!EVSEEN){ EVSEEN=Date.now(); store.set('kgn-evseen',EVSEEN); return; }
+    const r=await api('/api/events?since='+EVSEEN); if(!r.ok) return; const ev=await r.json(); if(!ev.length) return;
+    EVSEEN=Math.max(...ev.map(e=>e.at)); store.set('kgn-evseen',EVSEEN);
+    const top=ev.find(e=>e.type==='getekend')||ev.find(e=>e.type==='betaald')||ev[0];
+    toast(top.text,7000);
+    if(CUR&&ev.some(e=>e.quote===CUR.id)) refreshCur();
+    if(VIEW==='list') loadList();
+  }catch(e){}
+}
+setInterval(pollEvents,45000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ pollEvents(); if(VIEW==='list') loadList(); else refreshCur(); } });
+
+function update(){ const T=compute(); updatePanel(T); renderDoc(); saveDraft(); queueSave(); if(VIEW==='edit') updateBarTitle(); }
+function buildAll(){ buildItems(); buildRooms(); buildCustoms(); buildPhotos(); refreshInputs(); update(); renderBanner(); }
 buildAll();
 initServer();
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);

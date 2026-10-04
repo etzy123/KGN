@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Offerte</title>
+<meta name="theme-color" content="#1d1d1b">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+:root{--ink:#1d1d1b;--acc:#1d1d1b;--mute:#6d6d69;--rule:#d9d9d5;--bg:#e6e6e3;--soft:#f4f4f2;--ok:#1d6b33;--bad:#a3271d;
+  font-family:'Schibsted Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-size:16px;-webkit-text-size-adjust:100%}
+button,input,textarea{font:inherit;color:inherit}
+.top{background:var(--acc);color:#fff;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top,0px));display:flex;align-items:center;gap:10px}
+.top b{flex:1;font-size:16px}
+.top a{color:#fff;font-size:14px;text-decoration:none;border:1px solid rgba(255,255,255,.5);border-radius:6px;padding:6px 10px}
+.wrap{max-width:860px;margin:0 auto;padding:16px 12px 120px}
+.hero{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--rule)}
+.hero h1{margin:0 0 4px;font-size:22px;letter-spacing:-.015em;line-height:1.2}
+.hero p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.45}
+.amt{font-size:28px;font-weight:600;letter-spacing:-.02em;margin-top:8px;font-variant-numeric:tabular-nums}
+.ban{border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:15px;line-height:1.4}
+.ban.ok{background:#e2f4e6;color:var(--ok)}.ban.bad{background:#fbe6e4;color:var(--bad)}.ban.info{background:#fff;border:1px solid var(--rule)}
+.doc{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.12),0 8px 28px rgba(0,0,0,.08);margin-bottom:12px}
+.doc iframe{border:0;width:794px;display:block;transform-origin:top left;background:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--rule);background:#fff;border-radius:8px;padding:12px 16px;font-weight:600;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn.dark{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn:disabled{opacity:.6}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--rule)}
+.card h2{margin:0 0 4px;font-size:18px}
+.card .hint{color:var(--mute);font-size:14px;margin:0 0 12px;line-height:1.45}
+label.f{display:block;font-size:13px;color:var(--mute);margin:0 0 4px}
+input[type=text],textarea{width:100%;padding:11px 12px;border:1px solid var(--rule);border-radius:8px;background:#fff;font-size:16px}
+.pad{position:relative;border:1px dashed #a9a9a4;border-radius:8px;background:var(--soft);touch-action:none;margin-top:12px}
+.pad canvas{display:block;width:100%;height:180px;cursor:crosshair}
+.pad span{position:absolute;left:12px;bottom:10px;font-size:13px;color:var(--mute);pointer-events:none}
+.pad button{position:absolute;right:8px;top:8px;padding:6px 10px;font-size:13px}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:14px 0;font-size:14.5px;line-height:1.4}
+.chk input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--acc)}
+.err{color:var(--bad);font-size:14px;min-height:1.2em;margin:4px 0 8px}
+.dock{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--rule);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:none;gap:8px;z-index:5}
+.dock.show{display:flex}
+.dock .btn{flex:1}
+.link{background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;padding:8px 0;font-size:14px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0 0 12px;font-size:15px}
+dt{color:var(--mute)}dd{margin:0;font-weight:600;word-break:break-word}
+.loading{padding:60px 16px;text-align:center;color:var(--mute)}
+.foot{text-align:center;color:var(--mute);font-size:13px;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="top"><b id="co">&nbsp;</b><a id="call" href="#" hidden>Bellen</a></div>
+<div class="wrap" id="app"><div class="loading">Even laden...</div></div>
+<div class="dock" id="dock"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eur=n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n||0);
+const dl=t=>t?new Date(typeof t==='string'&&t.length===10?t+'T12:00:00':t).toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'}):'';
+const token=location.pathname.split('/').pop();
+const qs=new URLSearchParams(location.search);
+const preview=qs.get('preview')?'?preview=1':'';
+let D=null;
+
+async function load(){
+  try{
+    const r=await fetch('/api/public/'+encodeURIComponent(token)+preview,{cache:'no-store'});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error||'Deze link is niet geldig.');
+    D=j; render();
+  }catch(e){ $('#app').innerHTML=`<div class="hero"><h1>Link niet gevonden</h1><p>${esc(e.message)}</p></div>`; }
+}
+function render(){
+  const c=D.company||{};
+  if(c.kleur) document.documentElement.style.setProperty('--acc',c.kleur);
+  $('#co').textContent=c.naam||'';
+  if(c.tel){ const a=$('#call'); a.href='tel:'+c.tel.replace(/[^\d+]/g,''); a.hidden=false; }
+  document.title=(D.kind==='factuur'?'Factuur ':'Offerte ')+D.nummer+' - '+(c.naam||'');
+  let h='';
+  if(D.kind==='offerte'){
+    const valid=D.datum?new Date(new Date(D.datum+'T12:00:00').getTime()+(+D.geldig||0)*86400000):null;
+    h+=`<div class="hero"><p>Offerte ${esc(D.nummer)}${D.klant?' voor '+esc(D.klant):''}</p><div class="amt">${eur(D.incl)}</div><p>inclusief btw${valid&&D.status!=='getekend'?' · geldig tot '+dl(valid):''}</p></div>`;
+    if(D.status==='getekend') h+=`<div class="ban ok"><b>Getekend.</b> ${D.signed?'Door '+esc(D.signed.name)+' op '+dl(D.signed.at)+'. ':''}Hartelijk dank voor uw opdracht! Wij nemen contact met u op over de planning.</div>`;
+    else if(D.status==='afgewezen') h+=`<div class="ban bad">Deze offerte is afgewezen. Wilt u toch verder of een aangepaste offerte? Neem gerust contact op.</div>`;
+  } else {
+    h+=`<div class="hero"><p>Factuur ${esc(D.nummer)}${D.klant?' voor '+esc(D.klant):''}</p><div class="amt">${eur(D.incl)}</div><p>${D.status==='betaald'?'betaald':'te betalen vóór '+dl(D.verval)}</p></div>`;
+    if(D.status==='betaald') h+=`<div class="ban ok"><b>Betaald.</b> Hartelijk dank voor uw betaling${D.paidAt?' op '+dl(D.paidAt):''}.</div>`;
+    else if(qs.get('betaald')) h+=`<div class="ban info" id="payWait">Uw betaling wordt verwerkt...</div>`;
+  }
+  h+=`<div class="doc" id="doc"><iframe id="frame" title="Document" sandbox="allow-same-origin"></iframe></div>`;
+  h+=`<div class="row" style="margin-bottom:12px"><a class="btn" href="/api/public/${encodeURIComponent(token)}/pdf" download>PDF downloaden</a></div>`;
+  if(D.kind==='offerte' && D.status!=='getekend' && D.status!=='afgewezen'){
+    h+=`<div class="card" id="sign"><h2>Akkoord geven</h2><p class="hint">Gaat u akkoord met deze offerte? Vul uw naam in en zet uw handtekening met uw vinger of muis.</p>
+      <label class="f" for="nm">Uw naam</label><input type="text" id="nm" autocomplete="name" value="${esc(D.klant||'')}">
+      <div class="pad"><canvas id="cv"></canvas><span id="padHint">Teken hier uw handtekening</span><button type="button" class="btn" id="clr">Wissen</button></div>
+      <label class="chk"><input type="checkbox" id="ok"><span>Ik ga akkoord met offerte ${esc(D.nummer)} van ${eur(D.incl)} inclusief btw en de voorwaarden die daarin staan.</span></label>
+      <div class="err" id="err"></div>
+      <button type="button" class="btn dark" id="go" style="width:100%">Akkoord en ondertekenen</button>
+      <div style="text-align:center"><button type="button" class="link" id="no">Offerte afwijzen</button></div></div>`;
+  }
+  if(D.kind==='factuur' && D.status!=='betaald'){
+    h+=`<div class="card" id="pay"><h2>Betalen</h2>`;
+    if(D.mollie) h+=`<p class="hint">Betaal veilig en direct met iDEAL of een andere betaalmethode.</p><div class="err" id="perr"></div><button type="button" class="btn dark" id="paybtn" style="width:100%">Betaal ${eur(D.incl)}</button>`;
+    else h+=`<p class="hint">Maak het bedrag over naar onderstaande rekening, of scan de QR-code op de factuur met uw bank-app.</p>
+      <dl><dt>Bedrag</dt><dd>${eur(D.incl)}</dd><dt>Rekening</dt><dd>${esc(c.iban||'zie factuur')}</dd><dt>Ten name van</dt><dd>${esc(c.naam)}</dd><dt>Omschrijving</dt><dd>${esc(D.nummer)}</dd></dl>
+      ${c.iban?`<button type="button" class="btn" id="cpy">Rekeningnummer kopiëren</button>`:''}`;
+    h+=`</div>`;
+  }
+  if(c.tel||c.email) h+=`<div class="foot">Vragen? ${c.tel?`Bel <a href="tel:${esc(c.tel.replace(/[^\d+]/g,''))}">${esc(c.tel)}</a>`:''}${c.tel&&c.email?' of mail ':''}${c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:''}</div>`;
+  $('#app').innerHTML=h;
+  showDoc();
+  if($('#sign')) setupSign();
+  if($('#paybtn')) $('#paybtn').onclick=pay;
+  if($('#cpy')) $('#cpy').onclick=()=>navigator.clipboard&&navigator.clipboard.writeText(c.iban.replace(/\s+/g,'')).then(()=>{ $('#cpy').textContent='Gekopieerd'; });
+  if($('#payWait')) waitPaid();
+  const dock=$('#dock');
+  if($('#sign')){ dock.innerHTML=`<button class="btn dark" type="button">Akkoord geven</button>`; dock.firstChild.onclick=()=>$('#sign').scrollIntoView({behavior:'smooth'}); }
+  else if($('#paybtn')){ dock.innerHTML=`<button class="btn dark" type="button">Betaal ${eur(D.incl)}</button>`; dock.firstChild.onclick=pay; }
+  else dock.innerHTML='';
+  const tgt=$('#sign')||$('#pay');
+  if(tgt && 'IntersectionObserver' in window){ new IntersectionObserver(es=>dock.classList.toggle('show',!es[0].isIntersecting&&!!dock.innerHTML)).observe(tgt); }
+}
+function showDoc(){
+  const f=$('#frame');
+  const fix='<style>html,body{height:auto!important;background:#fff!important;display:block!important;overflow:hidden!important;margin:0}.layout{display:block!important;overflow:visible!important}#stage{display:block!important;padding:0!important;overflow:visible!important}#sheet{width:auto!important;height:auto!important;margin:0!important}#paper{position:static!important;transform:none!important;box-shadow:none!important;min-height:0!important}</style>';
+  f.srcdoc=String(D.html||'<p style="padding:20px">Geen document.</p>').replace(/<\/head>/i,fix+'</head>');
+  const size=()=>{ try{
+    const doc=f.contentDocument; if(!doc||!doc.body) return;
+    const H=doc.documentElement.scrollHeight, W=$('#doc').clientWidth, sc=Math.min(1,W/794);
+    f.style.height=H+'px'; f.style.transform=`scale(${sc})`; $('#doc').style.height=Math.ceil(H*sc)+'px';
+  }catch(e){} };
+  f.onload=()=>{ size(); setTimeout(size,300); setTimeout(size,1200); const d=f.contentDocument; if(d&&d.fonts) d.fonts.ready.then(size); d&&[...d.images].forEach(i=>i.addEventListener('load',size)); };
+  window.addEventListener('resize',size);
+}
+function setupSign(){
+  const cv=$('#cv'), ctx=cv.getContext('2d'); let drawing=false, len=0, last=null;
+  const fit=()=>{ const r=cv.getBoundingClientRect(), d=Math.min(2,window.devicePixelRatio||1); const img=len?cv.toDataURL():null; cv.width=r.width*d; cv.height=r.height*d; ctx.scale(d,d); ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#1d1d1b'; if(img){ const i=new Image(); i.onload=()=>ctx.drawImage(i,0,0,r.width,r.height); i.src=img; } };
+  fit(); window.addEventListener('resize',fit);
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left,y:e.clientY-r.top}; };
+  cv.addEventListener('pointerdown',e=>{ drawing=true; last=pos(e); cv.setPointerCapture(e.pointerId); $('#padHint').style.display='none'; e.preventDefault(); });
+  cv.addEventListener('pointermove',e=>{ if(!drawing) return; const p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); len+=Math.hypot(p.x-last.x,p.y-last.y); last=p; e.preventDefault(); });
+  const end=()=>{ drawing=false; }; cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
+  $('#clr').onclick=()=>{ ctx.clearRect(0,0,cv.width,cv.height); len=0; $('#padHint').style.display=''; };
+  $('#go').onclick=async()=>{
+    const err=$('#err'); err.textContent='';
+    const name=$('#nm').value.trim();
+    if(!name) return err.textContent='Vul uw naam in.';
+    if(len<40) return err.textContent='Zet eerst uw handtekening in het vak.';
+    if(!$('#ok').checked) return err.textContent='Vink aan dat u akkoord gaat.';
+    const btn=$('#go'); btn.disabled=true; btn.textContent='Bezig...';
+    // Handtekening bijsnijden en verkleinen
+    const out=document.createElement('canvas'); const r=cv.getBoundingClientRect(); out.width=Math.min(700,Math.round(r.width*1.5)); out.height=Math.round(out.width*r.height/r.width);
+    out.getContext('2d').drawImage(cv,0,0,out.width,out.height);
+    try{
+      const res=await fetch('/api/public/'+encodeURIComponent(token)+'/sign',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,img:out.toDataURL('image/png'),akkoord:true})});
+      const j=await res.json().catch(()=>({}));
+      if(!res.ok) throw new Error(j.error||'Ondertekenen mislukt.');
+      window.scrollTo({top:0,behavior:'smooth'}); await load();
+    }catch(e){ err.textContent=e.message; btn.disabled=false; btn.textContent='Akkoord en ondertekenen'; }
+  };
+  $('#no').onclick=async()=>{
+    const reason=prompt('Jammer! Wilt u kort laten weten waarom? (mag leeg blijven)');
+    if(reason===null) return;
+    const res=await fetch('/api/public/'+encodeURIComponent(token)+'/reject',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reason})});
+    if(res.ok) load(); else $('#err').textContent='Afwijzen lukt nu niet.';
+  };
+}
+async function pay(){
+  const b=$('#paybtn'); if(b){ b.disabled=true; b.textContent='Even geduld...'; }
+  try{
+    const r=await fetch('/api/public/'+encodeURIComponent(token)+'/pay',{method:'POST'});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error||'Betalen lukt nu niet.');
+    location.href=j.url;
+  }catch(e){ if($('#perr')) $('#perr').textContent=e.message; if(b){ b.disabled=false; b.textContent='Betaal '+eur(D.incl); } }
+}
+async function waitPaid(){
+  for(let i=0;i<8;i++){
+    try{ const r=await fetch('/api/public/'+encodeURIComponent(token)+'/check'); const j=await r.json(); if(j.status==='betaald'){ history.replaceState(null,'',location.pathname); return load(); } }catch(e){}
+    await new Promise(r=>setTimeout(r,2500));
+  }
+  const w=$('#payWait'); if(w) w.textContent='We hebben uw betaling nog niet binnen. Het kan een paar minuten duren.';
+}
+load();
+</script>
+</body>
+</html>
